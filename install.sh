@@ -1,0 +1,44 @@
+# Erase previous build folder
+sudo rm -r build
+
+# Create build folder, generate MakeFile and install Armorial library
+mkdir build && cd build
+qmake install_path=/usr/lib ..
+sudo make install
+cd ..
+
+# Clean old headers
+if [ -d /usr/include/Armorial ];
+    then
+        if [ -w /usr/include/Armorial ];
+            then
+                rm -rf /usr/include/Armorial
+
+            else
+                echo ""
+                echo ">> Armorial: Error in library headers installation! (Are you root?)"
+                exit 1
+        fi
+fi
+
+# Copies Armorial library headers to /usr/include
+if [ -w /usr/include ];
+    then
+        mkdir /usr/include/Armorial
+    else
+        echo ""
+        echo ">> Armorial: Error in library headers installation! (Are you root?)"
+        exit 1
+fi
+
+if [ -d /usr/include/Armorial ];
+    then
+        cp -rf include/Armorial/* /usr/include/Armorial
+        echo ""
+        echo ">> Armorial: Installation complete!"
+
+    else
+        echo ""
+        echo ">> Armorial: Error in library headers installation! (Are you root?)"
+        exit 1
+fi
