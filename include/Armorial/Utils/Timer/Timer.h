@@ -51,7 +51,13 @@ namespace Utils {
         double getNanoseconds();
 
     private:
+        /*!
+         * \brief Stores the chrono start point.
+         */
         std::chrono::time_point<std::chrono::system_clock> _startPoint;
+        /*!
+         * \brief Stores the chrono end point.
+         */
         std::chrono::time_point<std::chrono::system_clock> _endPoint;
     };
 }

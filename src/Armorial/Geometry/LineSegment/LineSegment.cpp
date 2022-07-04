@@ -61,50 +61,57 @@ Vector2D LineSegment::project(const Vector2D &point) const {
     return projection;
 }
 
-std::optional<Vector2D> LineSegment::intersects(const LineSegment &other) const {
+std::vector<Vector2D> LineSegment::intersects(const LineSegment &other) const {
     auto intersect_result = Line::intersect(start(), end(), other.start(), other.end());
     if(intersect_result.has_value()) {
         // Intersected point is contained at both the LineSegments that are previously expanded to infinite Lines
         if(this->isOnLine(intersect_result.value()) && other.isOnLine(intersect_result.value())) {
-            return intersect_result;
+            return { intersect_result.value() };
         }
         // Intersected point is not contained at both the LineSegments
         else {
-            return std::nullopt;
+            return { };
         }
     }
     else {
         // Check the case when one or both the LineSegment are points
         if(this->isPoint()) {
-            return other.isOnLine(start()) ? std::optional<Vector2D>(start()) : std::nullopt;
+            if(other.isOnLine(start())) return { start() };
+            else                        return { };
         }
         else if(other.isPoint()) {
-            return this->isOnLine(other.start()) ? std::optional<Vector2D>(other.start()) : std::nullopt;
+            if(this->isOnLine(other.start())) return { other.start() };
+            else                              return { };
         }
 
         // Check if both LineSegments are on the same infinite line
         Line inf_line = Line(*this);
         if(!inf_line.isOnLine(other.start())) {
-            return std::nullopt;
+            return { };
         }
 
+        std::vector<Vector2D> intersections;
         if(other.isOnLine(start())) {
-            return start();
+            intersections.push_back(start());
         }
-        else if(other.isOnLine(end())) {
-            return end();
+        if(other.isOnLine(end())) {
+            intersections.push_back(end());
         }
-        else if(this->isOnLine(other.start())) {
-            return other.start();
+        if(this->isOnLine(other.start())) {
+            intersections.push_back(other.start());
         }
-        else {
-            return std::nullopt;
+        if(this->isOnLine(other.end())) {
+            intersections.push_back(other.end());
         }
+
+        std::sort(intersections.begin(), intersections.end());
+        intersections.erase(std::unique(intersections.begin(), intersections.end()), intersections.end());
+        return intersections;
     }
 }
 
 bool LineSegment::doesIntersect(const LineSegment &other) const {
-    return intersects(other).has_value();
+    return !intersects(other).empty();
 }
 
 Vector2D LineSegment::direction() const {

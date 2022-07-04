@@ -4,6 +4,7 @@
 #include <Armorial/Geometry/Vector2D/Vector2D.h>
 
 #include <optional>
+#include <vector>
 
 namespace Geometry {
     /*!
@@ -75,15 +76,12 @@ namespace Geometry {
         /*!
          * \brief Compute the intersection between to LineSegment instances.
          * \param other The other LineSegment instance.
-         * \return A std::optional object which stores a Vector2D instance containing (or not) the intersection point.
-         * \note - In the case that the LineSegment objects does not intersect, a std::nullopt will be returned. <br>
+         * \return A list which stores the intersection points.
+         * \note - In the case that the LineSegment objects does not intersect, a empty list will be returned. <br>
          *       - In the case that is a single intersection point, the Vector2D instance containing it will be returned. <br>
-         *       - In the case that are multiple or even infinite intersections then the preference of the return will be: <br>
-         *              - _start <br>
-         *              - _end <br>
-         *              - other _start
+         *       - In the case that are multiple or even infinite intersections then the start and end points of the intersection will be returned.
          */
-        [[nodiscard]] std::optional<Vector2D> intersects(const LineSegment &other) const;
+        [[nodiscard]] std::vector<Vector2D> intersects(const LineSegment &other) const;
 
         /*!
          * \brief Check if two LineSegment instances intersect.
