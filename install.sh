@@ -1,6 +1,9 @@
 # Erase previous build folder
 sudo rm -r build
 
+# Set shell to exit in the first error
+set -e
+
 # Create build folder, generate MakeFile and install Armorial library
 mkdir build && cd build
 qmake install_path=/usr/lib ..
