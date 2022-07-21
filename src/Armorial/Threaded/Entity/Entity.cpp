@@ -6,7 +6,7 @@ namespace Threaded {
 
 Entity::Entity() {
     setLoopFrequency(60);
-    _isEnabled = false;
+    _isEnabled = true;
     _isStopped = true;
 }
 
