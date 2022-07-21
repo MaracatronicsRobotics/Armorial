@@ -3,6 +3,6 @@
 
 #include "Angle/Angle.h"
 #include "Field/Field.h"
-#include "Object/object.h"
+#include "Object/Object.h"
 
 #endif // ARMORIAL_TYPES_H

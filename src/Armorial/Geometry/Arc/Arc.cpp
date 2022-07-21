@@ -23,6 +23,22 @@ Arc::Arc(const Vector2D &center, const float &radius, const Types::Angle &startA
     _endAngle = endAngle;
 }
 
+Vector2D Arc::center() const {
+    return _center;
+}
+
+float Arc::radius() const {
+    return _radius;
+}
+
+Types::Angle Arc::startAngle() const {
+    return _startAngle;
+}
+
+Types::Angle Arc::endAngle() const {
+    return _endAngle;
+}
+
 bool Arc::isCircle() const {
     return (startAngle() == 0.0f && endAngle() == ARC_MAX);
 }

@@ -1,5 +1,7 @@
 #include <Armorial/Geometry/Rectangle/Rectangle.h>
 
+#include <math.h>
+
 namespace Geometry {
 
 Rectangle::Rectangle(const Vector2D& topLeft, const Vector2D& bottomRight) {
@@ -25,6 +27,10 @@ double Rectangle::width() const {
 
 double Rectangle::height() const {
     return std::abs(_topLeft.y() - _bottomLeft.y());
+}
+
+Vector2D Rectangle::center() const {
+    return Vector2D((topLeft().x() + bottomRight().x()) / 2, (topLeft().y() + bottomRight().y()) / 2);
 }
 
 Vector2D Rectangle::topLeft() const {

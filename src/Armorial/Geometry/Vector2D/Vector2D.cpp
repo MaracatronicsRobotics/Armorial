@@ -1,5 +1,7 @@
 #include <Armorial/Geometry/Vector2D/Vector2D.h>
 
+#include <Armorial/Utils/Utils.h>
+
 #include <assert.h>
 #include <math.h>
 
@@ -36,7 +38,7 @@ Vector2D Vector2D::scale(double scalar) const {
 }
 
 Vector2D Vector2D::normalize() const {
-    if(this->length() == 0.0) return Vector2D(0.0, 0.0);
+    if(Utils::Compare::isEqual(this->length(), 0.0)) return Vector2D(0.0, 0.0);
 
     double d = 1.0 / length();
     return Vector2D(_x * d, _y * d);
@@ -97,7 +99,7 @@ Vector2D Vector2D::project(const Vector2D &line_a, const Vector2D &line_b) const
 
 bool Vector2D::isValid() const {
     // NaN is not equal to itself
-    return (_x == _x) && (_y == _y);
+    return Utils::Compare::isEqual(_x, _x) && Utils::Compare::isEqual(_y, _y);
 }
 
 double Vector2D::cross(const Vector2D &other) const {
@@ -105,7 +107,7 @@ double Vector2D::cross(const Vector2D &other) const {
 }
 
 Vector2D Vector2D::stretchToLength(double targetLength) const {
-    if(length() == 0.0) {
+    if(Utils::Compare::isEqual(length(), 0.0)) {
         return Vector2D(targetLength, 0.0);
     }
 

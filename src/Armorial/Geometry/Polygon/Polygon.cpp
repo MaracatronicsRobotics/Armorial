@@ -1,5 +1,7 @@
 #include <Armorial/Geometry/Polygon/Polygon.h>
 
+#include <Armorial/Utils/Utils.h>
+
 #include <algorithm>
 #include <math.h>
 
@@ -75,7 +77,7 @@ bool Polygon::isConvex() const {
         double cross = d1.cross(d2);
 
         // on a crossproduct of zero the points lie in one line and we can simply ignore this point's contribution to the convexity
-        if (cross != 0.0) {
+        if (!Utils::Compare::isEqual(cross, 0.0)) {
             if (!signSet) {
                 signSet = true;
                 sign = cross > 0;

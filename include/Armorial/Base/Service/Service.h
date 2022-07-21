@@ -90,6 +90,20 @@ namespace Base {
                 return true;
             }
 
+            /*!
+             * \return The service address.
+             */
+            [[nodiscard]] QString getServiceAddress() {
+                return _serviceAddress;
+            }
+
+            /*!
+             * \return The service port.
+             */
+            quint16 getServicePort() {
+                return _servicePort;
+            }
+
         private:
             // GRPC Pointers
             grpc::ServerBuilder _serverBuilder;

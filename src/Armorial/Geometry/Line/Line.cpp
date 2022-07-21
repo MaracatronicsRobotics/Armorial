@@ -1,5 +1,6 @@
 #include <Armorial/Geometry/Line/Line.h>
 #include <Armorial/Geometry/LineSegment/LineSegment.h>
+#include <Armorial/Utils/Utils.h>
 
 #include <spdlog/spdlog.h>
 #include <math.h>
@@ -70,7 +71,7 @@ bool Line::isOnLine(const Vector2D &point) const {
 
 double Line::relativePosition(const Vector2D &p1, const Vector2D &p2, const Vector2D &pointOnLine) {
     double xDiff = p2.x() - p1.x();
-    if (xDiff == 0.0) {
+    if (Utils::Compare::isEqual(xDiff, 0.0)) {
         return (pointOnLine.y() - p1.y()) / (p2.y() - p1.y());
     }
     else {

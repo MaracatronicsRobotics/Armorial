@@ -1,4 +1,5 @@
 #include <Armorial/Geometry/Circle/Circle.h>
+
 #include <Armorial/Utils/Utils.h>
 
 namespace Geometry {
@@ -30,11 +31,11 @@ std::vector<Vector2D> Circle::intersects(const LineSegment &line_segment) const 
     std::vector<Vector2D> intersections;
 
     if(values.has_value()){
-        if(values->first == std::clamp(values->first, 0.0, 1.0)) {
+        if(Utils::Compare::isEqual(values->first, std::clamp(values->first, 0.0, 1.0))) {
             intersections.push_back(line_segment.start() + direction_vector * values->first);
         }
 
-        if(values->second == std::clamp(values->second, 0.0, 1.0) && values->second != values->first) {
+        if(Utils::Compare::isEqual(values->second, std::clamp(values->second, 0.0, 1.0)) && !Utils::Compare::isEqual(values->second, values->first)) {
             intersections.push_back(line_segment.start()+ direction_vector * values->second);
         }
     }
@@ -55,7 +56,7 @@ Vector2D Circle::project(const Vector2D &point) const {
 }
 
 bool Circle::operator==(const Circle &other) const {
-    return (center() == other.center()) && (radius() == other.radius());
+    return (center() == other.center()) && (Utils::Compare::isEqual(radius(), other.radius()));
 }
 
 bool Circle::operator!=(const Circle &other) const {

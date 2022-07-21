@@ -1,5 +1,7 @@
 #include <Armorial/Geometry/Triangle/Triangle.h>
 
+#include <Armorial/Utils/Utils.h>
+
 #include <algorithm>
 
 namespace Geometry {
@@ -26,7 +28,7 @@ bool Triangle::contains(const Vector2D &point) const {
     sumArea += Triangle::area(_p2, _p3, point);
 
     // Return if sumArea and triangleArea matches
-    return (triangleArea == sumArea);
+    return Utils::Compare::isEqual(triangleArea, sumArea);
 }
 
 float Triangle::area() const {

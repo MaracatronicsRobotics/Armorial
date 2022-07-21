@@ -1,6 +1,8 @@
 #include <Armorial/Geometry/LineSegment/LineSegment.h>
 #include <Armorial/Geometry/Line/Line.h>
 
+#include <Armorial/Utils/Utils.h>
+
 #include <algorithm>
 #include <math.h>
 
@@ -38,7 +40,7 @@ bool LineSegment::isOnLine(const Vector2D &point) const {
 
     if(Line(*this).isOnLine(point)) {
         double t = Line::relativePosition(start(), end(), point);
-        return (t == std::clamp(t, 0.0, 1.0));
+        return (Utils::Compare::isEqual(t, std::clamp(t, 0.0, 1.0)));
     }
 
     return false;

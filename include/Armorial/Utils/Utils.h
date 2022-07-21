@@ -4,8 +4,22 @@
 #include <QNetworkDatagram>
 
 #include <math.h>
+#include <type_traits>
 
 namespace Utils {
+    namespace Compare {
+        /*!
+         * \tparam T The type of the values that will be compared.
+         * \brief Performs a floating point comparison using the '<=' operator.
+         * \param v1, v2 The floating point values which will be compared.
+         * \note The T type needs to be a floating type.
+         */
+        template <typename T>
+        [[nodiscard]] inline static constexpr std::enable_if_t<std::is_floating_point_v<T>, bool> isEqual(const T& v1, const T& v2) {
+            return fabs(v2 - v1) <= std::numeric_limits<T>::epsilon();
+        }
+    }
+
     namespace Proto {
         /*!
          * \tparam T The type of the protobuf object that the network datagram will be converted to
@@ -14,13 +28,20 @@ namespace Utils {
          * \param type The reference for the object of type T
          */
         template <typename T>
-        [[nodiscard]] static constexpr bool convertDatagramToType(QNetworkDatagram &datagram, T& type) noexcept {
+        [[nodiscard]] inline static constexpr bool convertDatagramToType(QNetworkDatagram &datagram, T& type) noexcept {
             return (type.ParseFromArray(datagram.data().data(), datagram.data().size()));
         }
     }
 
     namespace Algebra {
-        std::optional<std::pair<double, double>> solveQuadratic(double a, double b, double c) {
+        /*!
+         * \brief Solves a quadratic equation that possesses the form ax² + bx + c = 0.
+         * \param a, b, c The quadratic equation constraints.
+         * \return A std::optinal containing two float values t0, t1.
+         * \note t0 <= t1.
+         * \note If the discriminant is == 0, the optinal will be returned empty (std::nullopt).
+         */
+        [[nodiscard]] inline std::optional<std::pair<float, float>> solveQuadratic(const float &a, const float &b, const float &c) {
             double discriminant = (b * b) - (4 * a * c);
             if(discriminant < 0.0) {
                 return std::nullopt;
