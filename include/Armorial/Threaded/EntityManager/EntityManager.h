@@ -21,12 +21,6 @@ namespace Threaded {
         EntityManager() = default;
 
         /*!
-         * \brief EntityManager name implemented by children.
-         * \return The implemented EntityManager name.
-         */
-        virtual QString name() = 0;
-
-        /*!
          * \brief Add a Entity instance to the mapping with a given priority.
          * \param entity
          * \param entityPriority
