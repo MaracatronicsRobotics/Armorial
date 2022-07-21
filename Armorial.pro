@@ -45,6 +45,7 @@ HEADERS     += \
     include/Armorial/Types/Field/Field.h \
     include/Armorial/Types/Object/Object.h \
     include/Armorial/Types/Types.h \
+    include/Armorial/Utils/ExitHandler/ExitHandler.h \
     include/Armorial/Utils/ParameterHandler/ParameterHandler.h \
     include/Armorial/Utils/Timer/Timer.h \
     include/Armorial/Utils/Utils.h
@@ -66,6 +67,7 @@ SOURCES     += \
     src/Armorial/Types/Angle/Angle.cpp \
     src/Armorial/Types/Field/Field.cpp \
     src/Armorial/Types/Object/Object.cpp \
+    src/Armorial/Utils/ExitHandler/ExitHandler.cpp \
     src/Armorial/Utils/ParameterHandler/ParameterHandler.cpp \
     src/Armorial/Utils/Timer/Timer.cpp
 
