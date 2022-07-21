@@ -46,6 +46,7 @@ HEADERS     += \
     include/Armorial/Types/Object/Object.h \
     include/Armorial/Types/Types.h \
     include/Armorial/Utils/ExitHandler/ExitHandler.h \
+    include/Armorial/Utils/ParameterHandler/Parameter.h \
     include/Armorial/Utils/ParameterHandler/ParameterHandler.h \
     include/Armorial/Utils/Timer/Timer.h \
     include/Armorial/Utils/Utils.h
