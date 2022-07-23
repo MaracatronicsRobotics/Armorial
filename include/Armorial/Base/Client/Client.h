@@ -87,6 +87,20 @@ namespace Base {
                 return _stub;
             }
 
+            /*!
+             * \return The service address.
+             */
+            [[nodiscard]] QString getServiceAddress() {
+                return _serviceAddress;
+            }
+
+            /*!
+             * \return The service port.
+             */
+            quint16 getServicePort() {
+                return _servicePort;
+            }
+
         private:
             // GRPC Pointers
             std::shared_ptr<typename T::Stub> _stub;
@@ -248,6 +262,20 @@ namespace Base {
 
                 return datagram;
              }
+
+            /*!
+             * \return The server address.
+             */
+            [[nodiscard]] QString getServerAddress() {
+                return _serverAddress;
+            }
+
+            /*!
+             * \return The server port.
+             */
+            quint16 getServerPort() {
+                return _serverPort;
+            }
 
         private:
             // Pointer to socket
