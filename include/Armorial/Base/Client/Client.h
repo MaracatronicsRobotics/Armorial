@@ -264,6 +264,28 @@ namespace Base {
              }
 
             /*!
+             * \brief Send a given datagram to the socket.
+             * \param The given datagram.
+             * \return True if the given datagram could be sent through the socket and False otherwise.
+             */
+            [[nodiscard]] bool sendDatagram(const QNetworkDatagram &datagram) {
+                _mutex.lock();
+
+                // If socket is nullptr can not send any datagram, so return false
+                bool sentDatagram = false;
+                if(_socket != nullptr) {
+                    // Try to send datagram
+                    if(_socket->writeDatagram(datagram) != -1) {
+                        sentDatagram = true;
+                    }
+                }
+
+                _mutex.unlock();
+
+                return sentDatagram;
+            }
+
+            /*!
              * \return The server address.
              */
             [[nodiscard]] QString getServerAddress() {
