@@ -84,9 +84,6 @@ void Entity::run() {
             loop();
         }
 
-        // Stop timer
-        stopTimer();
-
         // Take the remaining time from the loop cast
         long rest = getRemainingTime();
 
@@ -109,11 +106,6 @@ void Entity::run() {
 void Entity::startTimer() {
     // Call start implementation from timer
     _entityTimer.start();
-}
-
-void Entity::stopTimer() {
-    // Call stop implementation from timer
-    _entityTimer.stop();
 }
 
 long Entity::getRemainingTime() {

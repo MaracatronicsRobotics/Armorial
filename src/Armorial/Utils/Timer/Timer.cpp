@@ -23,6 +23,7 @@ double Timer::getMicroseconds() {
 }
 
 double Timer::getNanoseconds() {
+    stop();
     return std::chrono::duration_cast<std::chrono::nanoseconds>(_endPoint - _startPoint).count();
 }
 

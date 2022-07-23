@@ -130,11 +130,6 @@ namespace Threaded {
         void startTimer();
 
         /*!
-         * \brief Auxiliary method to stop the timer.
-         */
-        void stopTimer();
-
-        /*!
          * \brief Auxiliary method to get the remaining time to the desired frequency.
          * \return The remaining time to the desired frequency.
          * \note As the Entity::loop() call can run in more time than the desired, this

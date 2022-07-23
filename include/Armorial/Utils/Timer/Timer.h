@@ -22,11 +22,6 @@ namespace Utils {
         void start();
 
         /*!
-         * \brief Stop the interval measurement, setting the Timer::_endPoint variable with the current time.
-         */
-        void stop();
-
-        /*!
          * \brief Get interval measurement (_endPoint - _startPoint) as seconds.
          * \return A double variable containing the interval measurement as seconds.
          */
@@ -52,9 +47,15 @@ namespace Utils {
 
     private:
         /*!
+         * \brief Stop the interval measurement, setting the Timer::_endPoint variable with the current time.
+         */
+        void stop();
+
+        /*!
          * \brief Stores the chrono start point.
          */
         std::chrono::time_point<std::chrono::system_clock> _startPoint;
+
         /*!
          * \brief Stores the chrono end point.
          */
