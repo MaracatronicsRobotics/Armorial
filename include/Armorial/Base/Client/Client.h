@@ -17,6 +17,8 @@
 #include <QUdpSocket>
 #include <QNetworkDatagram>
 
+#include <Armorial/Libs/nameof/include/nameof.hpp>
+
 namespace Base {
     namespace GRPC {
        /*!
@@ -38,6 +40,13 @@ namespace Base {
                 _servicePort = servicePort;
                 _stub = nullptr;
                 _channel = nullptr;
+            }
+
+            /*!
+             * \return A QString object containing the name of the implemented client.
+             */
+            virtual inline QString clientName() {
+                return NAMEOF_TYPE_RTTI(*this).data();
             }
 
         protected:
@@ -129,6 +138,13 @@ namespace Base {
                 _serverAddress = serverAddress;
                 _serverPort = serverPort;
                 _socket = nullptr;
+            }
+
+            /*!
+             * \return A QString object containing the name of the implemented client.
+             */
+            virtual inline QString clientName() const {
+                return NAMEOF_TYPE_RTTI(*this).data();
             }
 
         protected:

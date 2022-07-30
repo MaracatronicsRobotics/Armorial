@@ -12,6 +12,8 @@
 #include <grpcpp/server_builder.h>
 #include <grpcpp/server_context.h>
 
+#include <Armorial/Libs/nameof/include/nameof.hpp>
+
 #include <QString>
 
 namespace Base {
@@ -43,11 +45,11 @@ namespace Base {
             }
 
             /*!
-             * \brief Virtual function that needs to be implemented by children to provide
-             * the name of the service that they are running.
              * \return A QString object containing the name of the implemented service.
              */
-            virtual QString serviceName() const = 0;
+            virtual inline QString serviceName() const {
+                return NAMEOF_TYPE_RTTI(*this).data();
+            }
 
         protected:
             /*!

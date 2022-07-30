@@ -7,6 +7,8 @@
 
 #include <Armorial/Utils/Timer/Timer.h>
 
+#include <Armorial/Libs/nameof/include/nameof.hpp>
+
 namespace Threaded {
     /*!
      * \brief The Threaded::Entity class provides a interface for threaded modules.
@@ -21,9 +23,11 @@ namespace Threaded {
         Entity();
 
         /*!
-         * \return Returns the Entity::name() implemented by children of this class.
+         * \return A QString object containing the name of the implemented Entity.
          */
-        virtual QString name() = 0;
+        virtual inline QString entityName() {
+            return NAMEOF_TYPE_RTTI(*this).data();
+        }
 
         /*!
          * \brief Defines the loop frequency which the Entity instance will run.

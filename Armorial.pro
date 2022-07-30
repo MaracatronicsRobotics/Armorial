@@ -37,6 +37,7 @@ HEADERS     += \
     include/Armorial/Geometry/Rectangle/Rectangle.h \
     include/Armorial/Geometry/Triangle/Triangle.h \
     include/Armorial/Geometry/Vector2D/Vector2D.h \
+    include/Armorial/Libs/nameof/include/nameof.hpp \
     include/Armorial/Threaded/Entity/Entity.h \
     include/Armorial/Geometry/Geometry.h \
     include/Armorial/Threaded/EntityManager/EntityManager.h \
