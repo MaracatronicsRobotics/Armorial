@@ -19,6 +19,7 @@ namespace Geometry {
      */
     class Arc
     {
+    public:
         /*!
          * \brief Default Geometry::Arc constructor, which initialize a unitary circle.
          */

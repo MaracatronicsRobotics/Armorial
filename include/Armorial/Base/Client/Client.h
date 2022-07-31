@@ -237,8 +237,11 @@ namespace Base {
                     _socket->close();
                 }
 
+                // Disconnect from host
+                _socket->disconnectFromHost();
+
                 // Block until reach unconnected state
-                while(_socket->state() != QUdpSocket::UnconnectedState) {}
+                while(_socket->state() != QUdpSocket::UnconnectedState) { }
             }
 
             /*!
@@ -249,7 +252,10 @@ namespace Base {
                 _mutex.lock();
 
                 // If socket is nullptr it has no pending datagrams, so return false
-                if(_socket == nullptr) return false;
+                if(_socket == nullptr) {
+                    _mutex.unlock();
+                    return false;
+                }
 
                 // Check pending datagrams
                 bool pendingDatagrams = _socket->hasPendingDatagrams();
@@ -261,18 +267,25 @@ namespace Base {
 
             /*!
              * \brief Take the upcoming datagram from the socket.
-             * \return The datagram from the socket.
+             * \return A std::optional object that can contains a QNetworkDatagram or not.
              */
-            [[nodiscard]] QNetworkDatagram receiveDatagram() {
+            [[nodiscard]] std::optional<QNetworkDatagram> receiveDatagram() {
                 _mutex.lock();
 
                 // If socket is nullptr can not take any datagram, so return a empty one (invalid)
                 if(_socket == nullptr) {
-                    return QNetworkDatagram();
+                    _mutex.unlock();
+                    return std::nullopt;
                 }
 
                 // Take network datagram
                 QNetworkDatagram datagram = _socket->receiveDatagram();
+
+                // Check if is valid
+                if(!datagram.isValid()) {
+                    _mutex.unlock();
+                    return std::nullopt;
+                }
 
                 _mutex.unlock();
 
@@ -305,14 +318,22 @@ namespace Base {
              * \return The server address.
              */
             [[nodiscard]] QString getServerAddress() {
-                return _serverAddress;
+                _mutex.lock();
+                QString serverAddress = _serverAddress;
+                _mutex.unlock();
+
+                return serverAddress;
             }
 
             /*!
              * \return The server port.
              */
             quint16 getServerPort() {
-                return _serverPort;
+                _mutex.lock();
+                quint16 serverPort = _serverPort;
+                _mutex.unlock();
+
+                return serverPort;
             }
 
         private:
