@@ -31,14 +31,14 @@ namespace Types {
          * \param goalWidth The goal width constraint.
          * \param penaltyDepth The penalty depth constraint.
          * \param penaltyWidth The penalty width constraint.
-         * \param penaltyMarkDistanceFromCenter The penalty mark distance from field center.
+         * \param penaltyMarkDistanceFromGoal The penalty mark distance from goal center.
          * \note All the given units should be the same.
          */
         Field(const Side playSide, const float centerRadius,
               const float fieldLength, const float fieldWidth,
               const float goalDepth, const float goalWidth,
               const float penaltyDepth, const float penaltyWidth,
-              const float penaltyMarkDistanceFromCenter);
+              const float penaltyMarkDistanceFromGoal);
 
         /*!
          * \return A Geometry::Circle object centered at (0, 0) with radius _centerRadius.
@@ -127,9 +127,9 @@ namespace Types {
         float penaltyWidth() const;
 
         /*!
-         * \return The penalty mark distance from center.
+         * \return The penalty mark distance from goal center.
          */
-        float penaltyMarkDistanceFromCenter() const;
+        float penaltyMarkDistanceFromGoal() const;
 
         /*!
          * \return The center radius.
@@ -205,7 +205,7 @@ namespace Types {
         float _goalWidth;
         float _penaltyDepth;
         float _penaltyWidth;
-        float _penaltyMarkDistanceFromCenter;
+        float _penaltyMarkDistanceFromGoal;
     };
 }
 }
