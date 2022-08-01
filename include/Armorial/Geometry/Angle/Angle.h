@@ -1,9 +1,9 @@
-#ifndef ARMORIAL_TYPES_ANGLE_H
-#define ARMORIAL_TYPES_ANGLE_H
+#ifndef ARMORIAL_GEOMETRY_ANGLE_H
+#define ARMORIAL_GEOMETRY_ANGLE_H
 
-namespace Types {
+namespace Geometry {
     /*!
-     * \brief The Types::Angle class is a class that stores angles on the interval [-π, π) and allows
+     * \brief The Geometry::Angle class is a class that stores angles on the interval [-π, π) and allows
      * operations with angles.
      */
     class Angle
@@ -115,4 +115,4 @@ namespace Types {
     };
 }
 
-#endif // ARMORIAL_TYPES_ANGLE_H
+#endif // ARMORIAL_GEOMETRY_ANGLE_H

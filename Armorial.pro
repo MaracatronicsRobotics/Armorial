@@ -29,6 +29,9 @@ HEADERS     += \
     include/Armorial/Base/Base.h \
     include/Armorial/Base/Client/Client.h \
     include/Armorial/Base/Service/Service.h \
+    include/Armorial/Common/Enums/Color/Color.h \
+    include/Armorial/Common/Enums/Enums.h \
+    include/Armorial/Geometry/Angle/Angle.h \
     include/Armorial/Geometry/Arc/Arc.h \
     include/Armorial/Geometry/Circle/Circle.h \
     include/Armorial/Geometry/Line/Line.h \
@@ -42,11 +45,10 @@ HEADERS     += \
     include/Armorial/Geometry/Geometry.h \
     include/Armorial/Threaded/EntityManager/EntityManager.h \
     include/Armorial/Threaded/Threaded.h \
-    include/Armorial/Types/Angle/Angle.h \
-    include/Armorial/Types/Field/Field.h \
-    include/Armorial/Types/Object/Object.h \
-    include/Armorial/Types/Traits/Traits.h \
-    include/Armorial/Types/Types.h \
+    include/Armorial/Common/Types/Field/Field.h \
+    include/Armorial/Common/Types/Object/Object.h \
+    include/Armorial/Common/Types/Traits/Traits.h \
+    include/Armorial/Common/Types/Types.h \
     include/Armorial/Utils/ExitHandler/ExitHandler.h \
     include/Armorial/Utils/ParameterHandler/Parameter.h \
     include/Armorial/Utils/ParameterHandler/ParameterHandler.h \
@@ -56,6 +58,8 @@ HEADERS     += \
 SOURCES     += \
     src/Armorial/Base/Client/Client.cpp \
     src/Armorial/Base/Service/Service.cpp \
+    src/Armorial/Common/Enums/Color/Color.cpp \
+    src/Armorial/Geometry/Angle/Angle.cpp \
     src/Armorial/Geometry/Arc/Arc.cpp \
     src/Armorial/Geometry/Circle/Circle.cpp \
     src/Armorial/Geometry/Line/Line.cpp \
@@ -67,10 +71,9 @@ SOURCES     += \
     src/Armorial/Threaded/Entity/Entity.cpp \
     src/Armorial/Geometry/Geometry.cpp \
     src/Armorial/Threaded/EntityManager/EntityManager.cpp \
-    src/Armorial/Types/Angle/Angle.cpp \
-    src/Armorial/Types/Field/Field.cpp \
-    src/Armorial/Types/Object/Object.cpp \
-    src/Armorial/Types/Traits/Traits.cpp \
+    src/Armorial/Common/Types/Field/Field.cpp \
+    src/Armorial/Common/Types/Object/Object.cpp \
+    src/Armorial/Common/Types/Traits/Traits.cpp \
     src/Armorial/Utils/ExitHandler/ExitHandler.cpp \
     src/Armorial/Utils/ParameterHandler/ParameterHandler.cpp \
     src/Armorial/Utils/Timer/Timer.cpp

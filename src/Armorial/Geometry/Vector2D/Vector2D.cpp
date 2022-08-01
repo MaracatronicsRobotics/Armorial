@@ -12,7 +12,7 @@ Vector2D::Vector2D(const double x, const double y) {
     _y = y;
 }
 
-Vector2D::Vector2D(Types::Angle &angle, const double length) {
+Vector2D::Vector2D(Geometry::Angle &angle, const double length) {
     _x = cos(angle.value()) * length;
     _y = sin(angle.value()) * length;
 }
@@ -52,8 +52,8 @@ double Vector2D::angle() const {
     return this->toAngle().value();
 }
 
-Types::Angle Vector2D::toAngle() const {
-    return Types::Angle(atan2(_y, _x));
+Geometry::Angle Vector2D::toAngle() const {
+    return Geometry::Angle(atan2(_y, _x));
 }
 
 Vector2D Vector2D::lerp(const Vector2D &other, double factor) const {

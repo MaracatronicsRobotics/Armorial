@@ -4,7 +4,7 @@
 #include <Armorial/Geometry/Vector2D/Vector2D.h>
 #include <Armorial/Geometry/Circle/Circle.h>
 #include <Armorial/Geometry/Line/Line.h>
-#include <Armorial/Types/Angle/Angle.h>
+#include <Armorial/Geometry/Angle/Angle.h>
 
 #include <math.h>
 
@@ -39,7 +39,7 @@ namespace Geometry {
          * \param startAngle The start angle of the arc.
          * \param endAngle The end angle of the arc.
          */
-        Arc(const Vector2D &center, const float &radius, const Types::Angle &startAngle, const Types::Angle &endAngle);
+        Arc(const Vector2D &center, const float &radius, const Geometry::Angle &startAngle, const Geometry::Angle &endAngle);
 
         /*!
          * \return The center of this Arc instance.
@@ -54,12 +54,12 @@ namespace Geometry {
         /*!
          * \return The start angle of this Arc instance.
          */
-        [[nodiscard]] Types::Angle startAngle() const;
+        [[nodiscard]] Geometry::Angle startAngle() const;
 
         /*!
          * \return The end angle of this Arc instance.
          */
-        [[nodiscard]] Types::Angle endAngle() const;
+        [[nodiscard]] Geometry::Angle endAngle() const;
 
         /*!
          * \brief Checks if this arc defines a circle.
@@ -72,7 +72,7 @@ namespace Geometry {
          * \param angle The given angle.
          * \return True if the given angle is within the range that this Arc is defined and False otherwise.
          */
-        [[nodiscard]] bool angleWithinArc(const Types::Angle &angle) const;
+        [[nodiscard]] bool angleWithinArc(const Geometry::Angle &angle) const;
 
         /*!
          * \brief Checks if a given point is contained in this Arc.
@@ -91,8 +91,8 @@ namespace Geometry {
     private:
         Vector2D _center;         // Defines the center of the Arc
         float _radius;            // Defines the radius of the Arc
-        Types::Angle _startAngle; // Defines the start angle of the Arc
-        Types::Angle _endAngle;   // Defines the end angle of the Arc
+        Geometry::Angle _startAngle; // Defines the start angle of the Arc
+        Geometry::Angle _endAngle;   // Defines the end angle of the Arc
     };
 }
 

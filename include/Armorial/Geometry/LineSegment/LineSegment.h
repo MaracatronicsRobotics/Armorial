@@ -107,7 +107,7 @@ namespace Geometry {
          * \param angle The given angle.
          * \param pivot The given pivot position.
          */
-        void rotate(const Types::Angle angle, const Vector2D pivot);
+        void rotate(const Geometry::Angle angle, const Vector2D pivot);
 
     private:
         Vector2D _start;

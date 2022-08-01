@@ -1,12 +1,13 @@
-#ifndef ARMORIAL_TYPES_FIELD_H
-#define ARMORIAL_TYPES_FIELD_H
+#ifndef ARMORIAL_COMMON_TYPES_FIELD_H
+#define ARMORIAL_COMMON_TYPES_FIELD_H
 
-#include <Armorial/Types/Types.h>
+#include <Armorial/Common/Types/Types.h>
 
 #include <Armorial/Geometry/Vector2D/Vector2D.h>
 #include <Armorial/Geometry/Circle/Circle.h>
 #include <Armorial/Geometry/Rectangle/Rectangle.h>
 
+namespace Common {
 namespace Types {
     enum Side {
         SIDE_LEFT,
@@ -42,158 +43,158 @@ namespace Types {
         /*!
          * \return A Geometry::Circle object centered at (0, 0) with radius _centerRadius.
          */
-        Geometry::Circle centerCircle();
+        Geometry::Circle centerCircle() const;
 
         /*!
          * \return A Geometry::Rectangle object that contains the shape of the field
          * defined by the constructor contraints.
          */
-        Geometry::Rectangle field();
+        Geometry::Rectangle field() const;
 
         /*!
          * \return A Geometry::Rectangle object related to the left half of the field.
          */
-        Geometry::Rectangle leftField();
+        Geometry::Rectangle leftField() const;
 
         /*!
          * \return A Geometry::Rectangle object related to the right half of the field.
          */
-        Geometry::Rectangle rightField();
+        Geometry::Rectangle rightField() const;
 
         /*!
          * \return A Geometry::Rectangle object related to the left penalty area.
          */
-        Geometry::Rectangle leftPenaltyArea();
+        Geometry::Rectangle leftPenaltyArea() const;
 
         /*!
          * \return A Geometry::Rectangle object related to the right penalty area.
          */
-        Geometry::Rectangle rightPenaltyArea();
+        Geometry::Rectangle rightPenaltyArea() const;
 
         /*!
          * \return True if we are playing at left side and False otherwise.
          */
-        bool playingLeftSide();
+        bool playingLeftSide() const;
 
         /*!
          * \return The minimum x-axis value of the field.
          */
-        float minX();
+        float minX() const;
 
         /*!
          * \return The maximum x-axis value of the field.
          */
-        float maxX();
+        float maxX() const;
 
         /*!
          * \return The minimum y-axis value of the field.
          */
-        float minY();
+        float minY() const;
 
         /*!
          * \return The maximum y-axis value of the field.
          */
-        float maxY();
+        float maxY() const;
 
         /*!
          * \return The length of the field.
          */
-        float length();
+        float length() const;
 
         /*!
          * \return The width of the field.
          */
-        float width();
+        float width() const;
 
         /*!
          * \return The goal depth.
          */
-        float goalDepth();
+        float goalDepth() const;
 
         /*!
          * \return The goal width.
          */
-        float goalWidth();
+        float goalWidth() const;
 
         /*!
          * \return The penalty depth.
          */
-        float penaltyDepth();
+        float penaltyDepth() const;
 
         /*!
          * \return The penalty width.
          */
-        float penaltyWidth();
+        float penaltyWidth() const;
 
         /*!
          * \return The penalty mark distance from center.
          */
-        float penaltyMarkDistanceFromCenter();
+        float penaltyMarkDistanceFromCenter() const;
 
         /*!
          * \return The center radius.
          */
-        float centerRadius();
+        float centerRadius() const;
 
         /*!
          * \return The position of the center of our goal.
          */
-        Geometry::Vector2D ourGoalCenter();
+        Geometry::Vector2D ourGoalCenter() const;
 
         /*!
          * \return The position of the right post of our goal.
          */
-        Geometry::Vector2D ourGoalRightPost();
+        Geometry::Vector2D ourGoalRightPost() const;
 
         /*!
          * \return The position of the left post of our goal.
          */
-        Geometry::Vector2D ourGoalLeftPost();
+        Geometry::Vector2D ourGoalLeftPost() const;
 
         /*!
          * \return The position of our penalty mark.
          */
-        Geometry::Vector2D ourPenaltyMark();
+        Geometry::Vector2D ourPenaltyMark() const;
 
         /*!
          * \return A Geometry::Rectangle object related to our half of the field.
          */
-        Geometry::Rectangle ourField();
+        Geometry::Rectangle ourField() const;
 
         /*!
          * \return A Geometry::Rectangle object related to our penalty area.
          */
-        Geometry::Rectangle ourPenaltyArea();
+        Geometry::Rectangle ourPenaltyArea() const;
 
         /*!
          * \return The position of the center of their goal.
          */
-        Geometry::Vector2D theirGoalCenter();
+        Geometry::Vector2D theirGoalCenter() const;
 
         /*!
          * \return The position of the right post of their goal.
          */
-        Geometry::Vector2D theirGoalRightPost();
+        Geometry::Vector2D theirGoalRightPost() const;
 
         /*!
          * \return The position of the left post of their goal.
          */
-        Geometry::Vector2D theirGoalLeftPost();
+        Geometry::Vector2D theirGoalLeftPost() const;
 
         /*!
          * \return The position of their penalty mark.
          */
-        Geometry::Vector2D theirPenaltyMark();
+        Geometry::Vector2D theirPenaltyMark() const;
 
         /*!
          * \return A Geometry::Rectangle object related to their half of the field.
          */
-        Geometry::Rectangle theirField();
+        Geometry::Rectangle theirField() const;
 
         /*!
          * \return A Geometry::Rectangle object related to their penalty area.
          */
-        Geometry::Rectangle theirPenaltyArea();
+        Geometry::Rectangle theirPenaltyArea() const;
 
     private:
         Side _playSide;
@@ -207,5 +208,6 @@ namespace Types {
         float _penaltyMarkDistanceFromCenter;
     };
 }
+}
 
-#endif // ARMORIAL_TYPES_FIELD_H
+#endif // ARMORIAL_COMMON_TYPES_FIELD_H

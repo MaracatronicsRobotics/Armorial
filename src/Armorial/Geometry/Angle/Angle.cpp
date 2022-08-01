@@ -1,8 +1,8 @@
-#include <Armorial/Types/Angle/Angle.h>
+#include <Armorial/Geometry/Angle/Angle.h>
 
 #include <math.h>
 
-namespace Types {
+namespace Geometry {
 
 Angle::Angle(double angle) {
     _angle = angle;

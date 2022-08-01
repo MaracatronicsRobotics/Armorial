@@ -1,7 +1,7 @@
 #ifndef ARMORIAL_GEOMETRY_VECTOR2D_H
 #define ARMORIAL_GEOMETRY_VECTOR2D_H
 
-#include <Armorial/Types/Angle/Angle.h>
+#include <Armorial/Geometry/Angle/Angle.h>
 
 namespace Geometry {
     /*!
@@ -23,11 +23,11 @@ namespace Geometry {
         Vector2D(const double x, const double y);
 
         /*!
-         * \brief Vector2D constructor that receive a Types::Angle and length as parameter.
-         * \param angle The Types::Angle object which the angle value will be extracted.
+         * \brief Vector2D constructor that receive a Geometry::Angle and length as parameter.
+         * \param angle The Geometry::Angle object which the angle value will be extracted.
          * \param length The length of the Vector2D started from (0, 0) coordinates.
          */
-        Vector2D(Types::Angle &angle, const double length);
+        Vector2D(Geometry::Angle &angle, const double length);
 
         /*!
          * \brief Default copy constructor.
@@ -99,10 +99,10 @@ namespace Geometry {
         double angle() const;
 
         /*!
-         * \brief Get the Types::Angle object using the angle() result from this Vector2D instance.
-         * \return A Types::Angle object that contains the angle() result from this Vector2D instance.
+         * \brief Get the Geometry::Angle object using the angle() result from this Vector2D instance.
+         * \return A Geometry::Angle object that contains the angle() result from this Vector2D instance.
          */
-        Types::Angle toAngle() const;
+        Geometry::Angle toAngle() const;
 
         /*!
          * \brief Performs a linear interpolation/extrapolation of this Vector2D instance by a factor. <br>

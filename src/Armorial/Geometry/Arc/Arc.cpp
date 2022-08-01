@@ -16,7 +16,7 @@ Arc::Arc(const Vector2D &center, const float &radius) {
     _endAngle = ARC_MAX;
 }
 
-Arc::Arc(const Vector2D &center, const float &radius, const Types::Angle &startAngle, const Types::Angle &endAngle) {
+Arc::Arc(const Vector2D &center, const float &radius, const Geometry::Angle &startAngle, const Geometry::Angle &endAngle) {
     _center = center;
     _radius = radius;
     _startAngle = startAngle;
@@ -31,11 +31,11 @@ float Arc::radius() const {
     return _radius;
 }
 
-Types::Angle Arc::startAngle() const {
+Geometry::Angle Arc::startAngle() const {
     return _startAngle;
 }
 
-Types::Angle Arc::endAngle() const {
+Geometry::Angle Arc::endAngle() const {
     return _endAngle;
 }
 
@@ -43,7 +43,7 @@ bool Arc::isCircle() const {
     return (startAngle() == 0.0f && endAngle() == ARC_MAX);
 }
 
-bool Arc::angleWithinArc(const Types::Angle &angle) const {
+bool Arc::angleWithinArc(const Geometry::Angle &angle) const {
     return (angle.value() >= startAngle().value() && angle.value() <= endAngle().value());
 }
 

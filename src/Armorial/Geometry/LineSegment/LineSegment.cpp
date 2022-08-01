@@ -125,7 +125,7 @@ void LineSegment::move(const Vector2D &amount) {
     _end += amount;
 }
 
-void LineSegment::rotate(const Types::Angle angle, const Vector2D pivot) {
+void LineSegment::rotate(const Geometry::Angle angle, const Vector2D pivot) {
     Vector2D midpoint = pivot;
 
     Vector2D startNewMidpoint = Vector2D(start().x() - midpoint.x(), start().y() - midpoint.y());
