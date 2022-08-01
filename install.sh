@@ -4,6 +4,9 @@ sudo rm -r build
 # Set shell to exit in the first error
 set -e
 
+# Init and update submodules
+git submodule init && git submodule update
+
 # Create build folder, generate MakeFile and install Armorial library
 mkdir build && cd build
 qmake install_path=/usr/lib ..
