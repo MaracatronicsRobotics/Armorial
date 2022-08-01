@@ -65,4 +65,8 @@ LineSegment Rectangle::rightLine() const {
     return LineSegment(_topRight, _bottomRight);
 }
 
+std::vector<LineSegment> Rectangle::boundary() const {
+    return {leftLine(), topLine(), rightLine(), bottomLine()};
+}
+
 }

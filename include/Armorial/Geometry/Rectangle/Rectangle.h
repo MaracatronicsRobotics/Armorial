@@ -88,6 +88,11 @@ namespace Geometry {
          */
         [[nodiscard]] LineSegment leftLine() const;
 
+        /*!
+         * \return Returns a list of LineSegment instances containig all the boundary line segments of this Rectangle.
+         */
+        std::vector<LineSegment> boundary() const;
+
     private:
         Vector2D _topLeft;
         Vector2D _topRight;
