@@ -4,7 +4,7 @@
 
 #pragma GCC diagnostic ignored "-Wunused-parameter"
 
-namespace Utils{
+using namespace Utils;
 
 QCoreApplication* ExitHandler::_app = nullptr;
 int ExitHandler::_counter = 0;
@@ -34,6 +34,4 @@ void ExitHandler::run(int s) {
         }
         break;
     }
-}
-
 }

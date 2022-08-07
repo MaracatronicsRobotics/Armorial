@@ -1,7 +1,6 @@
 #include <Armorial/Common/Types/Field/Field.h>
 
-namespace Common {
-namespace Types {
+using namespace Common::Types;
 
 Field::Field(const Side playSide, const float centerRadius,
              const float fieldLength, const float fieldWidth,
@@ -172,7 +171,4 @@ Geometry::Rectangle Field::theirField() const {
 
 Geometry::Rectangle Field::theirPenaltyArea() const {
     return (playingLeftSide() ? rightPenaltyArea() : leftPenaltyArea());
-}
-
-}
 }

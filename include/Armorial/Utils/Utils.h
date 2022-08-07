@@ -6,6 +6,9 @@
 #include <math.h>
 #include <type_traits>
 
+#include <Armorial/Common/Types/Traits/Traits.h>
+#include <Armorial/Geometry/Rectangle/Rectangle.h>
+
 namespace Utils {
     namespace Compare {
         /*!
@@ -31,6 +34,27 @@ namespace Utils {
         [[nodiscard]] inline static constexpr bool convertDatagramToType(QNetworkDatagram &datagram, T& type) noexcept {
             return (type.ParseFromArray(datagram.data().data(), datagram.data().size()));
         }
+    }
+
+    namespace Angles {
+        /*!
+         * \tparam T The given type of the input.
+         * \return The given value in radians converted to degrees.
+         */
+        template<typename T>
+        inline static constexpr std::enable_if_t<std::is_floating_point_v<T>, T> radToDeg(const T& radians) {
+            return (radians * (180.0 / M_PI));
+        }
+
+        /*!
+         * \tparam T The given type of the input.
+         * \return The given value in degrees converted to radians.
+         */
+        template<typename T>
+        inline static constexpr std::enable_if_t<std::is_floating_point_v<T>, T> degToRad(const T& degrees) {
+            return (degrees * (M_PI / 180.0));
+        }
+
     }
 
     namespace Algebra {

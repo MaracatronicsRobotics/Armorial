@@ -2,7 +2,7 @@
 
 #include <spdlog/spdlog.h>
 
-namespace Threaded {
+using namespace Threaded;
 
 Entity::Entity() {
     setLoopFrequency(60);
@@ -113,6 +113,4 @@ long Entity::getRemainingTime() {
     long remainingTime = (1000 / _loopFrequency) - _entityTimer.getMilliseconds();
 
     return remainingTime;
-}
-
 }

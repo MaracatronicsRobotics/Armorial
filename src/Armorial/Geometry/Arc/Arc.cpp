@@ -1,6 +1,6 @@
 #include <Armorial/Geometry/Arc/Arc.h>
 
-namespace Geometry {
+using namespace Geometry;
 
 Arc::Arc() {
     _center = Vector2D();
@@ -68,6 +68,4 @@ std::vector<Vector2D> Arc::intersectionWithLine(const LineSegment &lineSegment) 
     }
 
     return intersections;
-}
-
 }

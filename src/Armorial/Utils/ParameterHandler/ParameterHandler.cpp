@@ -2,7 +2,7 @@
 
 #include <spdlog/spdlog.h>
 
-namespace Utils {
+using namespace Utils;
 
 bool ParameterHandler::loadFile(QString parameterFilePath) {
     // Open file
@@ -31,6 +31,4 @@ Parameter ParameterHandler::operator[](QString key) const {
     }
 
     return _documentMap[key];
-}
-
 }

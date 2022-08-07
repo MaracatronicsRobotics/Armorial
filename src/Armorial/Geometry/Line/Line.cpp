@@ -5,7 +5,7 @@
 #include <spdlog/spdlog.h>
 #include <math.h>
 
-namespace Geometry {
+using namespace Geometry;
 
 Line::Line(Vector2D &p1, Vector2D &p2) {
     _p1 = p1;
@@ -77,6 +77,4 @@ double Line::relativePosition(const Vector2D &p1, const Vector2D &p2, const Vect
     else {
         return (pointOnLine.x() - p1.x()) / xDiff;
     }
-}
-
 }

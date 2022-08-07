@@ -1,6 +1,6 @@
 #include <Armorial/Utils/Timer/Timer.h>
 
-namespace Utils {
+using namespace Utils;
 
 void Timer::start() {
     _startPoint = std::chrono::system_clock::now();
@@ -25,6 +25,4 @@ double Timer::getMicroseconds() {
 double Timer::getNanoseconds() {
     stop();
     return std::chrono::duration_cast<std::chrono::nanoseconds>(_endPoint - _startPoint).count();
-}
-
 }

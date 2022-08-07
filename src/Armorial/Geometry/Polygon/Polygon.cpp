@@ -5,7 +5,7 @@
 #include <algorithm>
 #include <math.h>
 
-namespace Geometry {
+using namespace Geometry;
 
 Polygon::Polygon(const std::vector<Vector2D> &vertices) {
     _vertices = vertices;
@@ -171,6 +171,4 @@ bool Polygon::isSimple() const {
 
     // If the polygon is not simple, it will intersect more than in the corners.
     return numberIntersections == amountOfVertices();
-}
-
 }

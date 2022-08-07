@@ -6,7 +6,7 @@
 #include <algorithm>
 #include <math.h>
 
-namespace Geometry {
+using namespace Geometry;
 
 LineSegment::LineSegment(const Vector2D &start, const Vector2D &end) {
     _start = start;
@@ -139,6 +139,4 @@ void LineSegment::rotate(const Geometry::Angle angle, const Vector2D pivot) {
 
     _start = startRotated;
     _end = endRotated;
-}
-
 }

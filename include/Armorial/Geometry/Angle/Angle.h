@@ -20,7 +20,7 @@ namespace Geometry {
 
         /*!
          * \brief Constructor of the Angle class, receiving a double value that represents the angle
-         * value and normalize it.
+         * value in radians and normalize it.
          * \param angle The given double value of the angle. As it is normalized after you can give it
          * outside the range [-π, π).
          */

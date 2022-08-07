@@ -2,7 +2,7 @@
 
 #include <math.h>
 
-namespace Geometry {
+using namespace Geometry;
 
 Rectangle::Rectangle(const Vector2D& topLeft, const Vector2D& bottomRight) {
     _topLeft = topLeft;
@@ -67,6 +67,4 @@ LineSegment Rectangle::rightLine() const {
 
 std::vector<LineSegment> Rectangle::boundary() const {
     return {leftLine(), topLine(), rightLine(), bottomLine()};
-}
-
 }

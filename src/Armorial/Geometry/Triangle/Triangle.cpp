@@ -4,7 +4,7 @@
 
 #include <algorithm>
 
-namespace Geometry {
+using namespace Geometry;
 
 Triangle::Triangle(const Vector2D &p1, const Vector2D &p2, const Vector2D &p3) {
     _p1 = p1;
@@ -69,6 +69,4 @@ std::vector<Vector2D> Triangle::intersect(const LineSegment &lineSegment) const 
     intersections.erase(std::unique(intersections.begin(), intersections.end()), intersections.end());
 
     return intersections;
-}
-
 }

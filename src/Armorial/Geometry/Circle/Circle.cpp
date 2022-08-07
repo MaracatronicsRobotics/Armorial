@@ -2,7 +2,7 @@
 
 #include <Armorial/Utils/Utils.h>
 
-namespace Geometry {
+using namespace Geometry;
 
 Circle::Circle(const Vector2D &center, const double radius) {
     _center = center;
@@ -93,6 +93,4 @@ Circle Circle::operator*=(double scale) {
 
 Circle Circle::operator/=(double scale) {
     return Circle(center(), _radius /= fabs(scale));
-}
-
 }

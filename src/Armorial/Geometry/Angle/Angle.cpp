@@ -2,7 +2,7 @@
 
 #include <math.h>
 
-namespace Geometry {
+using namespace Geometry;
 
 Angle::Angle(double angle) {
     _angle = angle;
@@ -66,6 +66,4 @@ Angle &Angle::operator=(double scalar) {
     this->_angle = scalar;
     this->normalize();
     return *this;
-}
-
 }

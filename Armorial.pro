@@ -6,10 +6,10 @@ VERSION  = 1.0.0
 CONFIG  += c++17
 
 # Qt info
-QT += network
+QT += network opengl widgets
 
 # Libs
-LIBS += -lQt5Core -lprotobuf -lgrpc -lgrpc++ -lfmt
+LIBS += -lQt5Core -lprotobuf -lgrpc -lgrpc++ -lfmt -lGLU
 
 # Temporary dirs
 OBJECTS_DIR = tmp/obj
@@ -32,6 +32,9 @@ HEADERS     += \
     include/Armorial/Common/Enums/Color/Color.h \
     include/Armorial/Common/Enums/Enums.h \
     include/Armorial/Common/Packet/Packet.h \
+    include/Armorial/Common/Widgets/Widgets.h \
+    include/Armorial/Common/Widgets/FieldView/FieldView.h \
+    include/Armorial/Common/Widgets/GLText/GLText.h \
     include/Armorial/Geometry/Angle/Angle.h \
     include/Armorial/Geometry/Arc/Arc.h \
     include/Armorial/Geometry/Circle/Circle.h \
@@ -62,6 +65,8 @@ SOURCES     += \
     src/Armorial/Base/Service/Service.cpp \
     src/Armorial/Common/Enums/Color/Color.cpp \
     src/Armorial/Common/Packet/Packet.cpp \
+    src/Armorial/Common/Widgets/FieldView/FieldView.cpp \
+    src/Armorial/Common/Widgets/GLText/GLText.cpp \
     src/Armorial/Geometry/Angle/Angle.cpp \
     src/Armorial/Geometry/Arc/Arc.cpp \
     src/Armorial/Geometry/Circle/Circle.cpp \

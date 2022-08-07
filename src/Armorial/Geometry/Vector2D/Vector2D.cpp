@@ -5,7 +5,7 @@
 #include <assert.h>
 #include <math.h>
 
-namespace Geometry {
+using namespace Geometry;
 
 Vector2D::Vector2D(const double x, const double y) {
     _x = x;
@@ -190,6 +190,4 @@ Vector2D Vector2D::operator/(const Vector2D &other) const {
 
 Vector2D Vector2D::operator/(const double &scalar) const {
     return Vector2D(_x / scalar, _y / scalar);
-}
-
 }

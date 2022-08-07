@@ -1,6 +1,6 @@
 #include <Armorial/Threaded/EntityManager/EntityManager.h>
 
-namespace Threaded {
+using namespace Threaded;
 
 void EntityManager::addEntity(Entity* entity, int entityPriority) {
     _priorityMap.insert(entityPriority, entity);
@@ -54,6 +54,4 @@ void EntityManager::disableEntities() {
             delete entity;
         }
     }
-}
-
 }
