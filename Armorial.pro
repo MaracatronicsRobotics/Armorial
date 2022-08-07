@@ -31,6 +31,7 @@ HEADERS     += \
     include/Armorial/Base/Service/Service.h \
     include/Armorial/Common/Enums/Color/Color.h \
     include/Armorial/Common/Enums/Enums.h \
+    include/Armorial/Common/Packet/Packet.h \
     include/Armorial/Geometry/Angle/Angle.h \
     include/Armorial/Geometry/Arc/Arc.h \
     include/Armorial/Geometry/Circle/Circle.h \
@@ -60,6 +61,7 @@ SOURCES     += \
     src/Armorial/Base/Client/Client.cpp \
     src/Armorial/Base/Service/Service.cpp \
     src/Armorial/Common/Enums/Color/Color.cpp \
+    src/Armorial/Common/Packet/Packet.cpp \
     src/Armorial/Geometry/Angle/Angle.cpp \
     src/Armorial/Geometry/Arc/Arc.cpp \
     src/Armorial/Geometry/Circle/Circle.cpp \
