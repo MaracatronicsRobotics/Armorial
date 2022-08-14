@@ -193,19 +193,16 @@ void FieldView::paintGL() {
     glLoadIdentity();
     glPushMatrix();
 
-    drawFieldLines();
-    drawCentralLogo();
-
-    // Examples of drawing robot / ball
-    {
-        drawRobot(Geometry::Vector2D(1.0, 0.0), M_PI, Common::Enums::UNDEFINED, 15);
-        drawRobot(Geometry::Vector2D(1.0, 0.2), 0.0, Common::Enums::YELLOW, 14);
-        drawRobot(Geometry::Vector2D(1.0, -0.2), 0.0, Common::Enums::BLUE, 3);
-    }
+    draw();
 
     glPopMatrix();
 
     _graphicsMutex.unlock();
+}
+
+void FieldView::draw() {
+    drawFieldLines();
+    drawCentralLogo();
 }
 
 void FieldView::drawFieldLines() {

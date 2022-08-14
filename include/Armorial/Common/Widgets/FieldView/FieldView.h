@@ -67,10 +67,17 @@ namespace Widgets {
         void resizeGL(int width, int height);
 
         /*!
+         * \brief Virtual function that allows Common::Widgets::FieldView implementations to setup which
+         * elements they want to draw on the screen.
+         * \note By default this implementation draws the field lines and the central logo (if it is set).
+         */
+        virtual void draw();
+
+        /*!
          * \brief Draw a triangle.
          * \param v1, v2, v3 The vertices of the triangle.
          * \param z The z value where the triangle will be drawed at.
-         * \note You need to call this method in the scope of the paintGL() method.
+         * \note You need to call this method in the scope of the paintGL() or draw() methods.
          */
         template <typename T>
         std::enable_if_t<Common::Types::has_coordinates_v<T>, void> drawTriangle(const T &v1, const T &v2, const T &v3, const float &z) {
@@ -85,7 +92,7 @@ namespace Widgets {
          * \brief Draw a rectangle.
          * \param topLeft, bottomRight The position of the topLeft and bottomRight corners.
          * \param z The z value where the rectangle will be drawed at.
-         * \note You need to call this method in the scope of the paintGL() method.
+         * \note You need to call this method in the scope of the paintGL() or draw() methods.
          */
         template <typename T>
         std::enable_if_t<Common::Types::has_coordinates_v<T>, void> drawRect(const T &topLeft, const T &bottomRight, const float &z) {
@@ -101,7 +108,7 @@ namespace Widgets {
          * \brief Draw a rectangle.
          * \param v1, v2, v3, v4 The position of the corners of the rectangle.
          * \param z The z value where the rectangle will be drawed at.
-         * \note You need to call this method in the scope of the paintGL() method.
+         * \note You need to call this method in the scope of the paintGL() or draw() methods.
          */
         template <typename T>
         std::enable_if_t<Common::Types::has_coordinates_v<T>, void> drawRect(const T &v1, const T &v2, const T &v3, const T &v4, const float &z) {
@@ -123,7 +130,7 @@ namespace Widgets {
          * \note Using r1 and r2 parameters you can draw a "full filled" arc (r1 = 0, r2 = radius) or
          * a "partially filled" arc, e.g. (r1 = radius - 10, r2 = radius), so this will fill only a 'border'
          * on the arc.
-         * \note You need to call this method in the scope of the paintGL() method.
+         * \note You need to call this method in the scope of the paintGL() or draw() methods.
          */
         template <typename T>
         std::enable_if_t<Common::Types::has_coordinates_v<T>, void> drawArc(const T &center, const float &r1, const float &r2, const float &theta1, const float &theta2, const float &z, float dTheta = -1) {
