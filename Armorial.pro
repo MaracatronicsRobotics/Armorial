@@ -46,6 +46,8 @@ HEADERS     += \
     include/Armorial/Geometry/Vector2D/Vector2D.h \
     include/Armorial/Libs/magic_enum/include/magic_enum.hpp \
     include/Armorial/Libs/nameof/include/nameof.hpp \
+    include/Armorial/Math/Math.h \
+    include/Armorial/Math/Matrix/Matrix.h \
     include/Armorial/Threaded/Entity/Entity.h \
     include/Armorial/Geometry/Geometry.h \
     include/Armorial/Threaded/EntityManager/EntityManager.h \
@@ -76,6 +78,7 @@ SOURCES     += \
     src/Armorial/Geometry/Rectangle/Rectangle.cpp \
     src/Armorial/Geometry/Triangle/Triangle.cpp \
     src/Armorial/Geometry/Vector2D/Vector2D.cpp \
+    src/Armorial/Math/Matrix/Matrix.cpp \
     src/Armorial/Threaded/Entity/Entity.cpp \
     src/Armorial/Geometry/Geometry.cpp \
     src/Armorial/Threaded/EntityManager/EntityManager.cpp \
