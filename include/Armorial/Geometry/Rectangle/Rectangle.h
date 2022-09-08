@@ -4,6 +4,8 @@
 #include <Armorial/Geometry/Vector2D/Vector2D.h>
 #include <Armorial/Geometry/LineSegment/LineSegment.h>
 
+#include <Armorial/Common/Types/Traits/Traits.h>
+
 namespace Geometry {
     /*!
      * \brief The Geometry::Rectangle class provides a representation for a rectangle object.
@@ -12,6 +14,12 @@ namespace Geometry {
     {
     public:
         /*!
+         * \brief Constructs a default instance for rectangle.
+         * \note The corner points in this case are by default at {0.0, 0.0}, so remember to update them.
+         */
+        Rectangle() = default;
+
+        /*!
          * \brief Constructs a instance of Rectangle by given corner points.
          * \param topLeft The top left corner position.
          * \param bottomRight The bottom right corner position.
@@ -19,19 +27,37 @@ namespace Geometry {
         Rectangle(const Vector2D& topLeft, const Vector2D& bottomRight);
 
         /*!
+         * \tparam T The type of the point variable.
          * \brief Computes if this Rectangle instance contains a given point.
          * \param point The given point.
          * \return True if this Rectangle instance contains a given point and False otherwise.
+         * \note This method will only work if the type T contains coordinates (.x() and .y() methods).
          */
-        [[nodiscard]] bool contains(const Vector2D& point) const;
+        template<typename T>
+        [[nodiscard]] std::enable_if_t<Common::Types::has_coordinates_v<T>, bool> contains(const T& point) const {
+            return (point.x() > _topLeft.x() && point.x() < _topRight.x())
+                    && (point.y() > _bottomLeft.y() && point.y() < _topLeft.y());
+        }
 
         /*!
+         * \tparam T The type of the point variable.
          * \brief Computes if this Rectangle instance contains a given point in a given margin error.
          * \param point The given point.
          * \param margin The given margin for error.
          * \return True if this Rectangle instance contains a given point in the margin error and False otherwise.
+         * \note This method will only work if the type T contains coordinates (.x() and .y() methods).
          */
-        [[nodiscard]] bool contains(const Vector2D& point, double margin) const;
+        template<typename T>
+        [[nodiscard]] std::enable_if_t<Common::Types::has_coordinates_v<T>, bool> contains(const T& point, double margin) const {
+            return (point.x() > (_topLeft.x() - margin) && point.x() < (_topRight.x() + margin))
+                    && (point.y() > (_bottomLeft.y() - margin) && point.y() < (_topLeft.y() + margin));
+        }
+
+        /*!
+         * \brief Update this Rectangle instance with the given corners.
+         * \param topLeft, bottomRight The given corners.
+         */
+        void updateCorners(const Vector2D& topLeft, const Vector2D& bottomRight);
 
         /*!
          * \return Returns this Rectangle instance width.

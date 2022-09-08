@@ -1,90 +1,73 @@
 #ifndef ARMORIAL_COMMON_TYPES_OBJECT_H
 #define ARMORIAL_COMMON_TYPES_OBJECT_H
 
-#define INVALID_IDENTIFIER 255
+#include <QReadWriteLock>
+
+#include <Armorial/Common/Types/Types.h>
 
 #include <Armorial/Geometry/Vector2D/Vector2D.h>
 #include <Armorial/Geometry/Angle/Angle.h>
 
-#include <QReadWriteLock>
-
 namespace Common {
 namespace Types {
     /*!
-     * \brief The Common::Types::Object class provides a interface to generalize objects in the environment,
-     * providing default parameters which objects in the field should have, such as position, orientation and
-     * identifier.
+     * \brief The Types::Object class provides a base interface for any object in the field.
      */
     class Object
     {
     public:
-        Object(const Geometry::Vector2D &position, const Geometry::Angle &orientation = Geometry::Angle(), const quint8 identifier = INVALID_IDENTIFIER);
-
         /*!
-         * \brief Set the position of this object instance to a given position.
-         * \param position The given position.
+         * \brief Default constructor for Types::Object class.
          */
-        void setPosition(const Geometry::Vector2D &position);
+        Object() = default;
 
         /*!
-         * \return This object instance position.
+         * \brief Copy constructor.
+         */
+        Object(Object& another);
+
+        /*!
+         * \brief Constructor for the Types::Object class.
+         * \param position, velocity, acceleration, orientation, angularSpeed The object data.
+         */
+        Object(const Geometry::Vector2D& position,
+               const Geometry::Vector2D& velocity, const Geometry::Vector2D& acceleration,
+               const Geometry::Angle& orientation = Geometry::Angle(), const float& angularSpeed = 0.0f);
+
+        /*!
+         * \brief Getters for the object attributes.
          */
         Geometry::Vector2D getPosition();
-
-        /*!
-         * \brief Set the velocity of this object instance to a given velocity.
-         * \param velocity The given velocity.
-         */
-        void setVelocity(const Geometry::Vector2D &velocity);
-
-        /*!
-         * \return This object instance velocity.
-         */
         Geometry::Vector2D getVelocity();
-
-        /*!
-         * \brief Set the acceleration of this object instance to a given acceleration.
-         * \param acceleration The given acceleration.
-         */
-        void setAcceleration(const Geometry::Vector2D &acceleration);
-
-        /*!
-         * \return This object instance acceleration.
-         */
         Geometry::Vector2D getAcceleration();
-
-        /*!
-         * \brief Set the orientation of this object instance to a given orientation.
-         * \param orientation The given orientation.
-         */
-        void setOrientation(const Geometry::Angle &orientation);
-
-        /*!
-         * \return This object instance orientation.
-         */
         Geometry::Angle getOrientation();
+        float getAngularSpeed();
 
         /*!
-         * \brief Set the identifier of this object instance to a given identifier.
-         * \param identifier The given identifier.
+         * \brief Override for the = operator.
          */
-        void setIdentifier(const quint8 &identifier);
+        Object &operator=(Object another);
 
+    protected:
         /*!
-         * \return This object instance identifier.
+         * \brief Setters for the object attributes.
          */
-        quint8 getIdentifier();
+        void setPosition(const Geometry::Vector2D& position);
+        void setVelocity(const Geometry::Vector2D& velocity);
+        void setAcceleration(const Geometry::Vector2D& acceleration);
+        void setOrientation(const Geometry::Angle& orientation);
+        void setAngularSpeed(const float& angularSpeed);
 
     private:
-        // Object-related vars
+        // Object attributes
         Geometry::Vector2D _position;
         Geometry::Vector2D _velocity;
         Geometry::Vector2D _acceleration;
         Geometry::Angle _orientation;
-        quint8 _identifier;
+        float _angularSpeed;
 
-        // Mutex for data modification / acquisition
-        QReadWriteLock _dataMutex;
+        // Mutex for data management
+        QReadWriteLock _mutex;
     };
 }
 }

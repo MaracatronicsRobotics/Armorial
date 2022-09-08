@@ -178,7 +178,7 @@ namespace Widgets {
          * \note The orientation should be passed as radians and needs to be a floating point.
          */
         template<typename T, typename V>
-        std::enable_if_t<Common::Types::has_coordinates_v<T> && std::is_floating_point_v<V>, void> drawRobot(const T& position, const V& orientation, const Common::Enums::Color &teamColor, const uint8_t &robotId, const float &idSize = 100.0) {
+        std::enable_if_t<Common::Types::has_coordinates_v<T> && std::is_floating_point_v<V>, void> drawRobot(const T& position, const V& orientation, const Common::Enums::Color &teamColor, const uint8_t &robotId) {
             // Draw robot shape
             glPushMatrix();
             glLoadIdentity();
@@ -188,7 +188,7 @@ namespace Widgets {
             glPopMatrix();
 
             // Draw text
-            drawText(position, 0.0f, QString("%1").arg(robotId), idSize, GLText::CenterAligned, GLText::MiddleAligned, QColor(0, 0, 0));
+            drawText(position, 0.0f, QString("%1").arg(robotId), _idSize, GLText::CenterAligned, GLText::MiddleAligned, QColor(0, 0, 0));
         }
 
         /*!
@@ -237,6 +237,12 @@ namespace Widgets {
         void setupFieldGeometry(const Common::Types::Field &field);
 
         /*!
+         * \brief getFieldGeometry
+         * \return The set field geometry for this FieldView instance.
+         */
+        Common::Types::Field getFieldGeometry() { return _field; }
+
+        /*!
          * \brief setupCentralLogo
          * \param logoPath
          */
@@ -246,6 +252,22 @@ namespace Widgets {
          * \brief Draw the field lines using the field objects lists generated from the setupFieldGeometry method.
          */
         void drawFieldLines();
+
+        void setupIdSize(const float& idSize) {
+            _idSize = idSize;
+        }
+
+        // Display lists
+        QMap<Common::Enums::Color, GLuint> _robotShape;
+        GLuint _ballShape;
+        int _idSize;
+
+        // Field z value references
+        static constexpr float _fieldZ = 1.0;
+        static constexpr float _robotZ = 2.0;
+        static constexpr float _ballZ = 3.0;
+        static constexpr float _minZValue = -10.0;
+        static constexpr float _maxZValue = 10.0;
 
     private:
         // Field view
@@ -264,21 +286,10 @@ namespace Widgets {
         // GLText for text rendering
         GLText _glText;
 
-        // Field z value references
-        static constexpr float _fieldZ = 1.0;
-        static constexpr float _robotZ = 2.0;
-        static constexpr float _ballZ = 3.0;
-        static constexpr float _minZValue = -10.0;
-        static constexpr float _maxZValue = 10.0;
-
         // Field objects
         QList<Geometry::LineSegment> _fieldLineSegments;
         QList<Geometry::Circle> _fieldCircles;
         QList<Geometry::Arc> _fieldArcs;
-
-        // Display lists
-        QMap<Common::Enums::Color, GLuint> _robotShape;
-        GLuint _ballShape;
 
         // Central logo
         QString _centralLogoPath;

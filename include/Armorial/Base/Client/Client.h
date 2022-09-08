@@ -16,6 +16,7 @@
 #include <QMutex>
 #include <QUdpSocket>
 #include <QNetworkDatagram>
+#include <QNetworkInterface>
 
 #include <Armorial/Libs/nameof/include/nameof.hpp>
 
@@ -61,6 +62,19 @@ namespace Base {
                 return (  _channel->GetState(false) == GRPC_CHANNEL_READY
                        || _channel->GetState(false) == GRPC_CHANNEL_IDLE
                        || _channel->GetState(false) == GRPC_CHANNEL_CONNECTING);
+            }
+
+            /*!
+             * \brief Connects to a new network data using the given network parameters and
+             * update the network parameters internally.
+             * \param serviceAddress, servicePort The given network parameters.
+             * \return A boolean that shows if the client is connected or not.
+             * \note This method just make a single call on 'connectToServer' method waiting for it.
+             */
+            [[nodiscard]] bool setClientNetworkData(QString serviceAddress, quint16 servicePort) {
+                _serviceAddress = serviceAddress;
+                _servicePort = servicePort;
+                return connectToServer(true);
             }
 
             /*!
@@ -133,10 +147,13 @@ namespace Base {
              * \brief UDP::Client constructor that initialize the network variables.
              * \param serverAddress The server address which the UDP::Client will listen to.
              * \param serverPort The port which the UDP::Client will listen to.
+             * \param serverNetworkInterface The network interface which the UDP::Client will listen to.
+             * \note By default the network interface will be set as 'lo'.
              */
-            Client(QString serverAddress, quint16 serverPort) {
+            Client(QString serverAddress, quint16 serverPort, QString serverNetworkInterface = "lo") {
                 _serverAddress = serverAddress;
                 _serverPort = serverPort;
+                _serverNetworkInterface = serverNetworkInterface;
                 _socket = nullptr;
             }
 
@@ -155,12 +172,13 @@ namespace Base {
              * \param isMulticast If it is a multicast connection.
              * \return
              */
-            [[nodiscard]] bool updateNetworkAddress(QString serverAddress, quint16 serverPort, bool isMulticast) {
+            [[nodiscard]] bool updateNetworkAddress(QString serverAddress, quint16 serverPort, QString serverNetworkInterface, bool isMulticast) {
                 _mutex.lock();
 
                 // Setup network addresses
                 _serverAddress = serverAddress;
                 _serverPort = serverPort;
+                _serverNetworkInterface = serverNetworkInterface;
 
                 // Perform connection
                 // If is a multicast, bind and connect to multicast address
@@ -194,7 +212,7 @@ namespace Base {
                 }
 
                 // Joining multicast group
-                if(_socket->joinMulticastGroup(QHostAddress(_serverAddress)) == false) {
+                if(_socket->joinMulticastGroup(QHostAddress(_serverAddress), QNetworkInterface::interfaceFromName(_serverNetworkInterface)) == false) {
                     return false;
                 }
 
@@ -218,6 +236,9 @@ namespace Base {
 
                 // Connect to required host
                 _socket->connectToHost(_serverAddress, _serverPort, openMode, networkProtocol);
+
+                // Connect to specific network interface
+                _socket->setMulticastInterface(QNetworkInterface::interfaceFromName(_serverNetworkInterface));
 
                 return true;
             }
@@ -326,9 +347,20 @@ namespace Base {
             }
 
             /*!
+             * \return The server network interface.
+             */
+            QString getServerNetworkInterface() {
+                _mutex.lock();
+                QString serverNetworkInterface = _serverNetworkInterface;
+                _mutex.unlock();
+
+                return serverNetworkInterface;
+            }
+
+            /*!
              * \return The server port.
              */
-            quint16 getServerPort() {
+            [[nodiscard]] quint16 getServerPort() {
                 _mutex.lock();
                 quint16 serverPort = _serverPort;
                 _mutex.unlock();
@@ -345,6 +377,7 @@ namespace Base {
 
             // Network address
             QString _serverAddress;
+            QString _serverNetworkInterface;
             quint16 _serverPort;
         };
     }

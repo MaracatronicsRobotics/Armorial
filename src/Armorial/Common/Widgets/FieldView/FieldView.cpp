@@ -22,6 +22,9 @@ FieldView::FieldView(const Common::Types::Field &field, const QString &centralLo
 
     // Setup central logo texture as nullptr
     _centralLogo = nullptr;
+
+    // Setup default id size
+    _idSize = 100;
 }
 
 void FieldView::setupFieldGeometry(const Common::Types::Field &field) {

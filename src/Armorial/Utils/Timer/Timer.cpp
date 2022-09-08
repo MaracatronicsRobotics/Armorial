@@ -2,6 +2,11 @@
 
 using namespace Utils;
 
+Timer::Timer() {
+    _startPoint = std::chrono::system_clock::now();
+    _endPoint = std::chrono::system_clock::now();
+}
+
 void Timer::start() {
     _startPoint = std::chrono::system_clock::now();
 }

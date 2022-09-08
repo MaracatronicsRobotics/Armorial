@@ -141,8 +141,9 @@ Matrix Matrix::cofactor(unsigned p, unsigned q) const {
     return cof;
 }
 
-int Matrix::determinant(Matrix m, unsigned columns) {
-    int D = 0, sign = 1;
+float Matrix::determinant(Matrix m, unsigned columns) {
+    float D = 0;
+    int sign = 1;
 
     // Base case of recursion
     if(columns == 1) {
@@ -184,10 +185,10 @@ Matrix Matrix::adjoint() {
 std::optional<Matrix> Matrix::inverse() {
     // Get determinant
     Matrix thisMat = (*this);
-    int det = Matrix::determinant(thisMat, thisMat.columns());
+    float det = Matrix::determinant(thisMat, thisMat.columns());
 
     // Check not possible case (det == 0)
-    if(det == 0) {
+    if(Utils::Compare::isEqual(det, 0.0f)) {
         return std::nullopt;
     }
 

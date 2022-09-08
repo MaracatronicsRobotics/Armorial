@@ -98,7 +98,7 @@ namespace Math {
          * \param columns The given number of columns of the given matrix.
          * \return A integer containing the determinant value for the given matrix.
          */
-        static int determinant(Matrix m, unsigned columns);
+        static float determinant(Matrix m, unsigned columns);
 
         /*!
          * \param size The size of the matrix.

@@ -2,80 +2,101 @@
 
 using namespace Common::Types;
 
-Object::Object(const Geometry::Vector2D &position, const Geometry::Angle &orientation, const quint8 identifier) {
-    _position = position;
-    _velocity = Geometry::Vector2D();
-    _acceleration = Geometry::Vector2D();
-    _orientation = orientation;
-    _identifier = identifier;
+Object::Object(Object& another) {
+    setPosition(another.getPosition());
+    setVelocity(another.getVelocity());
+    setAcceleration(another.getAcceleration());
+    setOrientation(another.getOrientation());
+    setAngularSpeed(another.getAngularSpeed());
 }
 
-void Object::setPosition(const Geometry::Vector2D &position) {
-    _dataMutex.lockForWrite();
-    _position = position;
-    _dataMutex.unlock();
+Object::Object(const Geometry::Vector2D& position,
+               const Geometry::Vector2D& velocity, const Geometry::Vector2D& acceleration,
+               const Geometry::Angle& orientation, const float& angularSpeed)
+{
+    setPosition(position);
+    setVelocity(velocity);
+    setAcceleration(acceleration);
+    setOrientation(orientation);
+    setAngularSpeed(angularSpeed);
 }
 
 Geometry::Vector2D Object::getPosition() {
-    _dataMutex.lockForRead();
+    _mutex.lockForRead();
     Geometry::Vector2D position = _position;
-    _dataMutex.unlock();
+    _mutex.unlock();
 
     return position;
 }
 
-void Object::setVelocity(const Geometry::Vector2D &velocity) {
-    _dataMutex.lockForWrite();
-    _velocity = velocity;
-    _dataMutex.unlock();
-}
-
 Geometry::Vector2D Object::getVelocity() {
-    _dataMutex.lockForRead();
+    _mutex.lockForRead();
     Geometry::Vector2D velocity = _velocity;
-    _dataMutex.unlock();
+    _mutex.unlock();
 
     return velocity;
 }
 
-void Object::setAcceleration(const Geometry::Vector2D &acceleration) {
-    _dataMutex.lockForWrite();
-    _acceleration = acceleration;
-    _dataMutex.unlock();
-}
-
 Geometry::Vector2D Object::getAcceleration() {
-    _dataMutex.lockForRead();
+    _mutex.lockForRead();
     Geometry::Vector2D acceleration = _acceleration;
-    _dataMutex.unlock();
+    _mutex.unlock();
 
     return acceleration;
 }
 
-void Object::setOrientation(const Geometry::Angle &orientation) {
-    _dataMutex.lockForWrite();
-    _orientation = orientation;
-    _dataMutex.unlock();
-}
-
 Geometry::Angle Object::getOrientation() {
-    _dataMutex.lockForRead();
+    _mutex.lockForRead();
     Geometry::Angle orientation = _orientation;
-    _dataMutex.unlock();
+    _mutex.unlock();
 
     return orientation;
 }
 
-void Object::setIdentifier(const quint8 &identifier) {
-    _dataMutex.lockForWrite();
-    _identifier = identifier;
-    _dataMutex.unlock();
+float Object::getAngularSpeed() {
+    _mutex.lockForRead();
+    float angularSpeed = _angularSpeed;
+    _mutex.unlock();
+
+    return angularSpeed;
 }
 
-quint8 Object::getIdentifier() {
-    _dataMutex.lockForRead();
-    quint8 identifier = _identifier;
-    _dataMutex.unlock();
+void Object::setPosition(const Geometry::Vector2D& position) {
+    _mutex.lockForWrite();
+    _position = position;
+    _mutex.unlock();
+}
 
-    return identifier;
+void Object::setVelocity(const Geometry::Vector2D& velocity) {
+    _mutex.lockForWrite();
+    _velocity = velocity;
+    _mutex.unlock();
+}
+
+void Object::setAcceleration(const Geometry::Vector2D& acceleration) {
+    _mutex.lockForWrite();
+    _acceleration = acceleration;
+    _mutex.unlock();
+}
+
+void Object::setOrientation(const Geometry::Angle& orientation) {
+    _mutex.lockForWrite();
+    _orientation = orientation;
+    _mutex.unlock();
+}
+
+void Object::setAngularSpeed(const float& angularSpeed) {
+    _mutex.lockForWrite();
+    _angularSpeed = angularSpeed;
+    _mutex.unlock();
+}
+
+Object &Object::operator=(Object another) {
+    this->setPosition(another.getPosition());
+    this->setVelocity(another.getVelocity());
+    this->setOrientation(another.getOrientation());
+    this->setAcceleration(another.getAcceleration());
+    this->setAngularSpeed(another.getAngularSpeed());
+
+    return *this;
 }

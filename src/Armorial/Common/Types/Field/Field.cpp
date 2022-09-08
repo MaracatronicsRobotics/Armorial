@@ -2,7 +2,7 @@
 
 using namespace Common::Types;
 
-Field::Field(const Side playSide, const float centerRadius,
+Field::Field(const Enums::Side playSide, const float centerRadius,
              const float fieldLength, const float fieldWidth,
              const float goalDepth, const float goalWidth,
              const float penaltyDepth, const float penaltyWidth,
@@ -53,7 +53,7 @@ Geometry::Rectangle Field::rightPenaltyArea() const {
 }
 
 bool Field::playingLeftSide() const {
-    return (_playSide == SIDE_LEFT);
+    return (_playSide == Common::Enums::Side::SIDE_LEFT);
 }
 
 float Field::minX() const {
@@ -171,4 +171,20 @@ Geometry::Rectangle Field::theirField() const {
 
 Geometry::Rectangle Field::theirPenaltyArea() const {
     return (playingLeftSide() ? rightPenaltyArea() : leftPenaltyArea());
+}
+
+Geometry::Rectangle Field::topRightQuadrant() const {
+    return Geometry::Rectangle({0.0, width() / 2.0}, {length() / 2.0, 0.0});
+}
+
+Geometry::Rectangle Field::topLeftQuadrant() const {
+    return Geometry::Rectangle({-(length() / 2.0), width() / 2.0}, {0.0, 0.0});
+}
+
+Geometry::Rectangle Field::bottomLeftQuadrant() const {
+    return Geometry::Rectangle({-(length() / 2.0), 0.0}, {0.0, -(width() / 2.0)});
+}
+
+Geometry::Rectangle Field::bottomRightQuadrant() const {
+    return Geometry::Rectangle({0.0, 0.0}, {length() / 2.0, -(width() / 2.0)});
 }

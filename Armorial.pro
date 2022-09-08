@@ -31,7 +31,10 @@ HEADERS     += \
     include/Armorial/Base/Service/Service.h \
     include/Armorial/Common/Enums/Color/Color.h \
     include/Armorial/Common/Enums/Enums.h \
+    include/Armorial/Common/Enums/Quadrant/Quadrant.h \
+    include/Armorial/Common/Enums/Side/Side.h \
     include/Armorial/Common/Packet/Packet.h \
+    include/Armorial/Common/Types/Object/Object.h \
     include/Armorial/Common/Widgets/Widgets.h \
     include/Armorial/Common/Widgets/FieldView/FieldView.h \
     include/Armorial/Common/Widgets/GLText/GLText.h \
@@ -53,7 +56,6 @@ HEADERS     += \
     include/Armorial/Threaded/EntityManager/EntityManager.h \
     include/Armorial/Threaded/Threaded.h \
     include/Armorial/Common/Types/Field/Field.h \
-    include/Armorial/Common/Types/Object/Object.h \
     include/Armorial/Common/Types/Traits/Traits.h \
     include/Armorial/Common/Types/Types.h \
     include/Armorial/Utils/ExitHandler/ExitHandler.h \
@@ -66,7 +68,10 @@ SOURCES     += \
     src/Armorial/Base/Client/Client.cpp \
     src/Armorial/Base/Service/Service.cpp \
     src/Armorial/Common/Enums/Color/Color.cpp \
+    src/Armorial/Common/Enums/Quadrant/Quadrant.cpp \
+    src/Armorial/Common/Enums/Side/Side.cpp \
     src/Armorial/Common/Packet/Packet.cpp \
+    src/Armorial/Common/Types/Object/Object.cpp \
     src/Armorial/Common/Widgets/FieldView/FieldView.cpp \
     src/Armorial/Common/Widgets/GLText/GLText.cpp \
     src/Armorial/Geometry/Angle/Angle.cpp \
@@ -83,7 +88,6 @@ SOURCES     += \
     src/Armorial/Geometry/Geometry.cpp \
     src/Armorial/Threaded/EntityManager/EntityManager.cpp \
     src/Armorial/Common/Types/Field/Field.cpp \
-    src/Armorial/Common/Types/Object/Object.cpp \
     src/Armorial/Common/Types/Traits/Traits.cpp \
     src/Armorial/Utils/ExitHandler/ExitHandler.cpp \
     src/Armorial/Utils/ParameterHandler/ParameterHandler.cpp \

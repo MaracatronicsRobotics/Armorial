@@ -2,6 +2,7 @@
 #define ARMORIAL_COMMON_TYPES_FIELD_H
 
 #include <Armorial/Common/Types/Types.h>
+#include <Armorial/Common/Enums/Side/Side.h>
 
 #include <Armorial/Geometry/Vector2D/Vector2D.h>
 #include <Armorial/Geometry/Circle/Circle.h>
@@ -9,11 +10,6 @@
 
 namespace Common {
 namespace Types {
-    enum Side {
-        SIDE_LEFT,
-        SIDE_RIGHT
-    };
-
     /*!
      * \brief The Types::Field class provides a interface to setup and get field positions based on the
      * provided constraints.
@@ -21,6 +17,11 @@ namespace Types {
     class Field
     {
     public:
+        /*!
+         * \brief Field default constructor
+         */
+        Field() = default;
+
         /*!
          * \brief Constructs a Field instance.
          * \param playSide The Side enum that indicates which is the side our team plays.
@@ -34,7 +35,7 @@ namespace Types {
          * \param penaltyMarkDistanceFromGoal The penalty mark distance from goal center.
          * \note All the given units should be the same.
          */
-        Field(const Side playSide, const float centerRadius,
+        Field(const Enums::Side playSide, const float centerRadius,
               const float fieldLength, const float fieldWidth,
               const float goalDepth, const float goalWidth,
               const float penaltyDepth, const float penaltyWidth,
@@ -196,8 +197,29 @@ namespace Types {
          */
         Geometry::Rectangle theirPenaltyArea() const;
 
+        /*!
+         * \return A Geometry::Rectangle object that describes the top right quadrant area.
+         */
+        Geometry::Rectangle topRightQuadrant() const;
+
+        /*!
+         * \return A Geometry::Rectangle object that describes the top left quadrant area.
+         */
+        Geometry::Rectangle topLeftQuadrant() const;
+
+        /*!
+         * \return A Geometry::Rectangle object that describes the bottom left quadrant area.
+         */
+        Geometry::Rectangle bottomLeftQuadrant() const;
+
+        /*!
+         * \return A Geometry::Rectangle object that describes the bottom right quadrant area.
+         */
+        Geometry::Rectangle bottomRightQuadrant() const;
+
+
     private:
-        Side _playSide;
+        Enums::Side _playSide;
         float _centerRadius;
         float _fieldLength;
         float _fieldWidth;

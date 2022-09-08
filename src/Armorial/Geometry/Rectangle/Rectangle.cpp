@@ -5,20 +5,14 @@
 using namespace Geometry;
 
 Rectangle::Rectangle(const Vector2D& topLeft, const Vector2D& bottomRight) {
+    updateCorners(topLeft, bottomRight);
+}
+
+void Rectangle::updateCorners(const Vector2D &topLeft, const Vector2D &bottomRight) {
     _topLeft = topLeft;
     _bottomRight = bottomRight;
     _topRight = Vector2D(bottomRight.x(), topLeft.y());
     _bottomLeft = Vector2D(topLeft.x(), bottomRight.y());
-}
-
-bool Rectangle::contains(const Vector2D &point) const {
-    return (point.x() > _topLeft.x() && point.x() < _topRight.x())
-            && (point.y() > _topLeft.y() && point.y() < _bottomLeft.y());
-}
-
-bool Rectangle::contains(const Vector2D &point, double margin) const {
-    return (point.x() > (_topLeft.x() + margin) && point.x() < (_topRight.x() + margin))
-            && (point.y() > (_topLeft.y() + margin) && point.y() < (_bottomLeft.y() + margin));
 }
 
 double Rectangle::width() const {

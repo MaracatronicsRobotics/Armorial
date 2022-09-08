@@ -14,7 +14,7 @@ namespace Utils {
         /*!
          * \brief Default constructor for Timer instance.
          */
-        Timer() = default;
+        Timer();
 
         /*!
          * \brief Start the interval measurement, setting the Timer::_startPoint variable with the current time.
