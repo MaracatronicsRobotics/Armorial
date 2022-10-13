@@ -18,6 +18,8 @@
 #include <QNetworkDatagram>
 #include <QNetworkInterface>
 
+#include <optional>
+
 #include <Armorial/Libs/nameof/include/nameof.hpp>
 
 namespace Base {
