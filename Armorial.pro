@@ -35,6 +35,7 @@ HEADERS     += \
     include/Armorial/Common/Enums/Side/Side.h \
     include/Armorial/Common/Packet/Packet.h \
     include/Armorial/Common/Types/Object/Object.h \
+    include/Armorial/Common/Widgets/RobotFrame/robotframe.h \
     include/Armorial/Common/Widgets/Widgets.h \
     include/Armorial/Common/Widgets/FieldView/FieldView.h \
     include/Armorial/Common/Widgets/GLText/GLText.h \
@@ -72,6 +73,7 @@ SOURCES     += \
     src/Armorial/Common/Enums/Side/Side.cpp \
     src/Armorial/Common/Packet/Packet.cpp \
     src/Armorial/Common/Types/Object/Object.cpp \
+    src/Armorial/Common/Widgets/RobotFrame/robotframe.cpp \
     src/Armorial/Common/Widgets/FieldView/FieldView.cpp \
     src/Armorial/Common/Widgets/GLText/GLText.cpp \
     src/Armorial/Geometry/Angle/Angle.cpp \
