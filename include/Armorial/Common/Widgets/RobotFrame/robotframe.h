@@ -15,41 +15,51 @@
 #define DEFAULT_PATTERN_SIZE 64
 #define DEFAULT_FONT_SIZE 9
 
-class RobotFrame : public QFrame
-{
-public:
-    /*!
-     * \brief The default constructor for RobotFrame.
-     */
-    RobotFrame(QWidget *parent = nullptr);
+namespace Common {
+namespace Widgets {
 
     /*!
-     * \brief Resets the RobotFrame to its default info.
+     * \brief The Common::Widgets::RobotFrame class provides a QOpenGLWidget override that allows to display a field
+     * and a lot of drawing methods using OpenGL.
      */
-    void reset();
+    class RobotFrame : public QFrame
+    {
+    public:
+        /*!
+         * \brief The default constructor for RobotFrame.
+         */
+        RobotFrame(QWidget *parent = nullptr);
 
-    /*!
-     * \brief Sets the RobotFrame's data.
-     * \param Color of the team.
-     * \param Robot ID.
-     * \param (Explain better pattern Size)
-     */
-    void setRobotData(Common::Enums::Color teamColor, quint8 robotId, int patternSize = DEFAULT_PATTERN_SIZE);
-    void setRobotRadioStatus(bool status);
-    void setRobotBattery(int value, int batteryWidth, int batteryHeight = DEFAULT_ICON_SIZE, int fontSize = DEFAULT_FONT_SIZE);
-    void setRobotRole(QString roleName);
+        /*!
+         * \brief Resets the RobotFrame to its default info.
+         */
+        void reset();
 
-private:
-    QLabel *_robotPattern;
-    QLabel *_robotId;
+        /*!
+         * \brief Sets the RobotFrame's data.
+         * \param Color of the team.
+         * \param Robot ID.
+         * \param (Explain better pattern Size)
+         */
+        void setRobotData(Common::Enums::Color teamColor, quint8 robotId, int patternSize = DEFAULT_PATTERN_SIZE);
+        void setRobotRadioStatus(bool status);
+        void setRobotBattery(int value, int batteryWidth, int batteryHeight = DEFAULT_ICON_SIZE, int fontSize = DEFAULT_FONT_SIZE);
+        void setRobotRole(QString roleName);
 
-    QLabel *_radioStatus;
+    private:
+        QLabel *_robotPattern;
+        QLabel *_robotId;
 
-    QLabel *_robotBatteryIcon;
-    QProgressBar *_robotBattery;
+        QLabel *_radioStatus;
 
-    QLabel *_roleIcon;
-    QLabel *_roleName;
-};
+        QLabel *_robotBatteryIcon;
+        QProgressBar *_robotBattery;
+
+        QLabel *_roleIcon;
+        QLabel *_roleName;
+    };
+}
+}
+
 
 #endif // ROBOTFRAME_H
