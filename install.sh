@@ -7,6 +7,10 @@ set -e
 # Init and update submodules
 git submodule init && git submodule update
 
+# Setup github hooks
+sudo cp test/hook/pre-commit .git/hooks/
+sudo chmod +x .git/hooks/pre-commit
+
 # Create build folder, generate MakeFile and install Armorial library
 mkdir build && cd build
 qmake install_path=/usr/lib ..

@@ -1,0 +1,4 @@
+#!/bin/sh
+
+echo "Running tests at Armorial library"
+. ./run_tests.sh
