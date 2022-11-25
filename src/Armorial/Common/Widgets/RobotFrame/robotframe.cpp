@@ -1,5 +1,7 @@
 #include <Armorial/Common/Widgets/RobotFrame/robotframe.h>
 
+using namespace Common::Widgets;
+
 RobotFrame::RobotFrame(QWidget *parent) : QFrame(parent) {
     // Setting default info
     setFixedSize(230, 80);

@@ -62,4 +62,4 @@ namespace Widgets {
 }
 
 
-#endif // ROBOTFRAME_H
+#endif // ARMORIAL_COMMON_WIDGETS_ROBOTFRAME_H
