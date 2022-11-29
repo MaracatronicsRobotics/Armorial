@@ -14,7 +14,7 @@ CONFIG -= app_bundle
 QT += core
 
 DEFINES += QT_DEPRECATED_WARNINGS
-LIBS += -lfmt -lArmorial -lgtest
+LIBS += -lfmt -lArmorial -lgtest -lgmock
 
 # The following define makes your compiler emit warnings if you use
 # any Qt feature that has been marked deprecated (the exact warnings
