@@ -17,13 +17,29 @@ Matrix::Matrix(unsigned lines, unsigned columns) {
     initialize();
 }
 
-Matrix::Matrix(const Matrix &M) {
-    _lines = M.lines();
-    _columns = M.columns();
+Matrix::Matrix(const std::vector<std::vector<float>>& matrix) {
+    _lines = matrix.size();
+    _columns = (_lines == 0) ? 0 : matrix[0].size();
 
-    // Create matrix by copy
+    // Create matrix
     _matrix = NULL;
     allocate();
+
+    assert(matrix.size() == lines());
+    for(unsigned i = 0; i < lines(); i++) {
+        assert(matrix[i].size() == columns());
+    }
+
+    for (unsigned i = 0; i < lines(); i++) {
+        for (unsigned j = 0; j < columns(); j++) {
+            _matrix[i][j] = matrix[i][j];
+        }
+    }
+}
+
+Matrix::Matrix(const Matrix &M) {
+    // Create matrix by copy
+    _matrix = NULL;
     copyFrom(M);
 }
 
@@ -78,7 +94,11 @@ void Matrix::set(unsigned i, unsigned j, float value) {
 }
 
 void Matrix::copyFrom(const Matrix &M) {
-    assert(lines() == M.lines() && columns() == M.columns());
+    deallocate();
+    _lines = M.lines();
+    _columns = M.columns();
+    allocate();
+
     for(unsigned i = 0; i < lines(); i++) {
         for(unsigned j = 0; j < columns(); j++) {
             _matrix[i][j] = M.get(i, j);
@@ -142,6 +162,8 @@ Matrix Matrix::cofactor(unsigned p, unsigned q) const {
 }
 
 float Matrix::determinant(Matrix m, unsigned columns) {
+    assert(m.columns() == m.lines());
+
     float D = 0;
     int sign = 1;
 
@@ -315,6 +337,20 @@ void Matrix::operator-=(const Matrix &M) {
             _matrix[i][j] -= M.get(i,j);
         }
     }
+}
+
+bool Matrix::operator==(const Matrix &M) {
+    assert(columns() == M.columns());
+    assert(lines() == M.lines());
+
+    bool eq = true;
+    for(unsigned i = 0; i < lines() && eq; i++) {
+        for(unsigned j = 0; j < columns() && eq; j++) {
+            eq = Utils::Compare::isEqual(this->get(i, j), M.get(i, j));
+        }
+    }
+
+    return eq;
 }
 
 void Matrix::operator-=(float k) {
