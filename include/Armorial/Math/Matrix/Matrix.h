@@ -2,6 +2,7 @@
 #define ARMORIAL_MATH_MATRIX_H
 
 #include <optional>
+#include <vector>
 
 namespace Math {
     /*!
@@ -16,6 +17,14 @@ namespace Math {
          * \param columns The given columns.
          */
         Matrix(unsigned lines = 0, unsigned columns = 0);
+
+        /*!
+         * \brief Matrix constructor that receives matrix in vector-of-vectors as input (list of lists)
+         * \param matrix The given double-pointer float.
+         * \param lines The given lines.
+         * \param columns The given columns;
+         */
+        Matrix(const std::vector<std::vector<float>>& matrix);
 
         /*!
          * \brief Matrix constructor that receives another matrix as argument (makes copy).
@@ -128,6 +137,7 @@ namespace Math {
         Matrix operator*(const Matrix &M) const;
         void operator+=(const Matrix &M);
         void operator-=(const Matrix &M);
+        bool operator==(const Matrix &M);
 
         /*!
          * \brief Operators between this Matrix instance and a given scalar.
@@ -167,7 +177,7 @@ namespace Math {
 
         unsigned _lines;
         unsigned _columns;
-        float **_matrix;
+        float** _matrix;
     };
 }
 
