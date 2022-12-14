@@ -32,7 +32,7 @@ TEST(Math_Matrix_Test, When_Creating_A_Matrix_With_Given_Vector_Should_Allocate_
 
     // Check if values are all set
     for (unsigned int i = 0; i < givenVector.size(); i++) {
-        for (unsigned j = 0; j < givenVector[0].size(); j++) {
+        for (unsigned int j = 0; j < givenVector[0].size(); j++) {
             EXPECT_FLOAT_EQ(matrix.get(i, j), givenVector[i][j]);
         }
     }
