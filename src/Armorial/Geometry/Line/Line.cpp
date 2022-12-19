@@ -23,7 +23,7 @@ Line::Line(const LineSegment &other) {
     }
 }
 
-double Line::distanceToLine(const Vector2D &point) const {
+float Line::distanceToLine(const Vector2D &point) const {
     return (project(point) - point).length();
 }
 
@@ -51,11 +51,11 @@ std::optional<Vector2D> Line::intersect(const Vector2D p1, const Vector2D p2, co
     Vector2D line_a = p1 - p2;
     Vector2D line_b = q1 - q2;
 
-    double denominator = line_a.cross(line_b);
+    float denominator = line_a.cross(line_b);
     if(fabs(denominator) >= 1e-4) {
         Vector2D l_aux = p1 - q1;
-        double numerator = l_aux.cross(line_a);
-        double u = numerator / denominator;
+        float numerator = l_aux.cross(line_a);
+        float u = numerator / denominator;
         return q1 - line_b * u;
     }
 
@@ -69,8 +69,8 @@ bool Line::isOnLine(const Vector2D &point) const {
     return (fabs(ab.cross(ap)) < 1e-4);
 }
 
-double Line::relativePosition(const Vector2D &p1, const Vector2D &p2, const Vector2D &pointOnLine) {
-    double xDiff = p2.x() - p1.x();
+float Line::relativePosition(const Vector2D &p1, const Vector2D &p2, const Vector2D &pointOnLine) {
+    float xDiff = p2.x() - p1.x();
     if (Utils::Compare::isEqual(xDiff, 0.0)) {
         return (pointOnLine.y() - p1.y()) / (p2.y() - p1.y());
     }

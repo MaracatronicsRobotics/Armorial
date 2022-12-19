@@ -4,12 +4,12 @@
 
 using namespace Geometry;
 
-Angle::Angle(double angle) {
+Angle::Angle(float angle) {
     _angle = angle;
     normalize();
 }
 
-double Angle::value() const {
+float Angle::value() const {
     return _angle;
 }
 
@@ -21,16 +21,16 @@ Angle Angle::normalize() {
 }
 
 Angle::Direction Angle::rotateDirection(const Angle &target) const {
-    double angleDiff = target.value() - this->value();
+    float angleDiff = target.value() - this->value();
     bool positive = (angleDiff >= 0.0);
     bool large = fabs(angleDiff) >= M_PI;
 
     return Angle::Direction(positive ^ large);
 }
 
-double Angle::shortestAngleDiff(const Angle &target) const {
-    double thisToOther = fabs((*this - target).value());
-    double otherToThis = fabs((target - *this).value());
+float Angle::shortestAngleDiff(const Angle &target) const {
+    float thisToOther = fabs((*this - target).value());
+    float otherToThis = fabs((target - *this).value());
     return std::min(thisToOther, otherToThis);
 }
 
@@ -62,7 +62,7 @@ Angle &Angle::operator-=(const Angle &other) {
     return *this;
 }
 
-Angle &Angle::operator=(double scalar) {
+Angle &Angle::operator=(float scalar) {
     this->_angle = scalar;
     this->normalize();
     return *this;

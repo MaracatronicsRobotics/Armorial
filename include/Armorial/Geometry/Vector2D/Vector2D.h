@@ -5,7 +5,7 @@
 
 namespace Geometry {
     /*!
-     * \brief The Geometry::Vector2D class stores a vector of two doubles that starts from (0, 0) to (_x, _y).
+     * \brief The Geometry::Vector2D class stores a vector of two floats that starts from (0, 0) to (_x, _y).
      */
     class Vector2D
     {
@@ -20,14 +20,14 @@ namespace Geometry {
          * \param x The x value.
          * \param y The y value.
          */
-        Vector2D(const double x, const double y);
+        Vector2D(const float x, const float y);
 
         /*!
          * \brief Vector2D constructor that receive a Geometry::Angle and length as parameter.
          * \param angle The Geometry::Angle object which the angle value will be extracted.
          * \param length The length of the Vector2D started from (0, 0) coordinates.
          */
-        Vector2D(Geometry::Angle &angle, const double length);
+        Vector2D(Geometry::Angle &angle, const float length);
 
         /*!
          * \brief Default copy constructor.
@@ -43,36 +43,36 @@ namespace Geometry {
 
         /*!
          * \brief Get the _x coordinate value.
-         * \return A double value containing the _x coordinate.
+         * \return A float value containing the _x coordinate.
          */
-        double x() const;
+        float x() const;
 
         /*!
          * \brief Get the _y coordinate value.
-         * \return A double value containing the _y coordinate.
+         * \return A float value containing the _y coordinate.
          */
-        double y() const;
+        float y() const;
 
         /*!
          * \brief Caculate the dot product of this Vector2D instance and another.
          * \param other The other Vector2D instance.
          * \return The dot product between the two Vector2D instances.
          */
-        [[nodiscard]] double dot(const Vector2D &other) const;
+        [[nodiscard]] float dot(const Vector2D &other) const;
 
         /*!
          * \brief Compute the distance from this Vector2D instance to another.
          * \param other The another Vector2D instance.
          * \return The distance from this Vector2D instance to another.
          */
-        double dist(const Vector2D &other) const;
+        float dist(const Vector2D &other) const;
 
         /*!
          * \brief Scale this Vector2D instance by a scalar.
          * \param scalar The scalar value which will be used to compute the scale.
          * \return A Vector2D instance that contains a copy of this Vector2D instance scaled.
          */
-        Vector2D scale(double scalar) const;
+        Vector2D scale(float scalar) const;
 
         /*!
          * \brief Compute the normalization of this Vector2D instance to a length of 1.
@@ -85,7 +85,7 @@ namespace Geometry {
          * \brief Computes the length of this Vector2D instance.
          * \return The length of this Vector2D instance.
          */
-        double length() const;
+        float length() const;
 
         /*!
          * \brief Computes the angle of this Vector2D instance viewed from the center of the field (0.0, 0.0). <br>
@@ -96,7 +96,7 @@ namespace Geometry {
          *      - The angle of the zero vector is undefined.
          * \return The angle value of this Vector2D instance viewed from the center of the field (0.0, 0.0).
          */
-        double angle() const;
+        float angle() const;
 
         /*!
          * \brief Get the Geometry::Angle object using the angle() result from this Vector2D instance.
@@ -113,14 +113,14 @@ namespace Geometry {
          * \param factor The factor which will be used to calculate the interpolation/extrapolation between the Vector2D instances.
          * \return A Vector2D that contains the result from the operation.
          */
-        Vector2D lerp(const Vector2D &other, double factor) const;
+        Vector2D lerp(const Vector2D &other, float factor) const;
 
         /*!
          * \brief Computate the rotation of this Vector2D instance around the origin.
          * \param radians The amount of the rotation given in radians.
          * \return A Vector2D instance that contains the result from the operation.
          */
-        Vector2D rotate(double radians) const;
+        Vector2D rotate(float radians) const;
 
         /*!
          * \brief Computate the rotation of this Vector2D instance around a given pivot.
@@ -128,7 +128,7 @@ namespace Geometry {
          * \param pivot A Vector2D instance that will be used as pivot for the rotation.
          * \return A Vector2D instance that contains the result from the operation.
          */
-        Vector2D rotateAroundPoint(double radians, const Vector2D &pivot) const;
+        Vector2D rotateAroundPoint(float radians, const Vector2D &pivot) const;
 
         /*!
          * \brief Computes the projection of this Vector2D instance onto another Vector2D instance.
@@ -158,7 +158,7 @@ namespace Geometry {
          * \param other The other Vector2D instance.
          * \return A Vector2D instance that contains the result for the operation.
          */
-        double cross(const Vector2D &other) const;
+        float cross(const Vector2D &other) const;
 
         /*!
          * \brief Creates a Vector2D instance with the same angle as this but with the given
@@ -166,7 +166,7 @@ namespace Geometry {
          * \param length The given length which this Vector2D instance will be strectched to.
          * \return A Vector2D instance with the stretched length.
          */
-        Vector2D stretchToLength(double targetLength) const;
+        Vector2D stretchToLength(float targetLength) const;
 
         /*!
          * \brief Check if two Vector2D instances have the same coordinates.
@@ -219,31 +219,31 @@ namespace Geometry {
 
         /*!
          * \brief Sum a scalar to Vector2D components.
-         * \param other A double scalar value.
+         * \param other A float scalar value.
          * \return A Vector2D instance which coordinates has the sum result.
          */
-        Vector2D operator+=(const double &scalar);
+        Vector2D operator+=(const float &scalar);
 
         /*!
          * \brief Subtract a scalar to Vector2D components.
-         * \param other A double scalar value.
+         * \param other A float scalar value.
          * \return A Vector2D instance which coordinates has the subtract result.
          */
-        Vector2D operator-=(const double &scalar);
+        Vector2D operator-=(const float &scalar);
 
         /*!
          * \brief Multiply a scalar to Vector2D components.
-         * \param other A double scalar value.
+         * \param other A float scalar value.
          * \return A Vector2D instance which coordinates has the multiplication result.
          */
-        Vector2D operator*=(const double &scalar);
+        Vector2D operator*=(const float &scalar);
 
         /*!
          * \brief Divide a scalar to Vector2D components.
-         * \param other A double scalar value.
+         * \param other A float scalar value.
          * \return A Vector2D instance which coordinates has the division result.
          */
-        Vector2D operator/=(const double &scalar);
+        Vector2D operator/=(const float &scalar);
 
         /*!
          * \brief Add another Vector2D instance component-wise to this.
@@ -254,10 +254,10 @@ namespace Geometry {
 
         /*!
          * \brief Add a scalar component-wise to this instance.
-         * \param other The double scalar value.
+         * \param other The float scalar value.
          * \return A Vector2D instance which contains the result of the sum.
          */
-        Vector2D operator+(const double &scalar) const;
+        Vector2D operator+(const float &scalar) const;
 
         /*!
          * \brief Subtract another Vector2D instance component-wise to this.
@@ -268,10 +268,10 @@ namespace Geometry {
 
         /*!
          * \brief Subtract a scalar component-wise to this instance.
-         * \param other The double scalar value.
+         * \param other The float scalar value.
          * \return A Vector2D instance which contains the result of the subtraction.
          */
-        Vector2D operator-(const double &scalar) const;
+        Vector2D operator-(const float &scalar) const;
 
         /*!
          * \brief Multiply another Vector2D instance component-wise to this.
@@ -282,10 +282,10 @@ namespace Geometry {
 
         /*!
          * \brief Multiply a scalar component-wise to this instance.
-         * \param other The double scalar value.
+         * \param other The float scalar value.
          * \return A Vector2D instance which contains the result of the multiplication.
          */
-        Vector2D operator*(const double &scalar) const;
+        Vector2D operator*(const float &scalar) const;
 
         /*!
          * \brief Divide another Vector2D instance component-wise to this.
@@ -296,14 +296,14 @@ namespace Geometry {
 
         /*!
          * \brief Divide a scalar component-wise to this instance.
-         * \param other The double scalar value.
+         * \param other The float scalar value.
          * \return A Vector2D instance which contains the result of the division.
          */
-        Vector2D operator/(const double &scalar) const;
+        Vector2D operator/(const float &scalar) const;
 
     private:
-        double _x;
-        double _y;
+        float _x;
+        float _y;
     };
 }
 

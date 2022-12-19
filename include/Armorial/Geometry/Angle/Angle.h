@@ -19,12 +19,12 @@ namespace Geometry {
         };
 
         /*!
-         * \brief Constructor of the Angle class, receiving a double value that represents the angle
+         * \brief Constructor of the Angle class, receiving a float value that represents the angle
          * value in radians and normalize it.
-         * \param angle The given double value of the angle. As it is normalized after you can give it
+         * \param angle The given float value of the angle. As it is normalized after you can give it
          * outside the range [-π, π).
          */
-        Angle(double angle = 0.0);
+        Angle(float angle = 0.0);
 
         /*!
          * \brief Compute the shortest direction to achieve the target angle from the actual angle.
@@ -41,7 +41,7 @@ namespace Geometry {
          * \return A value that contains the shortest angle diff in the range [0, π].
          * \note Use this combined with rotateDirection to discover the rotate direction.
          */
-        [[nodiscard]] double shortestAngleDiff(const Angle& target) const;
+        [[nodiscard]] float shortestAngleDiff(const Angle& target) const;
 
         /*!
          * \brief Check if two Angle instances have the same angle values.
@@ -91,21 +91,21 @@ namespace Geometry {
 
         /*!
          * \brief Set the angle value using a scalar value.
-         * \param scalar A double value that contains the angle value that will be set.
+         * \param scalar A float value that contains the angle value that will be set.
          * \return A new angle instance that contains the set angle value.
          * \note The set angle will be normalized.
          */
-        Angle &operator=(double scalar);
+        Angle &operator=(float scalar);
 
         /*!
          * \brief Get the actual value of angle for this Angle instance.
-         * \return A double containing the value of the angle.
+         * \return A float containing the value of the angle.
          */
-        double value() const;
+        float value() const;
 
     private:
         // Angle value
-        double _angle;
+        float _angle;
 
         /*!
          * \brief Compute the angle normalization to the range [-π, π).

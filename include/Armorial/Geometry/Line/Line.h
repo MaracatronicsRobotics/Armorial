@@ -29,9 +29,9 @@ namespace Geometry {
         /*!
          * \brief Computes the Euclidean Distance from the point param coordinates to this Line instance.
          * \param point Point which will be used to calculate the distance.
-         * \return A double value containing the distance from the point to this Line instance.
+         * \return A float value containing the distance from the point to this Line instance.
          */
-        [[nodiscard]] double distanceToLine(const Vector2D &point) const;
+        [[nodiscard]] float distanceToLine(const Vector2D &point) const;
 
         /*!
          * \brief Computes the projection of the given point onto this Line.
@@ -75,7 +75,7 @@ namespace Geometry {
          * \return A value *t* such that p1 + (p2 - p1) * t = pointOnLine
          * \note Make sure that the given parameters p1 and p2 are different and that pointOnLine actually lies on that Line, otherwise the return value does not make sense.
          */
-        static double relativePosition(const Vector2D &p1, const Vector2D &p2, const Vector2D &pointOnLine);
+        static float relativePosition(const Vector2D &p1, const Vector2D &p2, const Vector2D &pointOnLine);
 
     private:
         Vector2D _p1; // One of the points located on the Line

@@ -7,48 +7,48 @@
 
 using namespace Geometry;
 
-Vector2D::Vector2D(const double x, const double y) {
+Vector2D::Vector2D(const float x, const float y) {
     _x = x;
     _y = y;
 }
 
-Vector2D::Vector2D(Geometry::Angle &angle, const double length) {
+Vector2D::Vector2D(Geometry::Angle &angle, const float length) {
     _x = cos(angle.value()) * length;
     _y = sin(angle.value()) * length;
 }
 
-double Vector2D::x() const {
+float Vector2D::x() const {
     return _x;
 }
 
-double Vector2D::y() const {
+float Vector2D::y() const {
     return _y;
 }
 
-double Vector2D::dot(const Vector2D &other) const {
+float Vector2D::dot(const Vector2D &other) const {
     return (_x * other._x + _y * other._y);
 }
 
-double Vector2D::dist(const Vector2D &other) const {
+float Vector2D::dist(const Vector2D &other) const {
     return (*this - other).length();
 }
 
-Vector2D Vector2D::scale(double scalar) const {
+Vector2D Vector2D::scale(float scalar) const {
     return Vector2D(_x * scalar, _y * scalar);
 }
 
 Vector2D Vector2D::normalize() const {
     if(Utils::Compare::isEqual(this->length(), 0.0)) return Vector2D(0.0, 0.0);
 
-    double d = 1.0 / length();
+    float d = 1.0 / length();
     return Vector2D(_x * d, _y * d);
 }
 
-double Vector2D::length() const {
+float Vector2D::length() const {
     return sqrt(_x * _x + _y * _y);
 }
 
-double Vector2D::angle() const {
+float Vector2D::angle() const {
     return this->toAngle().value();
 }
 
@@ -56,24 +56,24 @@ Geometry::Angle Vector2D::toAngle() const {
     return Geometry::Angle(atan2(_y, _x));
 }
 
-Vector2D Vector2D::lerp(const Vector2D &other, double factor) const {
+Vector2D Vector2D::lerp(const Vector2D &other, float factor) const {
     return (this->scale(factor) + other.scale(1 - factor));
 }
 
-Vector2D Vector2D::rotate(double radians) const {
-    double c = cos(radians);
-    double s = sin(radians);
+Vector2D Vector2D::rotate(float radians) const {
+    float c = cos(radians);
+    float s = sin(radians);
 
     return Vector2D(_x * c - _y * s, _x * s + _y * c);
 }
 
-Vector2D Vector2D::rotateAroundPoint(double radians, const Vector2D &pivot) const {
-    double c = cos(radians);
-    double s = sin(radians);
+Vector2D Vector2D::rotateAroundPoint(float radians, const Vector2D &pivot) const {
+    float c = cos(radians);
+    float s = sin(radians);
 
     // Calculate new position
-    double rotatedX = (_x - pivot._x) * c - (_y - pivot._y) * s + pivot._x;
-    double rotatedY = (_x - pivot._y) * s + (_y - pivot._y) * c + pivot._y;
+    float rotatedX = (_x - pivot._x) * c - (_y - pivot._y) * s + pivot._x;
+    float rotatedY = (_x - pivot._y) * s + (_y - pivot._y) * c + pivot._y;
 
     return Vector2D(rotatedX, rotatedY);
 }
@@ -86,7 +86,7 @@ Vector2D Vector2D::project(const Vector2D &line_a, const Vector2D &line_b) const
     Vector2D ab = line_b - line_a;
     Vector2D ap = (*this) - line_a;
 
-    double t = ap.dot(ab) / ab.dot(ab);
+    float t = ap.dot(ab) / ab.dot(ab);
     if(t < 0.0) {
         return line_a;
     }
@@ -102,16 +102,16 @@ bool Vector2D::isValid() const {
     return Utils::Compare::isEqual(_x, _x) && Utils::Compare::isEqual(_y, _y);
 }
 
-double Vector2D::cross(const Vector2D &other) const {
+float Vector2D::cross(const Vector2D &other) const {
     return (_x * other._y - _y * other._x);
 }
 
-Vector2D Vector2D::stretchToLength(double targetLength) const {
+Vector2D Vector2D::stretchToLength(float targetLength) const {
     if(Utils::Compare::isEqual(length(), 0.0)) {
         return Vector2D(targetLength, 0.0);
     }
 
-    double frac = targetLength / length();
+    float frac = targetLength / length();
     return Vector2D(_x * frac, _y * frac);
 }
 
@@ -131,7 +131,7 @@ Vector2D Vector2D::operator+=(const Vector2D &other) {
     return Vector2D(this->_x += other._x, this->_y += other._y);
 }
 
-Vector2D Vector2D::operator+=(const double &scalar) {
+Vector2D Vector2D::operator+=(const float &scalar) {
     return Vector2D(_x += scalar, _y += scalar);
 }
 
@@ -139,7 +139,7 @@ Vector2D Vector2D::operator-=(const Vector2D &other) {
     return Vector2D(_x -= other._x, _y -= other._y);
 }
 
-Vector2D Vector2D::operator-=(const double &scalar) {
+Vector2D Vector2D::operator-=(const float &scalar) {
     return Vector2D(_x -= scalar, _y -= scalar);
 }
 
@@ -147,7 +147,7 @@ Vector2D Vector2D::operator*=(const Vector2D &other) {
     return Vector2D(_x *= other._x, _y *= other._y);
 }
 
-Vector2D Vector2D::operator*=(const double &scalar) {
+Vector2D Vector2D::operator*=(const float &scalar) {
     return Vector2D(_x *= scalar, _y *= scalar);
 }
 
@@ -156,7 +156,7 @@ Vector2D Vector2D::operator/=(const Vector2D &other) {
     return Vector2D(_x /= other._x, _y /= other._y);
 }
 
-Vector2D Vector2D::operator/=(const double &scalar) {
+Vector2D Vector2D::operator/=(const float &scalar) {
     return Vector2D(_x /= scalar, _y /= scalar);
 }
 
@@ -164,7 +164,7 @@ Vector2D Vector2D::operator+(const Vector2D &other) const {
     return Vector2D(_x + other._x, _y + other._y);
 }
 
-Vector2D Vector2D::operator+(const double &scalar) const {
+Vector2D Vector2D::operator+(const float &scalar) const {
     return Vector2D(_x + scalar, _y + scalar);
 }
 
@@ -172,7 +172,7 @@ Vector2D Vector2D::operator-(const Vector2D &other) const {
     return Vector2D(_x - other._x, _y - other._y);
 }
 
-Vector2D Vector2D::operator-(const double &scalar) const {
+Vector2D Vector2D::operator-(const float &scalar) const {
     return Vector2D(_x - scalar, _y - scalar);
 }
 
@@ -180,7 +180,7 @@ Vector2D Vector2D::operator*(const Vector2D &other) const {
     return Vector2D(_x * other._x, _y * other._y);
 }
 
-Vector2D Vector2D::operator*(const double &scalar) const {
+Vector2D Vector2D::operator*(const float &scalar) const {
     return Vector2D(_x * scalar, _y * scalar);
 }
 
@@ -188,6 +188,6 @@ Vector2D Vector2D::operator/(const Vector2D &other) const {
     return Vector2D(_x / other._x, _y / other._y);
 }
 
-Vector2D Vector2D::operator/(const double &scalar) const {
+Vector2D Vector2D::operator/(const float &scalar) const {
     return Vector2D(_x / scalar, _y / scalar);
 }

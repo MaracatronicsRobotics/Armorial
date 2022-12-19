@@ -21,7 +21,7 @@ Vector2D LineSegment::end() const {
     return _end;
 }
 
-double LineSegment::length() const {
+float LineSegment::length() const {
     return (end() - start()).length();
 }
 
@@ -29,7 +29,7 @@ bool LineSegment::isPoint() const {
     return (start() == end());
 }
 
-double LineSegment::distanceToPoint(const Vector2D &point) const {
+float LineSegment::distanceToPoint(const Vector2D &point) const {
     return (project(point) - point).length();
 }
 
@@ -39,7 +39,7 @@ bool LineSegment::isOnLine(const Vector2D &point) const {
     }
 
     if(Line(*this).isOnLine(point)) {
-        double t = Line::relativePosition(start(), end(), point);
+        float t = Line::relativePosition(start(), end(), point);
         return (Utils::Compare::isEqual(t, std::clamp(t, 0.0, 1.0)));
     }
 
@@ -52,7 +52,7 @@ Vector2D LineSegment::project(const Vector2D &point) const {
     }
 
     Vector2D projection = Line(*this).project(point);
-    double t = Line::relativePosition(start(), end(), projection);
+    float t = Line::relativePosition(start(), end(), projection);
     if(t < 0.0) {
         return start();
     }

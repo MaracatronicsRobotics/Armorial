@@ -20,7 +20,7 @@ namespace Geometry {
          * \param center The given center.
          * \param radius The given radius.
          */
-        Circle(const Vector2D &center, const double radius);
+        Circle(const Vector2D &center, const float radius);
 
         /*!
          * \brief Default copy constructor
@@ -35,9 +35,9 @@ namespace Geometry {
 
         /*!
          * \brief Get the radius of this Circle instance.
-         * \return A double value containing the radius of this Circle.
+         * \return A float value containing the radius of this Circle.
          */
-        [[nodiscard]] double radius() const;
+        [[nodiscard]] float radius() const;
 
         /*!
          * \brief Compute the intersection of the Circle instance with the Line instance.
@@ -94,18 +94,18 @@ namespace Geometry {
         Circle operator-=(const Vector2D& other);
 
         /*!
-         * \brief Compute a scale operation of this Circle instance by scaling the radius by a given double value.
-         * \param scale The given double value.
+         * \brief Compute a scale operation of this Circle instance by scaling the radius by a given float value.
+         * \param scale The given float value.
          * \return A Circle instance that contains the result of the operation.
          */
-        Circle operator*(double scale) const;
-        Circle operator/(double scale) const;
-        Circle operator*=(double scale);
-        Circle operator/=(double scale);
+        Circle operator*(float scale) const;
+        Circle operator/(float scale) const;
+        Circle operator*=(float scale);
+        Circle operator/=(float scale);
 
     private:
         Vector2D _center;
-        double _radius;
+        float _radius;
     };
 }
 
