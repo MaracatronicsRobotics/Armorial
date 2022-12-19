@@ -54,7 +54,7 @@ std::vector<LineSegment> Polygon::boundary() const {
 }
 
 float Polygon::perimeterLength() const {
-    double length = 0;
+    float length = 0;
     std::vector<LineSegment> polygonBoundary = boundary();
 
     for (auto &ls : polygonBoundary) {
@@ -74,7 +74,7 @@ bool Polygon::isConvex() const {
     for (int i = 0; i < sz_vertices; i++) {
         Vector2D d1 = _vertices[(i + 2) % sz_vertices] - _vertices[(i + 1) % sz_vertices];
         Vector2D d2 = _vertices[i] - _vertices[(i + 1) % sz_vertices];
-        double cross = d1.cross(d2);
+        float cross = d1.cross(d2);
 
         // on a crossproduct of zero the points lie in one line and we can simply ignore this point's contribution to the convexity
         if (!Utils::Compare::isEqual(cross, 0.0)) {

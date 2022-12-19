@@ -4,7 +4,7 @@
 
 using namespace Geometry;
 
-Circle::Circle(const Vector2D &center, const double radius) {
+Circle::Circle(const Vector2D &center, const float radius) {
     _center = center;
     _radius = radius;
 }
@@ -13,7 +13,7 @@ Vector2D Circle::center() const {
     return _center;
 }
 
-double Circle::radius() const {
+float Circle::radius() const {
     return _radius;
 }
 
@@ -21,11 +21,11 @@ std::vector<Vector2D> Circle::intersects(const LineSegment &line_segment) const 
     Vector2D direction_vector = line_segment.direction();
     Vector2D f = line_segment.start() - center();
 
-    double a = direction_vector.dot(direction_vector);
-    double b = 2.0 * f.dot(direction_vector);
-    double c = f.dot(f) - radius() * radius();
+    float a = direction_vector.dot(direction_vector);
+    float b = 2.0 * f.dot(direction_vector);
+    float c = f.dot(f) - radius() * radius();
 
-    std::optional<std::pair<double,double>> values = Utils::Algebra::solveQuadratic(a,b,c);
+    std::optional<std::pair<float,float>> values = Utils::Algebra::solveQuadratic(a,b,c);
 
     // Compute intersections
     std::vector<Vector2D> intersections;
@@ -79,18 +79,18 @@ Circle Circle::operator-=(const Vector2D &other) {
     return Circle(_center -= other, radius());
 }
 
-Circle Circle::operator*(double scale) const {
+Circle Circle::operator*(float scale) const {
     return Circle(center(), radius() * fabs(scale));
 }
 
-Circle Circle::operator/(double scale) const {
+Circle Circle::operator/(float scale) const {
     return Circle(center(), radius() / fabs(scale));
 }
 
-Circle Circle::operator*=(double scale) {
+Circle Circle::operator*=(float scale) {
     return Circle(center(), _radius *= fabs(scale));
 }
 
-Circle Circle::operator/=(double scale) {
+Circle Circle::operator/=(float scale) {
     return Circle(center(), _radius /= fabs(scale));
 }

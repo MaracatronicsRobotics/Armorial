@@ -15,11 +15,11 @@ void Rectangle::updateCorners(const Vector2D &topLeft, const Vector2D &bottomRig
     _bottomLeft = Vector2D(topLeft.x(), bottomRight.y());
 }
 
-double Rectangle::width() const {
+float Rectangle::width() const {
     return std::abs(topRight().x() - topLeft().x());
 }
 
-double Rectangle::height() const {
+float Rectangle::height() const {
     return std::abs(_topLeft.y() - _bottomLeft.y());
 }
 
