@@ -33,6 +33,7 @@ DEFINES += PROJECT_PATH=\\\"$${PWD}\\\"
 SOURCES += \
     main.cpp \
     src/Geometry/Angle/Angle.cpp \
+    src/Geometry/Line/Line.cpp \
     src/Geometry/Vector2D/Vector2D.cpp \
     src/Math/Matrix/Matrix.cpp \
     src/Common/Enums/Enums.cpp \
