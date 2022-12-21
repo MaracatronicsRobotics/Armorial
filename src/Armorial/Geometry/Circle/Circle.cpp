@@ -21,9 +21,9 @@ std::vector<Vector2D> Circle::intersects(const LineSegment &line_segment) const 
     Vector2D direction_vector = line_segment.direction();
     Vector2D f = line_segment.start() - center();
 
-    float a = direction_vector.dot(direction_vector);
-    float b = 2.0 * f.dot(direction_vector);
-    float c = f.dot(f) - radius() * radius();
+    float a = direction_vector.dotProduct(direction_vector);
+    float b = 2.0 * f.dotProduct(direction_vector);
+    float c = f.dotProduct(f) - radius() * radius();
 
     std::optional<std::pair<float,float>> values = Utils::Algebra::solveQuadratic(a,b,c);
 
@@ -31,11 +31,11 @@ std::vector<Vector2D> Circle::intersects(const LineSegment &line_segment) const 
     std::vector<Vector2D> intersections;
 
     if(values.has_value()){
-        if(Utils::Compare::isEqual(values->first, std::clamp(values->first, 0.0, 1.0))) {
+        if(Utils::Compare::isEqual(values->first, std::clamp(values->first, 0.0f, 1.0f))) {
             intersections.push_back(line_segment.start() + direction_vector * values->first);
         }
 
-        if(Utils::Compare::isEqual(values->second, std::clamp(values->second, 0.0, 1.0)) && !Utils::Compare::isEqual(values->second, values->first)) {
+        if(Utils::Compare::isEqual(values->second, std::clamp(values->second, 0.0f, 1.0f)) && !Utils::Compare::isEqual(values->second, values->first)) {
             intersections.push_back(line_segment.start()+ direction_vector * values->second);
         }
     }

@@ -58,7 +58,7 @@ namespace Geometry {
          * \param other The other Vector2D instance.
          * \return The dot product between the two Vector2D instances.
          */
-        [[nodiscard]] float dot(const Vector2D &other) const;
+        [[nodiscard]] float dotProduct(const Vector2D &other) const;
 
         /*!
          * \brief Compute the distance from this Vector2D instance to another.
@@ -158,7 +158,7 @@ namespace Geometry {
          * \param other The other Vector2D instance.
          * \return A Vector2D instance that contains the result for the operation.
          */
-        float cross(const Vector2D &other) const;
+        float crossProduct(const Vector2D &other) const;
 
         /*!
          * \brief Creates a Vector2D instance with the same angle as this but with the given

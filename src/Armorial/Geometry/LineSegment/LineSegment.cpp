@@ -40,7 +40,7 @@ bool LineSegment::isOnLine(const Vector2D &point) const {
 
     if(Line(*this).isOnLine(point)) {
         float t = Line::relativePosition(start(), end(), point);
-        return (Utils::Compare::isEqual(t, std::clamp(t, 0.0, 1.0)));
+        return (Utils::Compare::isEqual(t, std::clamp(t, 0.0f, 1.0f)));
     }
 
     return false;

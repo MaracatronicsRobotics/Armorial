@@ -39,7 +39,7 @@ float Triangle::area(const Vector2D &a, const Vector2D &b, const Vector2D &c) {
     Vector2D AB = b - a;
     Vector2D AC = c - a;
 
-    float cross_prod = AB.cross(AC);
+    float cross_prod = AB.crossProduct(AC);
     return (cross_prod / 2.0);
 }
 

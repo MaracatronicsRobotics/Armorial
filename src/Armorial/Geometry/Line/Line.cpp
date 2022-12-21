@@ -31,7 +31,7 @@ Vector2D Line::project(const Vector2D &point) const {
     Vector2D ab = _p2 - _p1;
     Vector2D ap = point - _p1;
 
-    return _p1 + ab * (ap.dot(ab) / pow(ab.length(), 2));
+    return _p1 + ab * (ap.dotProduct(ab) / pow(ab.length(), 2));
 }
 
 std::optional<Vector2D> Line::intersect(const Line &other) const {
@@ -51,10 +51,10 @@ std::optional<Vector2D> Line::intersect(const Vector2D p1, const Vector2D p2, co
     Vector2D line_a = p1 - p2;
     Vector2D line_b = q1 - q2;
 
-    float denominator = line_a.cross(line_b);
+    float denominator = line_a.crossProduct(line_b);
     if(fabs(denominator) >= 1e-4) {
         Vector2D l_aux = p1 - q1;
-        float numerator = l_aux.cross(line_a);
+        float numerator = l_aux.crossProduct(line_a);
         float u = numerator / denominator;
         return q1 - line_b * u;
     }
@@ -66,12 +66,12 @@ bool Line::isOnLine(const Vector2D &point) const {
     Vector2D ab = _p2 - _p1;
     Vector2D ap = point - _p1;
 
-    return (fabs(ab.cross(ap)) < 1e-4);
+    return (fabs(ab.crossProduct(ap)) < 1e-4);
 }
 
 float Line::relativePosition(const Vector2D &p1, const Vector2D &p2, const Vector2D &pointOnLine) {
     float xDiff = p2.x() - p1.x();
-    if (Utils::Compare::isEqual(xDiff, 0.0)) {
+    if (Utils::Compare::isEqual(xDiff, 0.0f)) {
         return (pointOnLine.y() - p1.y()) / (p2.y() - p1.y());
     }
     else {
