@@ -25,7 +25,7 @@ float Vector2D::y() const {
     return _y;
 }
 
-float Vector2D::dot(const Vector2D &other) const {
+float Vector2D::dotProduct(const Vector2D &other) const {
     return (_x * other._x + _y * other._y);
 }
 
@@ -38,7 +38,7 @@ Vector2D Vector2D::scale(float scalar) const {
 }
 
 Vector2D Vector2D::normalize() const {
-    if(Utils::Compare::isEqual(this->length(), 0.0)) return Vector2D(0.0, 0.0);
+    if(Utils::Compare::isEqual(this->length(), 0.0f)) return Vector2D(0.0f, 0.0f);
 
     float d = 1.0 / length();
     return Vector2D(_x * d, _y * d);
@@ -79,14 +79,14 @@ Vector2D Vector2D::rotateAroundPoint(float radians, const Vector2D &pivot) const
 }
 
 Vector2D Vector2D::project(const Vector2D &other) const {
-    return other.scale(this->dot(other) / other.dot(other));
+    return other.scale(this->dotProduct(other) / other.dotProduct(other));
 }
 
 Vector2D Vector2D::project(const Vector2D &line_a, const Vector2D &line_b) const {
     Vector2D ab = line_b - line_a;
     Vector2D ap = (*this) - line_a;
 
-    float t = ap.dot(ab) / ab.dot(ab);
+    float t = ap.dotProduct(ab) / ab.dotProduct(ab);
     if(t < 0.0) {
         return line_a;
     }
@@ -102,12 +102,12 @@ bool Vector2D::isValid() const {
     return Utils::Compare::isEqual(_x, _x) && Utils::Compare::isEqual(_y, _y);
 }
 
-float Vector2D::cross(const Vector2D &other) const {
+float Vector2D::crossProduct(const Vector2D &other) const {
     return (_x * other._y - _y * other._x);
 }
 
 Vector2D Vector2D::stretchToLength(float targetLength) const {
-    if(Utils::Compare::isEqual(length(), 0.0)) {
+    if(Utils::Compare::isEqual(length(), 0.0f)) {
         return Vector2D(targetLength, 0.0);
     }
 
