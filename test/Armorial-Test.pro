@@ -47,6 +47,7 @@ SOURCES += \
     src/Common/Types/Object/Object.cpp
     src/Threaded/Entity/Entity.cpp \
     src/Threaded/EntityCommons.cpp \
+    src/Threaded/EntityManager/EntityManager.cpp \
     src/Utils/ParameterHandler/ParameterHandler.cpp \
     src/Utils/Timer/Timer.cpp
 
