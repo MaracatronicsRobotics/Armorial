@@ -45,6 +45,8 @@ SOURCES += \
     src/Common/Enums/Enums.cpp \
     src/Common/Types/Field/Field.cpp \
     src/Common/Types/Object/Object.cpp
+    src/Utils/ParameterHandler/ParameterHandler.cpp \
+    src/Utils/Timer/Timer.cpp
 
 
 # Default rules for deployment.
