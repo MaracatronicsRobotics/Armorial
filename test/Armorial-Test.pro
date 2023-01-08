@@ -45,6 +45,8 @@ SOURCES += \
     src/Common/Enums/Enums.cpp \
     src/Common/Types/Field/Field.cpp \
     src/Common/Types/Object/Object.cpp
+    src/Threaded/Entity/Entity.cpp \
+    src/Threaded/EntityCommons.cpp \
     src/Utils/ParameterHandler/ParameterHandler.cpp \
     src/Utils/Timer/Timer.cpp
 
@@ -54,4 +56,5 @@ qnx: target.path = /tmp/$${TARGET}/bin
 else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
 
-HEADERS +=
+HEADERS += \
+    src/Threaded/EntityCommons.h
