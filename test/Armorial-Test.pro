@@ -34,6 +34,8 @@ SOURCES += \
     main.cpp \
     src/Geometry/Vector2D/Vector2D.cpp \
     src/Math/Matrix/Matrix.cpp \
+    src/Threaded/Entity/Entity.cpp \
+    src/Threaded/EntityCommons.cpp \
     src/Utils/ParameterHandler/ParameterHandler.cpp \
     src/Utils/Timer/Timer.cpp
 
@@ -42,4 +44,5 @@ qnx: target.path = /tmp/$${TARGET}/bin
 else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
 
-HEADERS +=
+HEADERS += \
+    src/Threaded/EntityCommons.h
