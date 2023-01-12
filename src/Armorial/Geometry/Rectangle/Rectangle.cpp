@@ -62,3 +62,7 @@ LineSegment Rectangle::rightLine() const {
 std::vector<LineSegment> Rectangle::boundary() const {
     return {leftLine(), topLine(), rightLine(), bottomLine()};
 }
+
+bool Rectangle::operator==(const Rectangle &other) const {
+    return (this->_topLeft == other._topLeft) && (this->_bottomRight == other._bottomRight);
+}
