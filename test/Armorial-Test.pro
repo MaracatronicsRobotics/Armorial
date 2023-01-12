@@ -33,7 +33,11 @@ DEFINES += PROJECT_PATH=\\\"$${PWD}\\\"
 SOURCES += \
     main.cpp \
     src/Geometry/Vector2D/Vector2D.cpp \
-    src/Math/Matrix/Matrix.cpp
+    src/Math/Matrix/Matrix.cpp \
+    src/Common/Enums/Enums.cpp \
+    src/Common/Types/Field/Field.cpp \
+    src/Common/Types/Object/Object.cpp
+
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
