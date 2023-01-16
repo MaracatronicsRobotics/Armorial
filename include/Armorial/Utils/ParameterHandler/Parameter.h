@@ -66,6 +66,14 @@ namespace Utils {
 
             return newMap;
         }
+
+        /*!
+         * \brief Get this Parameter instace associated keys.
+         * \return A QList<String> instance containing this Parameter instance associated keys.
+         */
+        QList<QString> getKeys() const {
+            return toMap().keys();
+        }
     };
 }
 

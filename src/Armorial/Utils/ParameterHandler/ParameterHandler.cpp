@@ -32,3 +32,7 @@ Parameter ParameterHandler::operator[](QString key) const {
 
     return _documentMap[key];
 }
+
+QList<QString> ParameterHandler::getKeys() const {
+    return _documentMap.keys();
+}
