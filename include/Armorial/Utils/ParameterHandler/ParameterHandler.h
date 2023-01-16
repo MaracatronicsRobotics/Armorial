@@ -42,6 +42,12 @@ namespace Utils {
          */
         Parameter operator[](QString key) const;
 
+        /*!
+         * \brief Get this ParameterHandler instace associated keys.
+         * \return A QList<String> instance containing this ParameterHandler instance associated keys.
+         */
+        QList<QString> getKeys() const;
+
     private:
         // File
         QFile _parameterFile;
