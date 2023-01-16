@@ -194,9 +194,6 @@ TEST(Common_Field_Test, OurAndTheir_GoalCenter_ShouldWork){
     Field teste_Field2 = Field(Common::Enums::SIDE_RIGHT, 50.0f, 1000.0f, 500.0f,
                                   10.0f,30.0f, 100.0f,50.0f,75.0f);
     
-    Geometry::Vector2D leftPenaltyAreaCenter = teste_Field.leftPenaltyArea().center();
-    Geometry::Vector2D rightPenaltyAreaCenter = teste_Field.rightPenaltyArea().center();
-    
     { // our Left Side
         Geometry::Vector2D GoalCenter(-teste_Field.length()/2.0f, 0.0f);
         EXPECT_EQ(GoalCenter, teste_Field.ourGoalCenter());
