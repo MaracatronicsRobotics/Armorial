@@ -39,8 +39,8 @@ float Triangle::area(const Vector2D &a, const Vector2D &b, const Vector2D &c) {
     Vector2D AB = b - a;
     Vector2D AC = c - a;
 
-    float cross_prod = AB.crossProduct(AC);
-    return (cross_prod / 2.0);
+    float cross_prod = AB.crossProductMagnitude(AC);
+    return (cross_prod / 2.0f);
 }
 
 std::vector<LineSegment> Triangle::boundary() const {

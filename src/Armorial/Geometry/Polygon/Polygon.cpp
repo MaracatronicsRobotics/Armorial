@@ -29,10 +29,10 @@ Vector2D Polygon::centroid() const {
     size_t sz_vertices = amountOfVertices();
     Vector2D sum = {0.0, 0.0};
     for(size_t i = 0; i < sz_vertices; i++) {
-        sum += (_vertices[i] + _vertices[(i + 1) % sz_vertices]) * _vertices[i].crossProduct(_vertices[(i + 1) % sz_vertices]);
+        sum += (_vertices[i] + _vertices[(i + 1) % sz_vertices]) * _vertices[i].crossProductMagnitude(_vertices[(i + 1) % sz_vertices]);
     }
 
-    return (sum /= (6.0 * area()));
+    return (sum / (6.0f * area()));
 }
 
 Vector2D Polygon::operator[](size_t id) const {
@@ -74,7 +74,7 @@ bool Polygon::isConvex() const {
     for (int i = 0; i < sz_vertices; i++) {
         Vector2D d1 = _vertices[(i + 2) % sz_vertices] - _vertices[(i + 1) % sz_vertices];
         Vector2D d2 = _vertices[i] - _vertices[(i + 1) % sz_vertices];
-        float cross = d1.crossProduct(d2);
+        float cross = d1.x() * d2.y() - d2.x() * d1.y();
 
         // on a crossproduct of zero the points lie in one line and we can simply ignore this point's contribution to the convexity
         if (!Utils::Compare::isEqual(cross, 0.0f)) {
@@ -145,10 +145,10 @@ float Polygon::area() const {
     float areaSum = 0.0;
     size_t sz_vertices = amountOfVertices();
     for(size_t i = 0; i < sz_vertices; i++) {
-        areaSum += _vertices[i].crossProduct(_vertices[(i + 1) % sz_vertices]);
+        areaSum += _vertices[i].crossProductMagnitude(_vertices[(i + 1) % sz_vertices]);
     }
 
-    return (0.5 * fabs(areaSum));
+    return (0.5 * areaSum);
 }
 
 bool Polygon::isSimple() const {
