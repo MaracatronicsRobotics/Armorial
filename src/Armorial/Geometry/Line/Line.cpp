@@ -51,10 +51,10 @@ std::optional<Vector2D> Line::intersect(const Vector2D p1, const Vector2D p2, co
     Vector2D line_a = p1 - p2;
     Vector2D line_b = q1 - q2;
 
-    float denominator = line_a.crossProduct(line_b);
-    if(fabs(denominator) >= 1e-4) {
+    float denominator = line_a.crossProductMagnitude(line_b);
+    if(denominator >= 1e-4) {
         Vector2D l_aux = p1 - q1;
-        float numerator = l_aux.crossProduct(line_a);
+        float numerator = l_aux.crossProductMagnitude(line_a);
         float u = numerator / denominator;
         return q1 - line_b * u;
     }
@@ -66,7 +66,7 @@ bool Line::isOnLine(const Vector2D &point) const {
     Vector2D ab = _p2 - _p1;
     Vector2D ap = point - _p1;
 
-    return (fabs(ab.crossProduct(ap)) < 1e-4);
+    return (ab.crossProductMagnitude(ap) < 1e-4);
 }
 
 float Line::relativePosition(const Vector2D &p1, const Vector2D &p2, const Vector2D &pointOnLine) {

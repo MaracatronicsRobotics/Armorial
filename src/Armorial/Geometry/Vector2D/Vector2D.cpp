@@ -102,13 +102,13 @@ bool Vector2D::isValid() const {
     return Utils::Compare::isEqual(_x, _x) && Utils::Compare::isEqual(_y, _y);
 }
 
-float Vector2D::crossProduct(const Vector2D &other) const {
-    return (_x * other._y - _y * other._x);
+float Vector2D::crossProductMagnitude(const Vector2D &other) const {
+    return std::fabs(_x * other._y - _y * other._x);
 }
 
 Vector2D Vector2D::stretchToLength(float targetLength) const {
     if(Utils::Compare::isEqual(length(), 0.0f)) {
-        return Vector2D(targetLength, 0.0);
+        return Vector2D(0.0f, 0.0f);
     }
 
     float frac = targetLength / length();
