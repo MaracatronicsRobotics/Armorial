@@ -163,23 +163,19 @@ float Polygon::area() const {
 }
 
 bool Polygon::isSimple() const {
-    std::vector<LineSegment> lines;
-    size_t numberIntersections = 0;
-    for (auto first = _vertices.begin(); first != _vertices.end(); first++) {
-        std::optional<LineSegment> boundarySegment;
-        if (first == std::prev(_vertices.end())) {
-            boundarySegment = LineSegment(*first, _vertices[0]);
-        } else {
-            boundarySegment = LineSegment(*first, *(first + 1));
+    std::vector<Vector2D> intersections;
+    std::vector<LineSegment> polygonBoundary = boundary();
+    for (auto i = polygonBoundary.begin(); i != polygonBoundary.end(); i++) {
+        for (auto j = i + 1; j != polygonBoundary.end(); j++) {
+            if ((*i).intersects(*j).has_value()) {
+                //spdlog::info("Intersect X: {}; Intersect Y: {}", (*i).intersects(*j).value().x(), (*i).intersects(*j).value().y());
+                intersections.push_back((*i).intersects(*j).value());
+            }
         }
-
-        for (auto const &line : lines) {
-            numberIntersections += boundarySegment.value().intersects(line).size();
-        }
-
-        lines.push_back(boundarySegment.value());
     }
+    std::sort(intersections.begin(), intersections.end());
+    intersections.erase(std::unique(intersections.begin(), intersections.end()), intersections.end());
 
     // If the polygon is not simple, it will intersect more than in the corners.
-    return numberIntersections == amountOfVertices();
+    return intersections.size() == amountOfVertices();
 }
