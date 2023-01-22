@@ -95,22 +95,22 @@ namespace Geometry {
         [[nodiscard]] Vector2D bottomRight() const;
 
         /*!
-         * \return Returns a LineSegment instance for the top line (formed by top corners) of this Rectangle.
+         * \return Returns a LineSegment instance for the top line (formed by top (left to right) corners) of this Rectangle.
          */
         [[nodiscard]] LineSegment topLine() const;
 
         /*!
-         * \return Returns a LineSegment instance for the right line (formed by right corners) of this Rectangle.
+         * \return Returns a LineSegment instance for the right line (formed by right (top to bottom) corners) of this Rectangle.
          */
         [[nodiscard]] LineSegment rightLine() const;
 
         /*!
-         * \return Returns a LineSegment instance for the bottom line (formed by bottom corners) of this Rectangle.
+         * \return Returns a LineSegment instance for the bottom line (formed by bottom (left to right) corners) of this Rectangle.
          */
         [[nodiscard]] LineSegment bottomLine() const;
 
         /*!
-         * \return Returns a LineSegment instance for the left line (formed by left corners) of this Rectangle.
+         * \return Returns a LineSegment instance for the left line (formed by left (top to bottom) corners) of this Rectangle.
          */
         [[nodiscard]] LineSegment leftLine() const;
 
