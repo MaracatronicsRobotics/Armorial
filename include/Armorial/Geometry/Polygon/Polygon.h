@@ -29,6 +29,12 @@ namespace Geometry {
         void insertVertice(const Vector2D &vertice);
 
         /*!
+         * \brief Remove a vertice from the list of vertices.
+         * \param Index of the vertice to remove in the list.
+         */
+        void removeVertice(const int index);
+
+        /*!
          * \return The list of vertices that defines this polygon.
          */
         std::vector<Vector2D> vertices() const;
