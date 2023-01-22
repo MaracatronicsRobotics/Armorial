@@ -48,13 +48,18 @@ namespace Geometry {
         [[nodiscard]] std::vector<Vector2D> intersects(const LineSegment& line_segment) const;
 
         /*!
-         * \brief Compute if the Circle intersect or contain a given object.
-         * \param other The object to check intersection and containing.
-         * \return True if this Circle instance contains or is intersected by the given object or
-         * False otherwise.
+         * \brief Check if this Circle contains a given point.
+         * \param point The given point.
+         * \return True if this Circle contains the given point and False otherwise.
          */
-        [[nodiscard]] bool doesIntersectOrContain(const Vector2D& other) const;
-        [[nodiscard]] bool doesIntersectOrContain(const Line& other) const;
+        [[nodiscard]] bool contains(const Vector2D& other) const;
+
+        /*!
+         * \brief Check if this Circle intersect a given line segment.
+         * \param lineSegment The given line segment.
+         * \return True if this Circle intersects a given line segment and False otherwise.
+         */
+        [[nodiscard]] bool doesIntersect(const LineSegment& other) const;
 
         /*!
          * \brief Compute the projection of a given point onto this Circle instance.
