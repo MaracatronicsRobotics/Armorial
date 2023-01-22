@@ -48,11 +48,11 @@ LineSegment Rectangle::topLine() const {
 }
 
 LineSegment Rectangle::leftLine() const {
-    return LineSegment(_bottomLeft, _topLeft);
+    return LineSegment(_topLeft, _bottomLeft);
 }
 
 LineSegment Rectangle::bottomLine() const {
-    return LineSegment(_bottomRight, _bottomLeft);
+    return LineSegment(_bottomLeft, _bottomRight);
 }
 
 LineSegment Rectangle::rightLine() const {
