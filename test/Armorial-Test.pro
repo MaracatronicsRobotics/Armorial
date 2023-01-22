@@ -37,6 +37,7 @@ SOURCES += \
     src/Geometry/Circle/Circle.cpp \
     src/Geometry/Line/Line.cpp \
     src/Geometry/LineSegment/LineSegment.cpp \
+    src/Geometry/Polygon/Polygon.cpp \
     src/Geometry/Vector2D/Vector2D.cpp \
     src/Math/Matrix/Matrix.cpp \
     src/Common/Enums/Enums.cpp \
