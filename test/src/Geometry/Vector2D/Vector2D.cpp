@@ -5,7 +5,7 @@
 #include <spdlog/spdlog.h>
 #include <spdlog/fmt/bundled/color.h>
 
-TEST(Geometry_Vector2D_Tests, GivenAVector_Getters_ShouldWork) {
+TEST(Geometry_Vector2D_Tests, GivenAVector_CoordinateGetters_ShouldWork) {
     Geometry::Vector2D vectorBase(1.0f, 1.0f);
     {
         SCOPED_TRACE("Coordinate X");
@@ -19,13 +19,13 @@ TEST(Geometry_Vector2D_Tests, GivenAVector_Getters_ShouldWork) {
 
 TEST(Geometry_Vector2D_Tests, GivenAVector_DistanceToPoint_ShouldWork) {
     Geometry::Vector2D vectorBase(1.0f, 0.0f);
-    EXPECT_EQ(vectorBase.dist(Geometry::Vector2D(0.0f, 0.0f)), 1.0f) << "Distance values doesn't match";
     ASSERT_GE(vectorBase.dist(Geometry::Vector2D(0.0f, 0.0f)), 0.0f) << "Distance of points has a negative value";
+    EXPECT_FLOAT_EQ(vectorBase.dist(Geometry::Vector2D(0.0f, 0.0f)), 1.0f) << "Distance value does not match";
 }
 TEST(Geometry_Vector2D_Tests, GivenAVector_VectorLength_ShouldWork) {
     Geometry::Vector2D vectorBase(1.0f, 1.0f);
-    EXPECT_FLOAT_EQ(vectorBase.length(), sqrtf(2)) << "Distance values doesn't match";
     ASSERT_GE(vectorBase.length(), 0.0f) << "Distance of points has a negative value";
+    EXPECT_FLOAT_EQ(vectorBase.length(), sqrtf(2)) << "Distance value does not match";
 }
 
 TEST(Geometry_Vector2D_Tests, GivenAVector_DotProduct_ShouldWork) {
@@ -41,9 +41,9 @@ TEST(Geometry_Vector2D_Tests, GivenAVector_CrossProduct_ShouldWork) {
     Geometry::Vector2D vectorBase1(1.0f, 0.0f);
     Geometry::Vector2D vectorBase2(0.0f, 1.0f);
     Geometry::Vector2D vectorBase3(1.0f, 1.0f);
-    EXPECT_EQ(vectorBase1.crossProduct(vectorBase2), 1.0f) << "Cross Product does not match (should be 1)";
-    EXPECT_EQ(vectorBase2.crossProduct(vectorBase3), -1.0f) << "Cross Product does not match (should be -1)";
-    EXPECT_EQ(vectorBase3.crossProduct(vectorBase3), 0.0f) << "Cross Product does not match (should be 0)";
+    EXPECT_EQ(vectorBase1.crossProductMagnitude(vectorBase2), 1.0f) << "Cross Product does not match (should be 1)";
+    EXPECT_EQ(vectorBase2.crossProductMagnitude(vectorBase3), 1.0f) << "Cross Product does not match (should be 1)";
+    EXPECT_EQ(vectorBase3.crossProductMagnitude(vectorBase3), 0.0f) << "Cross Product does not match (should be 0)";
 }
 
 TEST(Geometry_Vector2D_Tests, GivenAVector_Scalation_ShouldWork) {
@@ -56,20 +56,20 @@ TEST(Geometry_Vector2D_Tests, GivenANonNullVector_Normalization_ShouldWork) {
     EXPECT_EQ(vectorBase.normalize(), Geometry::Vector2D(sqrtf(2)/2, sqrtf(2)/2)) << "Normalization failed";
 }
 
-//TEST(Geometry_Vector2D_Tests, GivenANullVector_Normalization_ShouldFail) {
-//    Geometry::Vector2D vectorBase(0.0f, 0.0f);
-//    EXPECT_DEATH(vectorBase.normalize(), "Assertion*.*failed");
-//}
+TEST(Geometry_Vector2D_Tests, GivenANullVector_Normalization_ShouldFail) {
+    Geometry::Vector2D vectorBase(0.0f, 0.0f);
+    EXPECT_EQ(vectorBase.normalize(), Geometry::Vector2D(0.0f, 0.0f));
+}
 
 TEST(Geometry_Vector2D_Tests, GivenANonNullVector_StretchToLength_ShouldWork) {
     Geometry::Vector2D vectorBase(1.0f, 1.0f);
     EXPECT_EQ(vectorBase.stretchToLength(sqrtf(8)), Geometry::Vector2D(2.0f, 2.0f)) << "Stretchion failed";
 }
 
-//TEST(Geometry_Vector2D_Tests, GivenANullVector_StretchToLength_ShouldFail) {
-//    Geometry::Vector2D vectorBase(0.0f, 0.0f);
-//    EXPECT_DEATH(vectorBase.normalize(), "Assertion*.*failed");
-//}
+TEST(Geometry_Vector2D_Tests, GivenANullVector_StretchToLength_ShouldFail) {
+    Geometry::Vector2D vectorBase(0.0f, 0.0f);
+    EXPECT_EQ(vectorBase.stretchToLength(5.0f), Geometry::Vector2D(0.0f, 0.0f));
+}
 
 TEST(Geometry_Vector2D_Tests, GivenAVector_GetAngle_ShouldWork) {
     Geometry::Vector2D vectorBase(1.0f, 1.0f);
@@ -161,23 +161,29 @@ TEST(Geometry_Vector2D_Tests, GivenAVector_OperatorsWithScalars_ShouldWork) {
     }
 }
 
-//TEST(Geometry_Vector2D_Tests, GivenAVector_DivisionWithNullParametersVector_ShouldFail) {
-//    Geometry::Vector2D vectorBase(1.0f, 1.0f);
-//    {
-//        SCOPED_TRACE("Null coordinate X");
-//        EXPECT_DEATH(vectorBase / Geometry::Vector2D(0.0f, 1.0f), "Assertion*.*failed");
-//    }
-//    {
-//        SCOPED_TRACE("Null coordinate Y");
-//        EXPECT_DEATH(vectorBase / Geometry::Vector2D(1.0f, 0.0f), "Assertion*.*failed");
-//    }
-//    {
-//        SCOPED_TRACE("Nulls coordinate X and Y");
-//        EXPECT_DEATH(vectorBase / Geometry::Vector2D(1.0f, 1.0f), "Assertion*.*failed");
-//    }
-//}
+TEST(Geometry_Vector2D_Tests, GivenAVector_DivisionWithNullParametersVector_ShouldFail) {
+    Geometry::Vector2D vectorBase(1.0f, 1.0f);
+    {
+        SCOPED_TRACE("Null coordinate X");
+        Geometry::Vector2D vectorDivision = vectorBase / Geometry::Vector2D(0.0f, 1.0f);
+        EXPECT_EQ(std::isinf(vectorDivision.x()), true);
+    }
+    {
+        SCOPED_TRACE("Null coordinate Y");
+        Geometry::Vector2D vectorDivision = vectorBase / Geometry::Vector2D(1.0f, 0.0f);
+        EXPECT_EQ(std::isinf(vectorDivision.y()), true);
+    }
+    {
+        SCOPED_TRACE("Nulls coordinate X and Y");
+        Geometry::Vector2D vectorDivision = vectorBase / Geometry::Vector2D(0.0f, 0.0f);
+        EXPECT_EQ(std::isinf(vectorDivision.x()), true);
+        EXPECT_EQ(std::isinf(vectorDivision.y()), true);
+    }
+}
 
-//TEST(Geometry_Vector2D_Tests, GivenAVector_DivisionWithNullScalar_ShouldFail) {
-//    Geometry::Vector2D vectorBase(1.0f, 1.0f);
-//    EXPECT_DEATH(vectorBase / 0.0f, "Assertion*.*failed");
-//}
+TEST(Geometry_Vector2D_Tests, GivenAVector_DivisionWithNullScalar_ShouldFail) {
+    Geometry::Vector2D vectorBase(1.0f, 1.0f);
+    Geometry::Vector2D vectorDivision = vectorBase / 0.0f;
+    EXPECT_EQ(std::isinf(vectorDivision.x()), true);
+    EXPECT_EQ(std::isinf(vectorDivision.y()), true);
+}
