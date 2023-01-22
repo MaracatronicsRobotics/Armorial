@@ -15,7 +15,7 @@ float Angle::value() const {
 
 Angle Angle::normalize() {
     _angle = fmod(value() + M_PI, 2.0 * M_PI);
-    _angle = (value() < 0.0) ? value() + M_PI : value() - M_PI;
+    _angle = (value() <= 0.0) ? value() + M_PI : value() - M_PI;
 
     return *this;
 }
