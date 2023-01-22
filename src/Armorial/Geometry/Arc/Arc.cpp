@@ -1,4 +1,5 @@
 #include <Armorial/Geometry/Arc/Arc.h>
+#include <spdlog/spdlog.h>
 
 using namespace Geometry;
 
@@ -7,6 +8,7 @@ Arc::Arc() {
     _radius = 1.0;
     _startAngle = 0.0;
     _endAngle = ARC_MAX;
+    _reversed = false;
 }
 
 Arc::Arc(const Vector2D &center, const float &radius) {
@@ -14,13 +16,21 @@ Arc::Arc(const Vector2D &center, const float &radius) {
     _radius = radius;
     _startAngle = 0.0;
     _endAngle = ARC_MAX;
+    _reversed = false;
 }
 
 Arc::Arc(const Vector2D &center, const float &radius, const Geometry::Angle &startAngle, const Geometry::Angle &endAngle) {
     _center = center;
     _radius = radius;
-    _startAngle = startAngle;
-    _endAngle = endAngle;
+    if (startAngle.value() > endAngle.value()) {
+        _endAngle = startAngle;
+        _startAngle = endAngle;
+        _reversed = true;
+    } else {
+        _startAngle = startAngle;
+        _endAngle = endAngle;
+        _reversed = false;
+    }
 }
 
 Vector2D Arc::center() const {
@@ -32,11 +42,19 @@ float Arc::radius() const {
 }
 
 Geometry::Angle Arc::startAngle() const {
-    return _startAngle;
+    if (_reversed) {
+        return _endAngle;
+    } else {
+        return _startAngle;
+    }
 }
 
 Geometry::Angle Arc::endAngle() const {
-    return _endAngle;
+    if (_reversed) {
+        return _startAngle;
+    } else {
+        return _endAngle;
+    }
 }
 
 bool Arc::isCircle() const {
@@ -44,12 +62,16 @@ bool Arc::isCircle() const {
 }
 
 bool Arc::angleWithinArc(const Geometry::Angle &angle) const {
-    return (angle.value() >= startAngle().value() && angle.value() <= endAngle().value());
+    if (_reversed) {
+        return !(angle.value() > _startAngle.value() && angle.value() <= _endAngle.value());
+    } else {
+        return (angle.value() >= _startAngle.value() && angle.value() <= _endAngle.value());
+    }
 }
 
 bool Arc::pointInArc(const Vector2D &point) const {
     Vector2D normPoint = point - center();
-    return (angleWithinArc(normPoint.angle()) && normPoint.length() <= radius());
+    return (angleWithinArc(normPoint.angle()) && std::fabs(normPoint.length() - radius()) < 1e-3);
 }
 
 std::vector<Vector2D> Arc::intersectionWithLine(const LineSegment &lineSegment) const {

@@ -93,6 +93,7 @@ namespace Geometry {
         float _radius;            // Defines the radius of the Arc
         Geometry::Angle _startAngle; // Defines the start angle of the Arc
         Geometry::Angle _endAngle;   // Defines the end angle of the Arc
+        bool _reversed;           // Defines if the Arc methods will work with the angle limits switched or not
     };
 }
 
