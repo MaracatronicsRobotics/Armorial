@@ -38,11 +38,7 @@ std::optional<Vector2D> Line::intersect(const Line &other) const {
     auto intersect_result = intersect(_p1, _p2, other._p1, other._p2);
     if(intersect_result.has_value()) {
         return intersect_result;
-    }
-    else if(other.isOnLine(_p1)) {
-        return project(Vector2D(0, 0));
-    }
-    else {
+    } else {
         return std::nullopt;
     }
 }
@@ -63,8 +59,15 @@ std::optional<Vector2D> Line::intersect(const Vector2D p1, const Vector2D p2, co
 }
 
 bool Line::isOnLine(const Vector2D &point) const {
+    if (_p2 == _p1) {
+        return (point == _p1);
+    }
     Vector2D ab = _p2 - _p1;
     Vector2D ap = point - _p1;
 
     return (ab.crossProductMagnitude(ap) < 1e-4);
+}
+
+bool Line::operator==(const Line &other) const {
+    return ((project(other._p1) == other._p1) && (project(other._p2) == other._p2));
 }

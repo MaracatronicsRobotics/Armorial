@@ -117,6 +117,13 @@ namespace Geometry {
          */
         std::optional<float> relativePosition(const Vector2D &pointOnLine) const;
 
+        /*!
+         * \brief Check if two LineSegment instances have the same start and end points.
+         * \param other The other LineSegment instance.
+         * \return True if the LineSegment instances have the same start/end points and False otherwise.
+         */
+        bool operator==(const LineSegment &other) const;
+
     private:
         Vector2D _start;
         Vector2D _end;
