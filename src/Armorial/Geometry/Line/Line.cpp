@@ -7,7 +7,7 @@
 
 using namespace Geometry;
 
-Line::Line(Vector2D &p1, Vector2D &p2) {
+Line::Line(const Vector2D &p1, const Vector2D &p2) {
     _p1 = p1;
     _p2 = p2;
     if(p1 == p2) {
@@ -67,14 +67,4 @@ bool Line::isOnLine(const Vector2D &point) const {
     Vector2D ap = point - _p1;
 
     return (ab.crossProductMagnitude(ap) < 1e-4);
-}
-
-float Line::relativePosition(const Vector2D &p1, const Vector2D &p2, const Vector2D &pointOnLine) {
-    float xDiff = p2.x() - p1.x();
-    if (Utils::Compare::isEqual(xDiff, 0.0f)) {
-        return (pointOnLine.y() - p1.y()) / (p2.y() - p1.y());
-    }
-    else {
-        return (pointOnLine.x() - p1.x()) / xDiff;
-    }
 }

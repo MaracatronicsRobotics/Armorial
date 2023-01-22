@@ -109,6 +109,14 @@ namespace Geometry {
          */
         void rotate(const Geometry::Angle angle, const Vector2D pivot);
 
+        /*!
+         * \brief Compute the relative position of pointOnLine instance on the given LineSegment, i.e. compute a *t* value such as p1 + (p2 - p1) * t = pointOnLine.
+         * \param pointOnLine A point that is located on the related Line of the given LineSegment instance.
+         * \return A value *t* such that p1 + (p2 - p1) * t = pointOnLine
+         * \note Make sure that the given parameters p1 and p2 are different and that pointOnLine actually lies on that Line, otherwise the return value does not make sense.
+         */
+        std::optional<float> relativePosition(const Vector2D &pointOnLine) const;
+
     private:
         Vector2D _start;
         Vector2D _end;

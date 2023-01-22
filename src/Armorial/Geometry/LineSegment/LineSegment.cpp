@@ -5,6 +5,7 @@
 
 #include <algorithm>
 #include <math.h>
+#include <spdlog/spdlog.h>
 
 using namespace Geometry;
 
@@ -30,17 +31,23 @@ bool LineSegment::isPoint() const {
 }
 
 float LineSegment::distanceToPoint(const Vector2D &point) const {
-    return (project(point) - point).length();
+    if (isOnLine(project(point))) {
+        return (project(point) - point).length();
+    }
+    if (relativePosition(project(point)).value() > 1.0f) {
+        return (end() - point).length();
+    }
+    return (start() - point).length();
 }
 
 bool LineSegment::isOnLine(const Vector2D &point) const {
     if(isPoint()) {
-        return (start() == point || end() == point);
+        return (start() == point);
     }
 
-    if(Line(*this).isOnLine(point)) {
-        float t = Line::relativePosition(start(), end(), point);
-        return (Utils::Compare::isEqual(t, std::clamp(t, 0.0f, 1.0f)));
+    if(relativePosition(point).has_value()) {
+        float relativePos = relativePosition(point).value();
+        return (Utils::Compare::isEqual(relativePos, std::clamp(relativePos, 0.0f, 1.0f)));
     }
 
     return false;
@@ -52,7 +59,7 @@ Vector2D LineSegment::project(const Vector2D &point) const {
     }
 
     Vector2D projection = Line(*this).project(point);
-    float t = Line::relativePosition(start(), end(), projection);
+    float t = relativePosition(projection).value();
     if(t < 0.0) {
         return start();
     }
@@ -126,4 +133,17 @@ void LineSegment::rotate(const Geometry::Angle angle, const Vector2D pivot) {
 
     _start = startRotated;
     _end = endRotated;
+}
+
+std::optional<float> LineSegment::relativePosition(const Vector2D &pointOnLine) const {
+    Geometry::Line relatedLine(*this);
+    if ((!relatedLine.isOnLine(pointOnLine)) || (isPoint())) {
+        return std::nullopt;
+    }
+    float xDiff = this->end().x() - this->start().x();
+    if (Utils::Compare::isEqual(xDiff, 0.0f)) {
+        return (pointOnLine.y() - this->start().y()) / (this->end().y() - this->start().y());
+    } else {
+        return (pointOnLine.x() - this->start().x()) / xDiff;
+    }
 }
