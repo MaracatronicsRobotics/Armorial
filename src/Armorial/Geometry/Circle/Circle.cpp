@@ -43,16 +43,20 @@ std::vector<Vector2D> Circle::intersects(const LineSegment &line_segment) const 
     return intersections;
 }
 
-bool Circle::doesIntersectOrContain(const Vector2D &other) const {
+bool Circle::contains(const Vector2D &other) const {
     return (fabs((center() - other).length()) <= radius());
 }
 
-bool Circle::doesIntersectOrContain(const Line &other) const {
-    return (other.distanceToLine(center()) <= radius());
+bool Circle::doesIntersect(const LineSegment &other) const {
+    return (other.distanceToPoint(center()) <= radius());
 }
 
 Vector2D Circle::project(const Vector2D &point) const {
     return center() + (point - center()).stretchToLength(radius());
+}
+
+void Circle::move(const Vector2D &amount) {
+    this->_center += amount;
 }
 
 bool Circle::operator==(const Circle &other) const {
