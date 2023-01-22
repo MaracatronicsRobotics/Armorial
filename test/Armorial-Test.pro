@@ -34,6 +34,7 @@ SOURCES += \
     main.cpp \
     src/Geometry/Angle/Angle.cpp \
     src/Geometry/Arc/Arc.cpp \
+    src/Geometry/Circle/Circle.cpp \
     src/Geometry/Line/Line.cpp \
     src/Geometry/Vector2D/Vector2D.cpp \
     src/Math/Matrix/Matrix.cpp \
