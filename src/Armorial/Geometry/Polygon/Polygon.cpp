@@ -2,6 +2,8 @@
 
 #include <Armorial/Utils/Utils.h>
 
+#include <spdlog/spdlog.h>
+#include <iostream>
 #include <algorithm>
 #include <math.h>
 
@@ -9,10 +11,17 @@ using namespace Geometry;
 
 Polygon::Polygon(const std::vector<Vector2D> &vertices) {
     _vertices = vertices;
+    if (_vertices.size() < 3) {
+        spdlog::warn("Created a Polygon with less than 3 vertices, so it is not a polygon");
+    }
 }
 
 void Polygon::insertVertice(const Vector2D &vertice) {
     _vertices.push_back(vertice);
+}
+
+void Polygon::removeVertice(const int index) {
+    _vertices.erase(_vertices.begin()+index);
 }
 
 std::vector<Vector2D> Polygon::vertices() const {
