@@ -11,7 +11,7 @@ RCC_DIR = tmp/rc
 
 CONFIG += c++17 console
 CONFIG -= app_bundle
-QT += core
+QT += core network
 
 DEFINES += QT_DEPRECATED_WARNINGS
 LIBS += -lfmt -lArmorial -lgtest -lgmock
