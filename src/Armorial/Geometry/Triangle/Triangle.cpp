@@ -61,8 +61,10 @@ std::vector<Vector2D> Triangle::intersect(const LineSegment &lineSegment) const 
     std::vector<Vector2D> intersections;
     std::vector<LineSegment> triangleBoundary = boundary();
     for (const auto &triangleLine : triangleBoundary) {
-        std::vector<Vector2D> intersection = lineSegment.intersects(triangleLine);
-        intersections.insert(intersections.end(), intersection.begin(), intersection.end());
+        std::optional<Vector2D> intersection = lineSegment.intersects(triangleLine);
+        if (intersection.has_value()) {
+            intersections.push_back(intersection.value());
+        }
     }
 
     std::sort(intersections.begin(), intersections.end());

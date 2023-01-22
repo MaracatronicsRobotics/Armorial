@@ -132,8 +132,10 @@ std::vector<Vector2D> Polygon::getIntersections(const LineSegment &lineSegment) 
     std::vector<LineSegment> polygonBoundary = boundary();
 
     for (auto &ls : polygonBoundary) {
-        std::vector<Vector2D> segmentIntersections = lineSegment.intersects(ls);
-        intersections.insert(intersections.end(), segmentIntersections.begin(), segmentIntersections.end());
+        std::optional<Vector2D> segmentIntersection = lineSegment.intersects(ls);
+        if (segmentIntersection.has_value()) {
+            intersections.push_back(segmentIntersection.value());
+        }
     }
 
     std::sort(intersections.begin(), intersections.end());
