@@ -27,13 +27,6 @@ namespace Geometry {
         Rectangle(const Vector2D& topLeft, const Vector2D& bottomRight);
 
         /*!
-         * \brief Check if two Rectangles instances have the same corners.
-         * \param other The other Rectangle instance.
-         * \return True if the Rectangles instances have the same corners and False otherwise.
-         */
-        bool operator==(const Rectangle &other) const;
-
-        /*!
          * \tparam T The type of the point variable.
          * \brief Computes if this Rectangle instance contains a given point.
          * \param point The given point.
@@ -126,6 +119,12 @@ namespace Geometry {
          */
         std::vector<LineSegment> boundary() const;
 
+        /*!
+         * \brief Check if two Rectangles instances have the same corners.
+         * \param other The other Rectangle instance.
+         * \return True if the Rectangles instances have the same corners and False otherwise.
+         */
+        bool operator==(const Rectangle &other) const;
 
     private:
         Vector2D _topLeft;

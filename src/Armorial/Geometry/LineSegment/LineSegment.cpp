@@ -147,3 +147,7 @@ std::optional<float> LineSegment::relativePosition(const Vector2D &pointOnLine) 
         return (pointOnLine.x() - this->start().x()) / xDiff;
     }
 }
+
+bool LineSegment::operator==(const LineSegment &other) const {
+    return (this->start() == other.start()) && (this->end() == other.end());
+}

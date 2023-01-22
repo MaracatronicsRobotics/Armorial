@@ -67,6 +67,13 @@ namespace Geometry {
          */
         [[nodiscard]] bool isOnLine(const Vector2D &point) const;
 
+        /*!
+         * \brief Check if two Line instances represent the same line.
+         * \param other The other Line instance.
+         * \return True if the Line instances represent the same line and False otherwise.
+         */
+        bool operator==(const Line &other) const;
+
     private:
         Vector2D _p1; // One of the points located on the Line
         Vector2D _p2; // Another of the points located on the Line, _p2 != _p1
