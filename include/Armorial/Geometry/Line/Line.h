@@ -18,7 +18,7 @@ namespace Geometry {
          * \param p1 One of the points that will define the Line.
          * \param p2 The other point that will define the Line.
          */
-        Line(Vector2D &p1, Vector2D &p2);
+        Line(const Vector2D &p1, const Vector2D &p2);
 
         /*!
          * \brief Creates a Line instance by expanding the LineSegment start and end coordinates.
@@ -66,16 +66,6 @@ namespace Geometry {
          * \return True if the given point lies on this Line and False otherwise.
          */
         [[nodiscard]] bool isOnLine(const Vector2D &point) const;
-
-        /*!
-         * \brief Compute the relative position of pointOnLine instance on the given infinite line given by p1 and p2, i.e. compute a *t* value such as p1 + (p2 - p1) * t = pointOnLine.
-         * \param p1 Arbitrary point of the Line instance.
-         * \param p2 Another arbitrary point of the Line instance.
-         * \param pointOnLine A point that is located on the given Line instance.
-         * \return A value *t* such that p1 + (p2 - p1) * t = pointOnLine
-         * \note Make sure that the given parameters p1 and p2 are different and that pointOnLine actually lies on that Line, otherwise the return value does not make sense.
-         */
-        static float relativePosition(const Vector2D &p1, const Vector2D &p2, const Vector2D &pointOnLine);
 
     private:
         Vector2D _p1; // One of the points located on the Line
