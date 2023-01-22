@@ -74,14 +74,14 @@ namespace Geometry {
         [[nodiscard]] Vector2D project(const Vector2D &point) const;
 
         /*!
-         * \brief Compute the intersection between to LineSegment instances.
+         * \brief Compute a intersection between two LineSegment instances.
          * \param other The other LineSegment instance.
-         * \return A list which stores the intersection points.
-         * \note - In the case that the LineSegment objects does not intersect, a empty list will be returned. <br>
-         *       - In the case that is a single intersection point, the Vector2D instance containing it will be returned. <br>
-         *       - In the case that are multiple or even infinite intersections then the start and end points of the intersection will be returned.
+         * \return A LineSegment instance containing the intersection points.
+         * \note - In the case that the LineSegment objects does not intersect, a std::nullopt will be returned. <br>
+         *       - In the case that is a single intersection point, a LineSegment with the Vector2D intersection as the start and end point will be returned. <br>
+         *       - In the case that are multiple or even infinite intersections, then the a Vector2D with almost infinite coordinates will be returned.
          */
-        [[nodiscard]] std::vector<Vector2D> intersects(const LineSegment &other) const;
+        [[nodiscard]] std::optional<Vector2D> intersects(const LineSegment &other) const;
 
         /*!
          * \brief Check if two LineSegment instances intersect.

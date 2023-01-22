@@ -41,12 +41,12 @@ namespace Geometry {
         [[nodiscard]] Vector2D project(const Vector2D &point) const;
 
         /*!
-         * \brief Compute the intersection point between two Line instances.
+         * \brief Compute a single intersection point between two Line instances.
          * \param other The other Line.
          * \return A std::optional object which stores a Vector2D instance containing (or not) the intersection point.
-         * \note - In the case that the Lines does not intersect, a std::nullopt will be returned. <br>
-         *       - In the case that is a single intersection point, the Vector2D instance containing it will be returned. <br>
-         *       - In the case that are multiple or even infinite intersections, the most closest point to the origin (0, 0) will be returned.
+         * \note - In the case that the Lines does not intersect (parallelism), a std::nullopt will be returned. <br>
+         *       - In the case that is a single intersection point, the Vector2D instance containing it will be returned. <br
+         *       - In the case the lines are the same, a std::nullopt will be returned. Use == to verify similarity.
          */
         [[nodiscard]] std::optional<Vector2D> intersect(const Line &other) const;
 
