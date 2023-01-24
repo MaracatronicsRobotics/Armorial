@@ -4,7 +4,7 @@
 
 using namespace Geometry;
 
-Angle::Angle(float angle) {
+Angle::Angle(const float &angle) {
     _angle = angle;
     normalize();
 }
@@ -62,7 +62,7 @@ Angle &Angle::operator-=(const Angle &other) {
     return *this;
 }
 
-Angle &Angle::operator=(float scalar) {
+Angle &Angle::operator=(const float &scalar) {
     this->_angle = scalar;
     this->normalize();
     return *this;

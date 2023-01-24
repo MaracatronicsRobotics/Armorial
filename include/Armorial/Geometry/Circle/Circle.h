@@ -20,7 +20,7 @@ namespace Geometry {
          * \param center The given center.
          * \param radius The given radius.
          */
-        Circle(const Vector2D &center, const float radius);
+        Circle(const Vector2D &center, const float &radius);
 
         /*!
          * \brief Default copy constructor
@@ -103,10 +103,10 @@ namespace Geometry {
          * \param scale The given float value.
          * \return A Circle instance that contains the result of the operation.
          */
-        Circle operator*(float scale) const;
-        Circle operator/(float scale) const;
-        Circle operator*=(float scale);
-        Circle operator/=(float scale);
+        Circle operator*(const float &scale) const;
+        Circle operator/(const float &scale) const;
+        Circle operator*=(const float &scale);
+        Circle operator/=(const float &scale);
 
     private:
         Vector2D _center;

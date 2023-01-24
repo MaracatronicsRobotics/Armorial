@@ -4,7 +4,7 @@
 
 using namespace Geometry;
 
-Circle::Circle(const Vector2D &center, const float radius) {
+Circle::Circle(const Vector2D &center, const float &radius) {
     _center = center;
     _radius = radius;
 }
@@ -83,18 +83,18 @@ Circle Circle::operator-=(const Vector2D &other) {
     return Circle(_center -= other, radius());
 }
 
-Circle Circle::operator*(float scale) const {
+Circle Circle::operator*(const float &scale) const {
     return Circle(center(), radius() * fabs(scale));
 }
 
-Circle Circle::operator/(float scale) const {
+Circle Circle::operator/(const float &scale) const {
     return Circle(center(), radius() / fabs(scale));
 }
 
-Circle Circle::operator*=(float scale) {
+Circle Circle::operator*=(const float &scale) {
     return Circle(center(), _radius *= fabs(scale));
 }
 
-Circle Circle::operator/=(float scale) {
+Circle Circle::operator/=(const float &scale) {
     return Circle(center(), _radius /= fabs(scale));
 }

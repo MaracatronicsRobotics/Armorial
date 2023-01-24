@@ -32,7 +32,7 @@ namespace Geometry {
          * \brief Remove a vertice from the list of vertices.
          * \param Index of the vertice to remove in the list.
          */
-        void removeVertice(const int index);
+        void removeVertice(const int &index);
 
         /*!
          * \return The list of vertices that defines this polygon.
@@ -56,7 +56,7 @@ namespace Geometry {
          * \param id The given id.
          * \return The vertice at the index \ref id.
          */
-        [[nodiscard]] Vector2D operator[](size_t id) const;
+        [[nodiscard]] Vector2D operator[](const size_t &id) const;
 
         /*!
          * \return The amount of vertices that belongs to this polygon.

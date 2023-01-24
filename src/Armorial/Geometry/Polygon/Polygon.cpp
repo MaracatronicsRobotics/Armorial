@@ -20,7 +20,7 @@ void Polygon::insertVertice(const Vector2D &vertice) {
     _vertices.push_back(vertice);
 }
 
-void Polygon::removeVertice(const int index) {
+void Polygon::removeVertice(const int &index) {
     _vertices.erase(_vertices.begin()+index);
 }
 
@@ -44,7 +44,7 @@ Vector2D Polygon::centroid() const {
     return (sum / (6.0f * area()));
 }
 
-Vector2D Polygon::operator[](size_t id) const {
+Vector2D Polygon::operator[](const size_t &id) const {
     return _vertices[id];
 }
 

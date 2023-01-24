@@ -24,7 +24,7 @@ namespace Geometry {
          * \param angle The given float value of the angle. As it is normalized after you can give it
          * outside the range [-π, π).
          */
-        Angle(float angle = 0.0);
+        Angle(const float &angle = 0.0);
 
         /*!
          * \brief Compute the shortest direction to achieve the target angle from the actual angle.
@@ -95,7 +95,7 @@ namespace Geometry {
          * \return A new angle instance that contains the set angle value.
          * \note The set angle will be normalized.
          */
-        Angle &operator=(float scalar);
+        Angle &operator=(const float &scalar);
 
         /*!
          * \brief Get the actual value of angle for this Angle instance.

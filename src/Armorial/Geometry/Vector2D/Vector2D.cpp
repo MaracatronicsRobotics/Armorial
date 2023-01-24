@@ -7,12 +7,12 @@
 
 using namespace Geometry;
 
-Vector2D::Vector2D(const float x, const float y) {
+Vector2D::Vector2D(const float &x, const float &y) {
     _x = x;
     _y = y;
 }
 
-Vector2D::Vector2D(Geometry::Angle &angle, const float length) {
+Vector2D::Vector2D(const Angle &angle, const float &length) {
     _x = cos(angle.value()) * length;
     _y = sin(angle.value()) * length;
 }
@@ -33,7 +33,7 @@ float Vector2D::dist(const Vector2D &other) const {
     return (*this - other).length();
 }
 
-Vector2D Vector2D::scale(float scalar) const {
+Vector2D Vector2D::scale(const float &scalar) const {
     return Vector2D(_x * scalar, _y * scalar);
 }
 
@@ -56,18 +56,18 @@ Geometry::Angle Vector2D::toAngle() const {
     return Geometry::Angle(atan2(_y, _x));
 }
 
-Vector2D Vector2D::lerp(const Vector2D &other, float factor) const {
+Vector2D Vector2D::lerp(const Vector2D &other, const float &factor) const {
     return (this->scale(factor) + other.scale(1 - factor));
 }
 
-Vector2D Vector2D::rotate(float radians) const {
+Vector2D Vector2D::rotate(const float &radians) const {
     float c = cos(radians);
     float s = sin(radians);
 
     return Vector2D(_x * c - _y * s, _x * s + _y * c);
 }
 
-Vector2D Vector2D::rotateAroundPoint(float radians, const Vector2D &pivot) const {
+Vector2D Vector2D::rotateAroundPoint(const float &radians, const Vector2D &pivot) const {
     float c = cos(radians);
     float s = sin(radians);
 
@@ -106,7 +106,7 @@ float Vector2D::crossProductMagnitude(const Vector2D &other) const {
     return std::fabs(_x * other._y - _y * other._x);
 }
 
-Vector2D Vector2D::stretchToLength(float targetLength) const {
+Vector2D Vector2D::stretchToLength(const float &targetLength) const {
     if(Utils::Compare::isEqual(length(), 0.0f)) {
         return Vector2D(0.0f, 0.0f);
     }

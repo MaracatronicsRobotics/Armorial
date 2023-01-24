@@ -48,7 +48,7 @@ namespace Geometry {
          * \note This method will only work if the type T contains coordinates (.x() and .y() methods).
          */
         template<typename T>
-        [[nodiscard]] std::enable_if_t<Common::Types::has_coordinates_v<T>, bool> contains(const T& point, float margin) const {
+        [[nodiscard]] std::enable_if_t<Common::Types::has_coordinates_v<T>, bool> contains(const T& point, const float &margin) const {
             return (point.x() > (_topLeft.x() - margin) && point.x() < (_topRight.x() + margin))
                     && (point.y() > (_bottomLeft.y() - margin) && point.y() < (_topLeft.y() + margin));
         }

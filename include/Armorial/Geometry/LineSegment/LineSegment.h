@@ -107,7 +107,7 @@ namespace Geometry {
          * \param angle The given angle.
          * \param pivot The given pivot position.
          */
-        void rotate(const Geometry::Angle angle, const Vector2D pivot);
+        void rotate(const Geometry::Angle &angle, const Vector2D &pivot);
 
         /*!
          * \brief Compute the relative position of pointOnLine instance on the given LineSegment, i.e. compute a *t* value such as p1 + (p2 - p1) * t = pointOnLine.

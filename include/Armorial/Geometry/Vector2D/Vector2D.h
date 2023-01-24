@@ -1,4 +1,4 @@
-#ifndef ARMORIAL_GEOMETRY_VECTOR2D_H
+﻿#ifndef ARMORIAL_GEOMETRY_VECTOR2D_H
 #define ARMORIAL_GEOMETRY_VECTOR2D_H
 
 #include <Armorial/Geometry/Angle/Angle.h>
@@ -20,14 +20,14 @@ namespace Geometry {
          * \param x The x value.
          * \param y The y value.
          */
-        Vector2D(const float x, const float y);
+        Vector2D(const float &x, const float &y);
 
         /*!
          * \brief Vector2D constructor that receive a Geometry::Angle and length as parameter.
          * \param angle The Geometry::Angle object which the angle value will be extracted.
          * \param length The length of the Vector2D started from (0, 0) coordinates.
          */
-        Vector2D(Geometry::Angle &angle, const float length);
+        Vector2D(const Geometry::Angle &angle, const float &length);
 
         /*!
          * \brief Default copy constructor.
@@ -39,7 +39,7 @@ namespace Geometry {
          * \brief Default copy assignment operator.
          * \param other The Vector2D which will be copied.
          */
-        Vector2D &operator=(Vector2D const &other) = default;
+        Vector2D &operator=(const Vector2D &other) = default;
 
         /*!
          * \brief Get the _x coordinate value.
@@ -72,7 +72,7 @@ namespace Geometry {
          * \param scalar The scalar value which will be used to compute the scale.
          * \return A Vector2D instance that contains a copy of this Vector2D instance scaled.
          */
-        Vector2D scale(float scalar) const;
+        Vector2D scale(const float &scalar) const;
 
         /*!
          * \brief Compute the normalization of this Vector2D instance to a length of 1.
@@ -113,14 +113,14 @@ namespace Geometry {
          * \param factor The factor which will be used to calculate the interpolation/extrapolation between the Vector2D instances.
          * \return A Vector2D that contains the result from the operation.
          */
-        Vector2D lerp(const Vector2D &other, float factor) const;
+        Vector2D lerp(const Vector2D &other, const float &factor) const;
 
         /*!
          * \brief Computate the rotation of this Vector2D instance around the origin.
          * \param radians The amount of the rotation given in radians.
          * \return A Vector2D instance that contains the result from the operation.
          */
-        Vector2D rotate(float radians) const;
+        Vector2D rotate(const float &radians) const;
 
         /*!
          * \brief Computate the rotation of this Vector2D instance around a given pivot.
@@ -128,7 +128,7 @@ namespace Geometry {
          * \param pivot A Vector2D instance that will be used as pivot for the rotation.
          * \return A Vector2D instance that contains the result from the operation.
          */
-        Vector2D rotateAroundPoint(float radians, const Vector2D &pivot) const;
+        Vector2D rotateAroundPoint(const float &radians, const Vector2D &pivot) const;
 
         /*!
          * \brief Computes the projection of this Vector2D instance onto another Vector2D instance.
@@ -166,7 +166,7 @@ namespace Geometry {
          * \param length The given length which this Vector2D instance will be strectched to.
          * \return A Vector2D instance with the stretched length.
          */
-        Vector2D stretchToLength(float targetLength) const;
+        Vector2D stretchToLength(const float &targetLength) const;
 
         /*!
          * \brief Check if two Vector2D instances have the same coordinates.
