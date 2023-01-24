@@ -23,21 +23,17 @@ bool Triangle::contains(const Vector2D &point) const {
 
     // Compute the sum area using the given point as corner
     float sumArea = 0.0f;
-    sumArea += Triangle::area(_p1, _p2, point);
-    sumArea += Triangle::area(_p1, _p3, point);
-    sumArea += Triangle::area(_p2, _p3, point);
+    sumArea += Triangle(_p1, _p2, point).area();
+    sumArea += Triangle(_p1, _p3, point).area();
+    sumArea += Triangle(_p2, _p3, point).area();
 
     // Return if sumArea and triangleArea matches
     return Utils::Compare::isEqual(triangleArea, sumArea);
 }
 
 float Triangle::area() const {
-    return Triangle::area(_p1, _p2, _p3);
-}
-
-float Triangle::area(const Vector2D &a, const Vector2D &b, const Vector2D &c) {
-    Vector2D AB = b - a;
-    Vector2D AC = c - a;
+    Vector2D AB = _p2 - _p1;
+    Vector2D AC = _p3 - _p1;
 
     float cross_prod = AB.crossProductMagnitude(AC);
     return (cross_prod / 2.0f);

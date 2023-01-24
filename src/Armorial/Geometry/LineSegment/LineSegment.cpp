@@ -71,7 +71,8 @@ Vector2D LineSegment::project(const Vector2D &point) const {
 }
 
 std::optional<Vector2D> LineSegment::intersects(const LineSegment &other) const {
-    auto intersect_result = Line::intersect(start(), end(), other.start(), other.end());
+    Geometry::Line relatedLine(*this);
+    auto intersect_result = relatedLine.intersect(other);
     if(intersect_result.has_value()) {
         // Intersected point is contained at both the LineSegments that are previously expanded to infinite Lines
         if(this->isOnLine(intersect_result.value()) && other.isOnLine(intersect_result.value())) {

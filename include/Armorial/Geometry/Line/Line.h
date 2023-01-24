@@ -51,16 +51,6 @@ namespace Geometry {
         [[nodiscard]] std::optional<Vector2D> intersect(const Line &other) const;
 
         /*!
-         * \brief Static call that computes the intersection point between two Line instances defined by {p1, p2} and {q1, q2}
-         * \param p1 Arbitrary point of the first Line instance.
-         * \param p2 Another arbitrary point of the first Line instance.
-         * \param q1 Arbitrary point of the second Line instance.
-         * \param q2 Another arbitrary point of the second Line instance.
-         * \return A std::optional object which stores a Vector2D instance containing (or not) the intersection point.
-         */
-        static std::optional<Vector2D> intersect(const Vector2D p1, const Vector2D p2, const Vector2D q1, const Vector2D q2);
-
-        /*!
          * \brief Compute and determine if a point belongs to this Line instance.
          * \param point The point that will be used to determine if it belongs to this Line.
          * \return True if the given point lies on this Line and False otherwise.

@@ -35,24 +35,15 @@ Vector2D Line::project(const Vector2D &point) const {
 }
 
 std::optional<Vector2D> Line::intersect(const Line &other) const {
-    auto intersect_result = intersect(_p1, _p2, other._p1, other._p2);
-    if(intersect_result.has_value()) {
-        return intersect_result;
-    } else {
-        return std::nullopt;
-    }
-}
-
-std::optional<Vector2D> Line::intersect(const Vector2D p1, const Vector2D p2, const Vector2D q1, const Vector2D q2) {
-    Vector2D line_a = p1 - p2;
-    Vector2D line_b = q1 - q2;
+    Vector2D line_a = _p1 - _p2;
+    Vector2D line_b = other._p1 - other._p2;
 
     float denominator = line_a.crossProductMagnitude(line_b);
     if(denominator >= 1e-4) {
-        Vector2D l_aux = p1 - q1;
+        Vector2D l_aux = _p1 - other._p1;
         float numerator = l_aux.crossProductMagnitude(line_a);
         float u = numerator / denominator;
-        return q1 - line_b * u;
+        return other._p1 - line_b * u;
     }
 
     return std::nullopt;

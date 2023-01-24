@@ -38,15 +38,6 @@ namespace Geometry {
         [[nodiscard]] float area() const;
 
         /*!
-         * \brief Computes a triangle area with given corners.
-         * \param a The given first corner point.
-         * \param b The given second corner point.
-         * \param c The given third corner point.
-         * \return The given triangle area.
-         */
-        [[nodiscard]] static float area(const Vector2D &a, const Vector2D &b, const Vector2D &c);
-
-        /*!
          * \brief Get the boundary lines of this Triangle.
          * \return A list containing the line segments that compunds the boundary of the Triangle.
          */
