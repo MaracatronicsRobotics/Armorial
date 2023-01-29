@@ -44,7 +44,7 @@ SOURCES += \
     src/Math/Matrix/Matrix.cpp \
     src/Common/Enums/Enums.cpp \
     src/Common/Types/Field/Field.cpp \
-    src/Common/Types/Object/Object.cpp
+    src/Common/Types/Object/Object.cpp \
     src/Threaded/Entity/Entity.cpp \
     src/Threaded/EntityCommons.cpp \
     src/Threaded/EntityManager/EntityManager.cpp \
@@ -59,3 +59,6 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 
 HEADERS += \
     src/Threaded/EntityCommons.h
+
+DISTFILES += \
+    src/Utils/ParameterHandler/rsc/constants.json
