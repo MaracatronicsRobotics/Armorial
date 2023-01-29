@@ -123,11 +123,11 @@ Teste::Teste() {
 }
 
 /*
- *  Fon Class
+ *  Another Teste Class
  *
 */
 
-Fon::Fon() {
+Teste2::Teste2() {
 }
 
 /*

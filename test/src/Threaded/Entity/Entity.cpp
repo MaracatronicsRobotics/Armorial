@@ -35,7 +35,7 @@ TEST(Threaded_Entity_Test, When_Creating_Entity_Should_Setup_Values_Correctly) {
 TEST(Threaded_Entity_Test, When_Consulting_Name_Should_Return_Proper_Entity_Name) {
     EntityCommons::Entidade *entity = new EntityCommons::Entidade();
     EntityCommons::Teste *teste = new EntityCommons::Teste();
-    EntityCommons::Fon *teste2 = new EntityCommons::Fon();
+    EntityCommons::Teste2 *teste2 = new EntityCommons::Teste2();
     {
         SCOPED_TRACE(fmt::format(fmt::emphasis::bold, QString("\n[Entity] Threaded::Entites::entityName() herd class => stored %1 instead of 'EntityCommons::Entidade'.").arg(entity->entityName()).toStdString()));
         EXPECT_EQ(entity->entityName(), QString("EntityCommons::Entidade"));
@@ -45,8 +45,8 @@ TEST(Threaded_Entity_Test, When_Consulting_Name_Should_Return_Proper_Entity_Name
         EXPECT_EQ(teste->entityName(), QString("EntityCommons::Teste"));
     }
     {
-        SCOPED_TRACE(fmt::format(fmt::emphasis::bold, QString("\n[Entity] Threaded::Entites::entityName() herd class => stored %1 instead of 'EntityCommons::Fon'.").arg(teste2->entityName()).toStdString()));
-        EXPECT_EQ(teste2->entityName(), QString("EntityCommons::Fon"));
+        SCOPED_TRACE(fmt::format(fmt::emphasis::bold, QString("\n[Entity] Threaded::Entites::entityName() herd class => stored %1 instead of 'EntityCommons::Teste2'.").arg(teste2->entityName()).toStdString()));
+        EXPECT_EQ(teste2->entityName(), QString("EntityCommons::Teste2"));
     }
 }
 

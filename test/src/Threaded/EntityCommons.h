@@ -73,9 +73,9 @@ namespace EntityCommons {
         void finalization() {}
     };
 
-    class Fon : public Threaded::Entity {
+    class Teste2 : public Threaded::Entity {
     public:
-        Fon();
+        Teste2();
 
     private:
         void initialization() {}
@@ -94,15 +94,23 @@ namespace EntityCommons {
         MOCK_METHOD(int, getValueCheck, (), (override));
     };
 
+    class TesteMock : public EntityMock {
+
+    };
+
+    class Teste2Mock : public EntityMock {
+
+    };
+
     class ManagerMockable : public Threaded::EntityManager {
     public:
         ManagerMockable() = default;
 
-        virtual void addEntity(EntityMock *entity, int entityPriority = 0);
+        void addEntity(EntityMock *entity, int entityPriority = 0);
 
-        virtual void startEntities();
+        void startEntities();
 
-        virtual void disableEntities();
+        void disableEntities();
 
     private:
         QMultiMap<int, EntityMock*> _priorityMap;
