@@ -434,5 +434,5 @@ TEST(Math_Matrix_Test, When_Given_A_Matrix_Scalar_Division_With_Zero_Should_Fail
                          {2, -2, 0},
                          {1, 2, -1}});
 
-    EXPECT_DEATH(matrix / 0.0000000001, "Assertion*.*failed");
+    EXPECT_DEATH(matrix / 0.0f, "Assertion*.*failed");
 }

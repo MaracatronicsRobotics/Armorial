@@ -332,10 +332,10 @@ TEST(Common_Field_Test, Quadrants_Should_Work){
     float width = 500.0f;
     float length = 1000.0f;
 
-    Geometry::Rectangle FirstQ({0.0, width / 2.0}, {length / 2.0, 0.0});
-    Geometry::Rectangle SecondQ({-(length / 2.0), width / 2.0}, {0.0, 0.0});
-    Geometry::Rectangle ThirdQ({-(length / 2.0), 0.0}, {0.0, -(width / 2.0)});
-    Geometry::Rectangle FourthQ({0.0, 0.0}, {length / 2.0, -(width / 2.0)});
+    Geometry::Rectangle FirstQ({0.0, width / 2.0f}, {length / 2.0f, 0.0});
+    Geometry::Rectangle SecondQ({-(length / 2.0f), width / 2.0f}, {0.0, 0.0});
+    Geometry::Rectangle ThirdQ({-(length / 2.0f), 0.0}, {0.0, -(width / 2.0f)});
+    Geometry::Rectangle FourthQ({0.0, 0.0}, {length / 2.0f, -(width / 2.0f)});
 
     EXPECT_EQ(FirstQ, Teste_Field.topRightQuadrant());
     EXPECT_EQ(SecondQ, Teste_Field.topLeftQuadrant());

@@ -3,7 +3,7 @@
 cd test
 rm -rf build
 mkdir build
-cd build && qmake .. && make && cd ..
+cd build && qmake .. && make -j$(nproc) && cd ..
 cd bin && ./Armorial-Test 
 
 if [ $? -ne 0 ]; then

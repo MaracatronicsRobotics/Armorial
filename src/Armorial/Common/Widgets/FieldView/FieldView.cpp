@@ -67,22 +67,22 @@ void FieldView::setupFieldGeometry(const Common::Types::Field &field) {
     }
 
     // Create left goal area
-    Geometry::Rectangle leftGoal({-fieldLength/2.0 - goalDepth, goalWidth/2.0}, {-fieldLength/2.0, -goalWidth/2.0});
+    Geometry::Rectangle leftGoal({-fieldLength/2.0f - goalDepth, goalWidth/2.0f}, {-fieldLength/2.0f, -goalWidth/2.0f});
     std::vector<Geometry::LineSegment> leftGoalLines = leftGoal.boundary();
     for(auto &ls : leftGoalLines) {
         _fieldLineSegments.push_back(ls);
     }
 
     // Create right goal area
-    Geometry::Rectangle rightGoal({fieldLength/2.0, goalWidth/2.0}, {fieldLength/2.0 + goalDepth, -goalWidth/2.0});
+    Geometry::Rectangle rightGoal({fieldLength/2.0f, goalWidth/2.0f}, {fieldLength/2.0f + goalDepth, -goalWidth/2.0f});
     std::vector<Geometry::LineSegment> rightGoalLines = rightGoal.boundary();
     for(auto &ls : rightGoalLines) {
         _fieldLineSegments.push_back(ls);
     }
 
     // Setup field quadrant lines
-    _fieldLineSegments.push_back(Geometry::LineSegment({-fieldLength/2.0, 0.0}, {fieldLength/2.0, 0.0}));
-    _fieldLineSegments.push_back(Geometry::LineSegment({0.0, fieldWidth/2.0}, {0.0, -fieldWidth/2.0}));
+    _fieldLineSegments.push_back(Geometry::LineSegment({-fieldLength/2.0f, 0.0}, {fieldLength/2.0f, 0.0}));
+    _fieldLineSegments.push_back(Geometry::LineSegment({0.0, fieldWidth/2.0f}, {0.0, -fieldWidth/2.0f}));
 }
 
 void FieldView::setupCentralLogo(const QString &logoPath) {

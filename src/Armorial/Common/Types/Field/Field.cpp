@@ -23,32 +23,32 @@ Geometry::Circle Field::centerCircle() const {
 }
 
 Geometry::Rectangle Field::field() const {
-    Geometry::Vector2D topLeftCorner(-length()/2.0, width()/2.0);
-    Geometry::Vector2D bottomRightCorner(length()/2.0, -width()/2.0);
+    Geometry::Vector2D topLeftCorner(-length()/2.0f, width()/2.0f);
+    Geometry::Vector2D bottomRightCorner(length()/2.0f, -width()/2.0f);
     return Geometry::Rectangle(topLeftCorner, bottomRightCorner);
 }
 
 Geometry::Rectangle Field::leftField() const {
     Geometry::Vector2D topLeftCorner = field().topLeft();
-    Geometry::Vector2D midBottomCorner(0.0, -width()/2.0);
+    Geometry::Vector2D midBottomCorner(0.0, -width()/2.0f);
     return Geometry::Rectangle(topLeftCorner, midBottomCorner);
 }
 
 Geometry::Rectangle Field::rightField() const {
-    Geometry::Vector2D midTopCorner(0.0, width()/2.0);
+    Geometry::Vector2D midTopCorner(0.0, width()/2.0f);
     Geometry::Vector2D bottomRightCorner = field().bottomRight();
     return Geometry::Rectangle(midTopCorner, bottomRightCorner);
 }
 
 Geometry::Rectangle Field::leftPenaltyArea() const {
-    Geometry::Vector2D leftPenaltyTopLeftCorner(-length()/2.0, penaltyWidth()/2.0);
-    Geometry::Vector2D leftPenaltyBottomRightCorner(-length()/2.0 + penaltyDepth(), -penaltyWidth()/2.0);
+    Geometry::Vector2D leftPenaltyTopLeftCorner(-length()/2.0f, penaltyWidth()/2.0f);
+    Geometry::Vector2D leftPenaltyBottomRightCorner(-length()/2.0f + penaltyDepth(), -penaltyWidth()/2.0f);
     return Geometry::Rectangle(leftPenaltyTopLeftCorner, leftPenaltyBottomRightCorner);
 }
 
 Geometry::Rectangle Field::rightPenaltyArea() const {
-    Geometry::Vector2D rightPenaltyTopLeftCorner(length()/2.0 - penaltyDepth(), penaltyWidth()/2.0);
-    Geometry::Vector2D rightPenaltyBottomRightCorner(length()/2.0, -penaltyWidth()/2.0);
+    Geometry::Vector2D rightPenaltyTopLeftCorner(length()/2.0f - penaltyDepth(), penaltyWidth()/2.0f);
+    Geometry::Vector2D rightPenaltyBottomRightCorner(length()/2.0f, -penaltyWidth()/2.0f);
     return Geometry::Rectangle(rightPenaltyTopLeftCorner, rightPenaltyBottomRightCorner);
 }
 
@@ -57,19 +57,19 @@ bool Field::playingLeftSide() const {
 }
 
 float Field::minX() const {
-    return -length()/2.0;
+    return -length()/2.0f;
 }
 
 float Field::maxX() const {
-    return length()/2.0;
+    return length()/2.0f;
 }
 
 float Field::minY() const {
-    return -width()/2.0;
+    return -width()/2.0f;
 }
 
 float Field::maxY() const {
-    return width()/2.0;
+    return width()/2.0f;
 }
 
 float Field::length() const {
@@ -107,23 +107,23 @@ float Field::centerRadius() const {
 Geometry::Vector2D Field::ourGoalCenter() const {
     if(playingLeftSide()) {
         Geometry::Vector2D leftPenaltyAreaCenter = leftPenaltyArea().center();
-        return Geometry::Vector2D(leftPenaltyAreaCenter.x() - penaltyDepth()/2.0, leftPenaltyAreaCenter.y());
+        return Geometry::Vector2D(leftPenaltyAreaCenter.x() - penaltyDepth()/2.0f, leftPenaltyAreaCenter.y());
     }
     else {
         Geometry::Vector2D rightPenaltyAreaCenter = rightPenaltyArea().center();
-        return Geometry::Vector2D(rightPenaltyAreaCenter.x() + penaltyDepth()/2.0, rightPenaltyAreaCenter.y());
+        return Geometry::Vector2D(rightPenaltyAreaCenter.x() + penaltyDepth()/2.0f, rightPenaltyAreaCenter.y());
     }
 }
 
 Geometry::Vector2D Field::ourGoalLeftPost() const {
     Geometry::Vector2D goalCenter = ourGoalCenter();
-    float offset = (playingLeftSide() ? -goalWidth()/2.0 : goalWidth()/2.0);
+    float offset = (playingLeftSide() ? -goalWidth()/2.0f : goalWidth()/2.0f);
     return Geometry::Vector2D(goalCenter.x(), goalCenter.y() + offset);
 }
 
 Geometry::Vector2D Field::ourGoalRightPost() const {
     Geometry::Vector2D goalCenter = ourGoalCenter();
-    float offset = (playingLeftSide() ? goalWidth()/2.0 : -goalWidth()/2.0);
+    float offset = (playingLeftSide() ? goalWidth()/2.0f : -goalWidth()/2.0f);
     return Geometry::Vector2D(goalCenter.x(), goalCenter.y() + offset);
 }
 
@@ -149,13 +149,13 @@ Geometry::Vector2D Field::theirGoalCenter() const {
 
 Geometry::Vector2D Field::theirGoalLeftPost() const {
     Geometry::Vector2D goalCenter = theirGoalCenter();
-    float offset = (playingLeftSide() ? goalWidth()/2.0 : -goalWidth()/2.0);
+    float offset = (playingLeftSide() ? goalWidth()/2.0f : -goalWidth()/2.0f);
     return Geometry::Vector2D(goalCenter.x(), goalCenter.y() + offset);
 }
 
 Geometry::Vector2D Field::theirGoalRightPost() const {
     Geometry::Vector2D goalCenter = theirGoalCenter();
-    float offset = (playingLeftSide() ? -goalWidth()/2.0 : goalWidth()/2.0);
+    float offset = (playingLeftSide() ? -goalWidth()/2.0f : goalWidth()/2.0f);
     return Geometry::Vector2D(goalCenter.x(), goalCenter.y() + offset);
 }
 
@@ -174,17 +174,17 @@ Geometry::Rectangle Field::theirPenaltyArea() const {
 }
 
 Geometry::Rectangle Field::topRightQuadrant() const {
-    return Geometry::Rectangle({0.0, width() / 2.0}, {length() / 2.0, 0.0});
+    return Geometry::Rectangle({0.0, width() / 2.0f}, {length() / 2.0f, 0.0});
 }
 
 Geometry::Rectangle Field::topLeftQuadrant() const {
-    return Geometry::Rectangle({-(length() / 2.0), width() / 2.0}, {0.0, 0.0});
+    return Geometry::Rectangle({-(length() / 2.0f), width() / 2.0f}, {0.0, 0.0});
 }
 
 Geometry::Rectangle Field::bottomLeftQuadrant() const {
-    return Geometry::Rectangle({-(length() / 2.0), 0.0}, {0.0, -(width() / 2.0)});
+    return Geometry::Rectangle({-(length() / 2.0f), 0.0}, {0.0, -(width() / 2.0f)});
 }
 
 Geometry::Rectangle Field::bottomRightQuadrant() const {
-    return Geometry::Rectangle({0.0, 0.0}, {length() / 2.0, -(width() / 2.0)});
+    return Geometry::Rectangle({0.0, 0.0}, {length() / 2.0f, -(width() / 2.0f)});
 }

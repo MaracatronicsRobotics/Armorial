@@ -19,7 +19,7 @@ namespace Utils {
          */
         template <typename T>
         [[nodiscard]] inline static constexpr std::enable_if_t<std::is_floating_point_v<T>, bool> isEqual(const T& v1, const T& v2) {
-            return fabs(v2 - v1) <= std::numeric_limits<T>::epsilon();
+            return fabs(v2 - v1) <= std::numeric_limits<double>::epsilon();
         }
     }
 

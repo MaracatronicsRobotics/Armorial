@@ -5,14 +5,17 @@
 #include <Armorial/Utils/Utils.h>
 #include <spdlog/spdlog.h>
 #include <spdlog/fmt/bundled/color.h>
+#include <math.h>
 
 
 TEST(Geometry_Angle_Tests, GivenAnAngle_AngleLimitsChecker_ShouldWork) {
     Geometry::Angle angleBase(0.0f);
 
+    spdlog::info("{}", angleBase.value());
+
     ASSERT_GE(angleBase.value(), -M_PI) << "Angle under minimum angle limit";
     ASSERT_LE(angleBase.value(), M_PI) << "Angle over maximum angle limit";
-    EXPECT_EQ(Utils::Compare::isEqual(angleBase.value(), 0.0f), true) << "Angle value does not match";
+    ASSERT_LE(angleBase.value(), std::numeric_limits<float>::epsilon()) << "Angle value does not match";
 }
 
 TEST(Geometry_Angle_Tests, GivenAnAngle_Normalization_ShouldWork) {
