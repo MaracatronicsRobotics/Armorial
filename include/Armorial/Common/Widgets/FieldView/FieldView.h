@@ -74,6 +74,57 @@ namespace Widgets {
         virtual void draw();
 
         /*!
+         * \brief Draw a line.
+         * \param v1, v2, The position of the start and end of the line, respectively.
+         * \param z The z value where the line will be drawed at.
+         * \param thickness The thickness value which the line will be draw.
+         * \note You need to call this method in the scope of the paintGL() or draw() methods.
+         */
+        template <typename T>
+        std::enable_if_t<Common::Types::has_coordinates_v<T>, void> drawLine(const T &v1, const T &v2, const float &z, const float &thickness = 10.0f) {
+            // Generate Vector2D for line
+            const Geometry::Vector2D v1Transformed(v1.x(), v1.y());
+            const Geometry::Vector2D v2Transformed(v2.x(), v2.y());
+            const Geometry::Vector2D norm = (v2Transformed - v1Transformed).normalize();
+            const Geometry::Vector2D perp = Geometry::Vector2D(-norm.y(), norm.x());
+
+            // Generate vectors to simulate thickness
+            const Geometry::Vector2D qv1 = (v1Transformed - (thickness / 2.0f)) * perp;
+            const Geometry::Vector2D qv2 = (v1Transformed + (thickness / 2.0f)) * perp;
+            const Geometry::Vector2D qv3 = (v2Transformed + (thickness / 2.0f)) * perp;
+            const Geometry::Vector2D qv4 = (v2Transformed - (thickness / 2.0f)) * perp;
+
+            // Draw rect using generated vectors
+            drawRect(qv1, qv2, qv3, qv4, z);
+        }
+
+        /*!
+         * \brief Draw a vector.
+         * \param v1, v2, The position of the start and end of the vector, respectively.
+         * \param z The z value where the line will be drawed at.
+         * \param thickness The thickness value which the vector line will be draw.
+         * \note You need to call this method in the scope of the paintGL() or draw() methods.
+         */
+        template <typename T>
+        std::enable_if_t<Common::Types::has_coordinates_v<T>, void> drawVector(const T &v1, const T &v2, const float &z, const float &thickness = 10.0f) {
+            // Generate Vector2D for line
+            const Geometry::Vector2D v1Transformed(v1.x(), v1.y());
+            const Geometry::Vector2D v2Transformed(v2.x(), v2.y());
+            const Geometry::Vector2D norm = (v2Transformed - v1Transformed).normalize();
+            const Geometry::Vector2D perp = Geometry::Vector2D(-norm.y(), norm.x());
+
+            // Draw line
+            drawLine(v1, v2, z, thickness);
+
+            // Draw triangle
+            const float triangle_thickness = 3.0f * thickness;
+            const Geometry::Vector2D tv1 = v2Transformed + (norm * (2.0f * triangle_thickness));
+            const Geometry::Vector2D tv2 = v2Transformed + (perp * triangle_thickness);
+            const Geometry::Vector2D tv3 = v2Transformed - (perp * triangle_thickness);
+            drawTriangle(tv1, tv2, tv3, z);
+        }
+
+        /*!
          * \brief Draw a triangle.
          * \param v1, v2, v3 The vertices of the triangle.
          * \param z The z value where the triangle will be drawed at.
