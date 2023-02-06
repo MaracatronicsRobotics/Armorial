@@ -46,9 +46,9 @@ TEST(Geometry_Line_Tests, GivenALine_IntercectionOfNonParallelLines_ShouldWork) 
     Geometry::Line lineBase2(Geometry::Vector2D(0.0f, -1.0f), Geometry::Vector2D(-1.0f, sqrtf(3) - 1.0f));
     Geometry::Line lineBase3(Geometry::Vector2D(-sqrtf(3) - 1.0f, -1.0f), Geometry::Vector2D(sqrtf(3) - 1.0f, 1.0f));
     Geometry::Vector2D referencePoint1(-1.0f / (sqrtf(3) + 1.0f), -1.0f / (sqrtf(3) + 1.0f));
-    Geometry::Vector2D referencePoint2((-1.0f - sqrtf(3))/4, (3.0f + sqrtf(3))/4 - 1.0f);
-    EXPECT_EQ(lineBase1.intersect(lineBase2), referencePoint1) << "Line do not intersects at the given point";
-    EXPECT_EQ(lineBase2.intersect(lineBase3), referencePoint2) << "Line do not intersects at the given point";
+    Geometry::Vector2D referencePoint2((-sqrtf(3) - 1.0f)/4, (sqrtf(3) - 1.0f)/4);
+    EXPECT_EQ(lineBase1.intersect(lineBase2), referencePoint1) << "Lines do not intersect at the given point";
+    EXPECT_EQ(lineBase2.intersect(lineBase3), referencePoint2) << "Lines do not intersect at the given point";
 }
 
 TEST(Geometry_Line_Tests, GivenALine_IntercectionOfParallelLines_ShouldFail) {

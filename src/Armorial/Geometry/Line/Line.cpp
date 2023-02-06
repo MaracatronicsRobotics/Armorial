@@ -38,10 +38,10 @@ std::optional<Vector2D> Line::intersect(const Line &other) const {
     Vector2D line_a = _p1 - _p2;
     Vector2D line_b = other._p1 - other._p2;
 
-    float denominator = line_a.crossProductMagnitude(line_b);
-    if(denominator >= 1e-4) {
+    float denominator = line_a.x() * line_b.y() - line_a.y() * line_b.x();
+    if(fabs(denominator) >= 1e-4) {
         Vector2D l_aux = _p1 - other._p1;
-        float numerator = l_aux.crossProductMagnitude(line_a);
+        float numerator = l_aux.x() * line_a.y() - l_aux.y() * line_a.x();
         float u = numerator / denominator;
         return other._p1 - line_b * u;
     }
