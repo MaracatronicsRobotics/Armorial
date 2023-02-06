@@ -1,0 +1,27 @@
+---
+name: Pull Request
+about: Create a Pull Request for this project
+title: ''
+labels: ''
+assignees: ''
+
+---
+
+**What is the proposal of this pull reqquest?**
+A clear and concise description of the main proposal of this pull request.
+
+**What changes have been made?**
+Describe which types of changes (features, hotfixes, rewriten, etc) were made on macro classes.
+
+**How to test this changes?**
+Describe the steps to test or a dictated explanation to test the changes (the main archives to edit and what to edit).
+
+***References (screenshots, links, tc)*
+
+**Checklist**
+- [ ] I have performed a self review on my own code
+- [ ] I have commented my code, particularly in hard-to-understand areas
+- [ ] My changes required changes on the Armorial lib
+
+**Additional context**
+Add any other context or screenshots about the task here.
