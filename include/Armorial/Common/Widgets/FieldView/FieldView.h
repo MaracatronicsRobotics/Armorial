@@ -120,7 +120,7 @@ namespace Widgets {
             const Geometry::Vector2D perp = Geometry::Vector2D(-norm.y(), norm.x());
 
             // Draw line
-            drawLine(v1, v2, z, thickness, lineColor);
+            drawLine(v1, v2, z, lineColor, thickness);
 
             // Draw triangle
             const float triangle_thickness = 3.0f * thickness;
