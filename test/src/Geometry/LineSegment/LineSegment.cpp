@@ -48,11 +48,13 @@ TEST(Geometry_LineSegment_Tests, GivenASegment_IsOnLineChecker_ShouldWork) {
 }
 
 TEST(Geometry_LineSegment_Tests, GivenASegment_Projection_ShouldWork) {
-    Geometry::LineSegment segmentBase1(Geometry::Vector2D(-2.0f, -2.0f), Geometry::Vector2D(1.0f, 1.0f));
-    Geometry::LineSegment segmentBase2(Geometry::Vector2D(0.0f, -1.0f), Geometry::Vector2D(-1.0f, sqrtf(3) - 1));
-    Geometry::Vector2D referencePoint(-1.0f / (sqrtf(3) + 1.0f), -1.0f / (sqrtf(3) + 1.0f));
-    EXPECT_EQ(segmentBase1.isOnLine(referencePoint), true) << "Point is not in segment";
-    EXPECT_EQ(segmentBase2.isOnLine(referencePoint), true) << "Point is not in segment";
+    Geometry::LineSegment segmentBase(Geometry::Vector2D(-2.0f, -2.0f), Geometry::Vector2D(1.0f, 1.0f));
+    Geometry::Vector2D referencePoint1(0.5f, -1.5f);
+    Geometry::Vector2D referencePoint2(7.0f, 4.0f);
+    Geometry::Vector2D referencePoint3(-8.0f, -5.0f);
+    EXPECT_EQ(segmentBase.project(referencePoint1), Geometry::Vector2D(-0.5f, -0.5f)) << "Projection does not work";
+    EXPECT_EQ(segmentBase.project(referencePoint2), Geometry::Vector2D(1.0f, 1.0f)) << "Projection does not work";
+    EXPECT_EQ(segmentBase.project(referencePoint3), Geometry::Vector2D(-2.0f, -2.0f)) << "Projection does not work";
 }
 
 TEST(Geometry_LineSegment_Tests, GivenSegments_IntersectionVerification_ShouldWork) {
