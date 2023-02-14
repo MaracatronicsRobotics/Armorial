@@ -3,7 +3,7 @@
 
 #include <Armorial/Geometry/LineSegment/LineSegment.h>
 #include <spdlog/spdlog.h>
-#include <spdlog/fmt/bundled/color.h>
+#include <fmt/color.h>
 
 TEST(Geometry_LineSegment_Tests, GivenASegment_Getters_ShouldWork) {
     Geometry::LineSegment segmentBase(Geometry::Vector2D(0.0f, 0.0f), Geometry::Vector2D(1.0f, 1.0f));

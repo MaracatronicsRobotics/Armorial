@@ -3,7 +3,7 @@
 
 #include <Armorial/Geometry/Rectangle/Rectangle.h>
 #include <spdlog/spdlog.h>
-#include <spdlog/fmt/bundled/color.h>
+#include <fmt/color.h>
 
 Geometry::Rectangle rectangleBase(Geometry::Vector2D(-2.0f, 1.0f), Geometry::Vector2D(2.0f, -1.0f));
 

@@ -6,7 +6,7 @@
 #include <gmock/gmock.h>
 
 #include <spdlog/spdlog.h>
-#include <spdlog/fmt/bundled/color.h>
+#include <fmt/color.h>
 
 #include <Armorial/Threaded/Entity/Entity.h>
 #include <Armorial/Threaded/EntityManager/EntityManager.h>

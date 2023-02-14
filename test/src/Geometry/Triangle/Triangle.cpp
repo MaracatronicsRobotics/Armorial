@@ -3,7 +3,7 @@
 
 #include <Armorial/Geometry/Triangle/Triangle.h>
 #include <spdlog/spdlog.h>
-#include <spdlog/fmt/bundled/color.h>
+#include <fmt/color.h>
 
 Geometry::Triangle triangleBase(Geometry::Vector2D(-2.0f, -1.0f), Geometry::Vector2D(1.0f, 2.0f),
                                 Geometry::Vector2D(3.0f, -2.0f));

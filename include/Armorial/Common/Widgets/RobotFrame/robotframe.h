@@ -6,7 +6,7 @@
 #include <QProgressBar>
 
 #include <spdlog/spdlog.h>
-#include <spdlog/fmt/bundled/color.h>
+#include <fmt/color.h>
 
 #include <Armorial/Common/Enums/Color/Color.h>
 

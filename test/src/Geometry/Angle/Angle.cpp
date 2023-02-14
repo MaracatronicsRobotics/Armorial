@@ -4,7 +4,7 @@
 #include <Armorial/Geometry/Angle/Angle.h>
 #include <Armorial/Utils/Utils.h>
 #include <spdlog/spdlog.h>
-#include <spdlog/fmt/bundled/color.h>
+#include <fmt/color.h>
 #include <math.h>
 
 

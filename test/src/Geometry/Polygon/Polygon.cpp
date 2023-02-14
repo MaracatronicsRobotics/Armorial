@@ -3,7 +3,7 @@
 
 #include <Armorial/Geometry/Polygon/Polygon.h>
 #include <spdlog/spdlog.h>
-#include <spdlog/fmt/bundled/color.h>
+#include <fmt/color.h>
 
 std::vector<Geometry::Vector2D> polygonVertices = {Geometry::Vector2D(0.0f, 0.0f), Geometry::Vector2D(1.0f, 2.0f),
                                                    Geometry::Vector2D(2.0f, 0.0f), Geometry::Vector2D(4.0f, 0.0f),

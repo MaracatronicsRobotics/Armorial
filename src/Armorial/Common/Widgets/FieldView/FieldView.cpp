@@ -262,7 +262,7 @@ void FieldView::drawCentralLogo(const float &centralLogoSize) {
 
 void FieldView::mousePressEvent(QMouseEvent* event) {
     _leftButton = event->buttons().testFlag(Qt::LeftButton);
-    _midButton = event->buttons().testFlag(Qt::MidButton);
+    _midButton = event->buttons().testFlag(Qt::MiddleButton);
     _rightButton = event->buttons().testFlag(Qt::RightButton);
 
     if(_leftButton) {
@@ -283,7 +283,7 @@ void FieldView::mouseReleaseEvent(QMouseEvent* event) {
 
 void FieldView::mouseMoveEvent(QMouseEvent* event) {
     bool leftButton = event->buttons().testFlag(Qt::LeftButton);
-    bool midButton = event->buttons().testFlag(Qt::MidButton);
+    bool midButton = event->buttons().testFlag(Qt::MiddleButton);
 
     if(leftButton) {
         _viewXOffset -= _viewScale * float(event->x() - _mouseStartX);
@@ -302,7 +302,7 @@ void FieldView::mouseMoveEvent(QMouseEvent* event) {
 }
 
 void FieldView::wheelEvent(QWheelEvent* event) {
-    float zoomRatio = -static_cast<float>(event->delta())/1000.0;
+    float zoomRatio = -static_cast<float>(event->angleDelta().y())/1000.0;
     _viewScale = _viewScale * (1.0 + zoomRatio);
     recomputeProjection();
 }

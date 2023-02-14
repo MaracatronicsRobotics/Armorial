@@ -3,7 +3,7 @@
 
 #include <Armorial/Geometry/Arc/Arc.h>
 #include <spdlog/spdlog.h>
-#include <spdlog/fmt/bundled/color.h>
+#include <fmt/color.h>
 
 TEST(Geometry_Arc_Tests, GivenAnArc_CenterGetter_ShouldWork) {
     Geometry::Arc arcBase(Geometry::Vector2D(1.0f, -1.0f), 1.0f);

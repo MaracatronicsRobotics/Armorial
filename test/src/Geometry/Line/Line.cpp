@@ -3,7 +3,7 @@
 
 #include <Armorial/Geometry/Line/Line.h>
 #include <spdlog/spdlog.h>
-#include <spdlog/fmt/bundled/color.h>
+#include <fmt/color.h>
 
 TEST(Geometry_Line_Tests, GivenALine_DistanceToPoint_ShouldWork) {
     Geometry::Line lineBase(Geometry::Vector2D(0.0f, 0.0f), Geometry::Vector2D(1.0f, 1.0f));

@@ -3,7 +3,8 @@
 
 #include <Armorial/Geometry/Circle/Circle.h>
 #include <spdlog/spdlog.h>
-#include <spdlog/fmt/bundled/color.h>
+
+#include <fmt/color.h>
 
 Geometry::Circle circleBase(Geometry::Vector2D(2.0f, 0.0f), 2.0f);
 

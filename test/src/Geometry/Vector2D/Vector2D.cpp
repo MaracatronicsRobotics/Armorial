@@ -3,7 +3,7 @@
 
 #include <Armorial/Geometry/Vector2D/Vector2D.h>
 #include <spdlog/spdlog.h>
-#include <spdlog/fmt/bundled/color.h>
+#include <fmt/color.h>
 
 TEST(Geometry_Vector2D_Tests, GivenAVector_CoordinateGetters_ShouldWork) {
     Geometry::Vector2D vectorBase(1.0f, 1.0f);
