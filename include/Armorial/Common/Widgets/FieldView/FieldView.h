@@ -1,4 +1,4 @@
-﻿#ifndef ARMORIAL_COMMON_WIDGETS_FIELDVIEW_H
+#ifndef ARMORIAL_COMMON_WIDGETS_FIELDVIEW_H
 #define ARMORIAL_COMMON_WIDGETS_FIELDVIEW_H
 
 #include <QOpenGLWidget>
@@ -78,11 +78,11 @@ namespace Widgets {
          * \param v1, v2, The position of the start and end of the line, respectively.
          * \param z The z value where the line will be drawed at.
          * \param thickness The thickness value which the line will be draw.
-         * \param color The color of the line.
+         * \param color The color of the line (use 0-255 values for rgba).
          * \note You need to call this method in the scope of the paintGL() or draw() methods.
          */
         template <typename T>
-        std::enable_if_t<Common::Types::has_coordinates_v<T>, void> drawLine(const T &v1, const T &v2, const float &z, const QColor& color = QColor(Qt::white), const float &thickness = 10.0f) {
+        std::enable_if_t<Common::Types::has_coordinates_v<T>, void> drawLine(const T &v1, const T &v2, const float &z, const std::optional<QColor>& color = std::nullopt, const float &thickness = 10.0f) {
             // Generate Vector2D for line
             const Geometry::Vector2D v1Transformed(v1.x(), v1.y());
             const Geometry::Vector2D v2Transformed(v2.x(), v2.y());
@@ -96,7 +96,10 @@ namespace Widgets {
             const Geometry::Vector2D qv4 = (v2Transformed - (thickness / 2.0f)) * perp;
 
             // Set color
-            glColor4f(color.redF(), color.greenF(), color.blueF(), color.alphaF());
+            if(color.has_value()) {
+                QColor colorVal = color.value();
+                glColor4f(colorVal.redF(), colorVal.greenF(), colorVal.blueF(), colorVal.alphaF());
+            }
 
             // Draw rect using generated vectors
             drawRect(qv1, qv2, qv3, qv4, z);
@@ -106,13 +109,13 @@ namespace Widgets {
          * \brief Draw a vector.
          * \param v1, v2, The position of the start and end of the vector, respectively.
          * \param z The z value where the line will be drawed at.
-         * \param lineColor The color of the vector line.
-         * \param triangleColor The color of the vector triangle.
+         * \param lineColor The color of the vector line (use 0-255 values for rgba).
+         * \param triangleColor The color of the vector triangle (use 0-255 values for rgba).
          * \param thickness The thickness value which the vector line will be draw.
          * \note You need to call this method in the scope of the paintGL() or draw() methods.
          */
         template <typename T>
-        std::enable_if_t<Common::Types::has_coordinates_v<T>, void> drawVector(const T &v1, const T &v2, const float &z, const QColor& lineColor = QColor(Qt::white), const QColor& triangleColor = QColor(Qt::white), const float &thickness = 10.0f) {
+        std::enable_if_t<Common::Types::has_coordinates_v<T>, void> drawVector(const T &v1, const T &v2, const float &z, const std::optional<QColor>& lineColor = std::nullopt, const std::optional<QColor>& triangleColor = std::nullopt, const float &thickness = 10.0f) {
             // Generate Vector2D for line
             const Geometry::Vector2D v1Transformed(v1.x(), v1.y());
             const Geometry::Vector2D v2Transformed(v2.x(), v2.y());
@@ -134,13 +137,16 @@ namespace Widgets {
          * \brief Draw a triangle.
          * \param v1, v2, v3 The vertices of the triangle.
          * \param z The z value where the triangle will be drawed at.
-         * \param color The color of the triangle.
+         * \param color The color of the triangle (use 0-255 values for rgba).
          * \note You need to call this method in the scope of the paintGL() or draw() methods.
          */
         template <typename T>
-        std::enable_if_t<Common::Types::has_coordinates_v<T>, void> drawTriangle(const T &v1, const T &v2, const T &v3, const float &z, const QColor& color = QColor(Qt::white)) {
+        std::enable_if_t<Common::Types::has_coordinates_v<T>, void> drawTriangle(const T &v1, const T &v2, const T &v3, const float &z, const std::optional<QColor>& color = std::nullopt) {
             // Set color
-            glColor4f(color.redF(), color.greenF(), color.blueF(), color.alphaF());
+            if(color.has_value()) {
+                QColor colorVal = color.value();
+                glColor4f(colorVal.redF(), colorVal.greenF(), colorVal.blueF(), colorVal.alphaF());
+            }
 
             // Draw triangle
             glBegin(GL_TRIANGLES);
@@ -154,13 +160,16 @@ namespace Widgets {
          * \brief Draw a rectangle.
          * \param topLeft, bottomRight The position of the topLeft and bottomRight corners.
          * \param z The z value where the rectangle will be drawed at.
-         * \param color The color of the rectangle.
+         * \param color The color of the rectangle (use 0-255 values for rgba).
          * \note You need to call this method in the scope of the paintGL() or draw() methods.
          */
         template <typename T>
-        std::enable_if_t<Common::Types::has_coordinates_v<T>, void> drawRect(const T &topLeft, const T &bottomRight, const float &z, const QColor& color = QColor(Qt::white)) {
+        std::enable_if_t<Common::Types::has_coordinates_v<T>, void> drawRect(const T &topLeft, const T &bottomRight, const float &z, const std::optional<QColor>& color = std::nullopt) {
             // Set color
-            glColor4f(color.redF(), color.greenF(), color.blueF(), color.alphaF());
+            if(color.has_value()) {
+                QColor colorVal = color.value();
+                glColor4f(colorVal.redF(), colorVal.greenF(), colorVal.blueF(), colorVal.alphaF());
+            }
 
             // Draw rect
             glBegin(GL_QUADS);
@@ -175,13 +184,16 @@ namespace Widgets {
          * \brief Draw a rectangle.
          * \param v1, v2, v3, v4 The position of the corners of the rectangle.
          * \param z The z value where the rectangle will be drawed at.
-         * \param color The color of the rectangle.
+         * \param color The color of the rectangle (use 0-255 values for rgba).
          * \note You need to call this method in the scope of the paintGL() or draw() methods.
          */
         template <typename T>
-        std::enable_if_t<Common::Types::has_coordinates_v<T>, void> drawRect(const T &v1, const T &v2, const T &v3, const T &v4, const float &z, const QColor& color = QColor(Qt::white)) {
+        std::enable_if_t<Common::Types::has_coordinates_v<T>, void> drawRect(const T &v1, const T &v2, const T &v3, const T &v4, const float &z, const std::optional<QColor>& color = std::nullopt) {
             // Set color
-            glColor4f(color.redF(), color.greenF(), color.blueF(), color.alphaF());
+            if(color.has_value()) {
+                QColor colorVal = color.value();
+                glColor4f(colorVal.redF(), colorVal.greenF(), colorVal.blueF(), colorVal.alphaF());
+            }
 
             // Draw rect
             glBegin(GL_QUADS);
@@ -199,14 +211,14 @@ namespace Widgets {
          * \param theta1, theta2 The start and end angle of the arc.
          * \param z The z value where the rectangle will be drawed at.
          * \param dTheta
-         * \param color The color of the arc.
+         * \param color The color of the arc (use 0-255 values for rgba).
          * \note Using r1 and r2 parameters you can draw a "full filled" arc (r1 = 0, r2 = radius) or
          * a "partially filled" arc, e.g. (r1 = radius - 10, r2 = radius), so this will fill only a 'border'
          * on the arc.
          * \note You need to call this method in the scope of the paintGL() or draw() methods.
          */
         template <typename T>
-        std::enable_if_t<Common::Types::has_coordinates_v<T>, void> drawArc(const T &center, const float &r1, const float &r2, const float &theta1, const float &theta2, const float &z, float dTheta = -1, const QColor& color = QColor(Qt::white)) {
+        std::enable_if_t<Common::Types::has_coordinates_v<T>, void> drawArc(const T &center, const float &r1, const float &r2, const float &theta1, const float &theta2, const float &z, float dTheta = -1, const std::optional<QColor>& color = std::nullopt) {
             static const float tesselation = 1.0;
 
             if(dTheta < 0) {
@@ -214,7 +226,10 @@ namespace Widgets {
             }
 
             // Set color
-            glColor4f(color.redF(), color.greenF(), color.blueF(), color.alphaF());
+            if(color.has_value()) {
+                QColor colorVal = color.value();
+                glColor4f(colorVal.redF(), colorVal.greenF(), colorVal.blueF(), colorVal.alphaF());
+            }
 
             // Draw arc
             glBegin(GL_QUAD_STRIP);
