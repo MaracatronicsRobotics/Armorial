@@ -370,6 +370,13 @@ namespace Base {
                 return serverPort;
             }
 
+            /*!
+             * \return The socket shared pointer.
+             */
+            std::shared_ptr<QUdpSocket> getSocket() {
+                return _socket;
+            }
+
         private:
             // Pointer to socket
             std::shared_ptr<QUdpSocket> _socket;
