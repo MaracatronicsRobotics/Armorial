@@ -3,7 +3,7 @@
 
 #include <Armorial/Geometry/Rectangle/Rectangle.h>
 #include <spdlog/spdlog.h>
-#include <fmt/color.h>
+#include <spdlog/fmt/bundled/color.h>
 
 Geometry::Rectangle rectangleBase(Geometry::Vector2D(-2.0f, 1.0f), Geometry::Vector2D(2.0f, -1.0f));
 
@@ -76,6 +76,16 @@ TEST(Geometry_Rectangle_Tests, GivenARectangle_BoundaryGetter_ShouldWork) {
     for(const auto& rectangleLine : rectangleBoundary) {
         EXPECT_NE(std::find(boundary.begin(), boundary.end(), rectangleLine), std::end(boundary)) << "Line does not match";
     }
+}
+
+TEST(Geometry_Rectangle_Tests, GivenARectangle_PointInRectangleChecker_ShouldWork) {
+    Geometry::Vector2D referencePoint1(0.0f, 0.0f);
+    Geometry::Vector2D referencePoint2(0.0f, 1.0f);
+    Geometry::Vector2D referencePoint3(0.0f, 2.0f);
+    EXPECT_EQ(rectangleBase.contains(referencePoint1), true) << "Rectangle does not contain the point";
+    EXPECT_EQ(rectangleBase.contains(referencePoint2), true) << "Rectangle does not contain the point";
+    EXPECT_EQ(rectangleBase.contains(referencePoint3), false) << "Rectangle contains the point";
+    EXPECT_EQ(rectangleBase.contains(referencePoint3, 1.0f), true) << "Rectangle does not contain the point";
 }
 
 TEST(Geometry_Rectangle_Tests, GivenARectangle_UpdatingCorners_ShouldWork) {
