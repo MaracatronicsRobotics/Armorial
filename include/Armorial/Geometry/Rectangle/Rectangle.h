@@ -35,8 +35,8 @@ namespace Geometry {
          */
         template<typename T>
         [[nodiscard]] std::enable_if_t<Common::Types::has_coordinates_v<T>, bool> contains(const T& point) const {
-            return (point.x() > _topLeft.x() && point.x() < _topRight.x())
-                    && (point.y() > _bottomLeft.y() && point.y() < _topLeft.y());
+            return (point.x() >= _topLeft.x() && point.x() <= _topRight.x())
+                    && (point.y() >= _bottomLeft.y() && point.y() <= _topLeft.y());
         }
 
         /*!
@@ -49,8 +49,8 @@ namespace Geometry {
          */
         template<typename T>
         [[nodiscard]] std::enable_if_t<Common::Types::has_coordinates_v<T>, bool> contains(const T& point, const float &margin) const {
-            return (point.x() > (_topLeft.x() - margin) && point.x() < (_topRight.x() + margin))
-                    && (point.y() > (_bottomLeft.y() - margin) && point.y() < (_topLeft.y() + margin));
+            return (point.x() >= (_topLeft.x() - margin) && point.x() <= (_topRight.x() + margin))
+                    && (point.y() >= (_bottomLeft.y() - margin) && point.y() <= (_topLeft.y() + margin));
         }
 
         /*!
