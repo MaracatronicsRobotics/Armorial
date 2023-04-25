@@ -2,7 +2,7 @@
 
 using namespace Common::Widgets;
 
-RobotFrame::RobotFrame(QWidget *parent) : QFrame(parent) {
+RobotFrame::RobotFrame(const QString& basePath, QWidget *parent) : QFrame(parent) {
     // Setting default info
     setFixedSize(230, 80);
 
@@ -14,6 +14,8 @@ RobotFrame::RobotFrame(QWidget *parent) : QFrame(parent) {
     _robotBattery = nullptr;
     _roleIcon = nullptr;
     _roleName = nullptr;
+
+    _basePath = basePath;
 
     reset();
 }
@@ -30,7 +32,9 @@ void RobotFrame::setRobotData(Common::Enums::Color teamColor, quint8 robotId, in
         _robotPattern = new QLabel(this);
     }
 
-    QString path = QString(""); // bring back GUI resources images
+    QString path = _basePath + QString("/robots/%1%2.png")
+                                    .arg(Common::Enums::Color::YELLOW == teamColor ? "yellow/y": "blue/b")
+                                    .arg(robotId);
     QPixmap pixMap(path);
 
     if (pixMap.isNull()) {
@@ -58,7 +62,8 @@ void RobotFrame::setRobotRadioStatus(bool status) {
         _radioStatus = new QLabel(this);
     }
 
-    QString path = QString(""); // bring back GUI resources images
+    QString path = _basePath + QString("/gui/robotframe/connected%1.png")
+                                    .arg(status ? "ok": "not");
     QPixmap pixMap(path);
 
     if (pixMap.isNull()) {

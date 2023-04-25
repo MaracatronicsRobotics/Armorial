@@ -28,7 +28,7 @@ namespace Widgets {
         /*!
          * \brief The default constructor for RobotFrame.
          */
-        RobotFrame(QWidget *parent = nullptr);
+        RobotFrame(const QString& basePath = "", QWidget *parent = nullptr);
 
         /*!
          * \brief Resets the RobotFrame to its default info.
@@ -57,6 +57,8 @@ namespace Widgets {
 
         QLabel *_roleIcon;
         QLabel *_roleName;
+
+        QString _basePath;
     };
 }
 }
