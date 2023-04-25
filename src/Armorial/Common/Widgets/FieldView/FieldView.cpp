@@ -135,6 +135,34 @@ void FieldView::setupRobotDisplayList() {
         drawRect(QVector2D(90.0 * cos(theta1)-10, 90.0 * sin(theta1)),
                  QVector2D(90.0 * cos(theta2), 90.0 * sin(theta2)), _robotZ + 0.01);
 
+        // Setup color for wheels
+        glColor3d(0.5, 0.5, 0.5);
+
+        // Draw robot wheels
+        drawRect(QVector2D(90.0*cos(theta1), 90.0*sin(theta1)),
+                 QVector2D(90.0*cos(theta1) + 3.5, 90.0*sin(theta1) + 3.5),
+                 QVector2D(90.0*cos(theta1 + (M_PI/6)), 90.0*sin(theta1 + (M_PI/6))),
+                 QVector2D(90.0*cos(theta1 + (M_PI/6)) + 3.5, 90.0*sin(theta1 + (M_PI/6)) + 3.5),
+                 _robotZ + 0.02);
+
+        drawRect(QVector2D(-90.0*cos(theta1), 90.0*sin(theta1)),
+                 QVector2D(-90.0*cos(theta1) - 3.5, 90.0*sin(theta1) + 3.5),
+                 QVector2D(-90.0*cos(theta1 + (M_PI/6)), 90.0*sin(theta1 + (M_PI/6))),
+                 QVector2D(-90.0*cos(theta1 + (M_PI/6)) - 3.5, 90.0*sin(theta1 + (M_PI/6)) + 3.5),
+                 _robotZ + 0.02);
+
+        drawRect(QVector2D(90.0*cos(theta2), 90.0*sin(theta2)),
+                 QVector2D(90.0*cos(theta2) + 3.5, 90.0*sin(theta2) - 3.5),
+                 QVector2D(90.0*cos(theta2 - (M_PI/6)), 90.0*sin(theta2 - (M_PI/6))),
+                 QVector2D(90.0*cos(theta2 - (M_PI/6)) + 3.5, 90.0*sin(theta2 - (M_PI/6)) - 3.5),
+                 _robotZ + 0.02);
+
+        drawRect(QVector2D(-90.0*cos(theta2), 90.0*sin(theta2)),
+                 QVector2D(-90.0*cos(theta2) - 3.5, 90.0*sin(theta2) - 3.5),
+                 QVector2D(-90.0*cos(theta2 - (M_PI/6)), 90.0*sin(theta2 - (M_PI/6))),
+                 QVector2D(-90.0*cos(theta2 - (M_PI/6)) - 3.5, 90.0*sin(theta2 - (M_PI/6)) - 3.5),
+                 _robotZ + 0.02);
+
         glEndList();
     });
 }
