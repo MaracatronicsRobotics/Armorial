@@ -2,7 +2,8 @@
 
 using namespace Common::Types;
 
-Object::Object(Object& another) {
+
+Object::Object(const Object& another) {
     setPosition(another.getPosition());
     setVelocity(another.getVelocity());
     setAcceleration(another.getAcceleration());
@@ -21,7 +22,7 @@ Object::Object(const Geometry::Vector2D& position,
     setAngularSpeed(angularSpeed);
 }
 
-Geometry::Vector2D Object::getPosition() {
+Geometry::Vector2D Object::getPosition() const {
     _mutex.lockForRead();
     Geometry::Vector2D position = _position;
     _mutex.unlock();
@@ -29,7 +30,7 @@ Geometry::Vector2D Object::getPosition() {
     return position;
 }
 
-Geometry::Vector2D Object::getVelocity() {
+Geometry::Vector2D Object::getVelocity() const {
     _mutex.lockForRead();
     Geometry::Vector2D velocity = _velocity;
     _mutex.unlock();
@@ -37,7 +38,7 @@ Geometry::Vector2D Object::getVelocity() {
     return velocity;
 }
 
-Geometry::Vector2D Object::getAcceleration() {
+Geometry::Vector2D Object::getAcceleration() const {
     _mutex.lockForRead();
     Geometry::Vector2D acceleration = _acceleration;
     _mutex.unlock();
@@ -45,7 +46,7 @@ Geometry::Vector2D Object::getAcceleration() {
     return acceleration;
 }
 
-Geometry::Angle Object::getOrientation() {
+Geometry::Angle Object::getOrientation() const {
     _mutex.lockForRead();
     Geometry::Angle orientation = _orientation;
     _mutex.unlock();
@@ -53,7 +54,7 @@ Geometry::Angle Object::getOrientation() {
     return orientation;
 }
 
-float Object::getAngularSpeed() {
+float Object::getAngularSpeed() const {
     _mutex.lockForRead();
     float angularSpeed = _angularSpeed;
     _mutex.unlock();
@@ -91,7 +92,7 @@ void Object::setAngularSpeed(const float& angularSpeed) {
     _mutex.unlock();
 }
 
-Object &Object::operator=(Object another) {
+Object &Object::operator=(const Object& another) {
     this->setPosition(another.getPosition());
     this->setVelocity(another.getVelocity());
     this->setOrientation(another.getOrientation());
