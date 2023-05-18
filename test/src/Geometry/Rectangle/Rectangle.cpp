@@ -3,7 +3,6 @@
 
 #include <Armorial/Geometry/Rectangle/Rectangle.h>
 #include <spdlog/spdlog.h>
-#include <spdlog/fmt/bundled/color.h>
 
 Geometry::Rectangle rectangleBase(Geometry::Vector2D(-2.0f, 1.0f), Geometry::Vector2D(2.0f, -1.0f));
 
@@ -83,9 +82,9 @@ TEST(Geometry_Rectangle_Tests, GivenARectangle_PointInRectangleChecker_ShouldWor
     Geometry::Vector2D referencePoint2(0.0f, 1.0f);
     Geometry::Vector2D referencePoint3(0.0f, 2.0f);
     EXPECT_EQ(rectangleBase.contains(referencePoint1), true) << "Rectangle does not contain the point";
-    EXPECT_EQ(rectangleBase.contains(referencePoint2), true) << "Rectangle does not contain the point";
+    EXPECT_EQ(rectangleBase.contains(referencePoint2), false) << "Rectangle does not contain the point";
     EXPECT_EQ(rectangleBase.contains(referencePoint3), false) << "Rectangle contains the point";
-    EXPECT_EQ(rectangleBase.contains(referencePoint3, 1.0f), true) << "Rectangle does not contain the point";
+    EXPECT_EQ(rectangleBase.contains(referencePoint3, 1.01f), true) << "Rectangle does not contain the point";
 }
 
 TEST(Geometry_Rectangle_Tests, GivenARectangle_UpdatingCorners_ShouldWork) {

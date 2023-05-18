@@ -24,7 +24,7 @@ namespace Types {
         /*!
          * \brief Copy constructor.
          */
-        Object(Object& another);
+        Object(const Object& another);
 
         /*!
          * \brief Constructor for the Types::Object class.
@@ -37,16 +37,16 @@ namespace Types {
         /*!
          * \brief Getters for the object attributes.
          */
-        Geometry::Vector2D getPosition();
-        Geometry::Vector2D getVelocity();
-        Geometry::Vector2D getAcceleration();
-        Geometry::Angle getOrientation();
-        float getAngularSpeed();
+        Geometry::Vector2D getPosition() const;
+        Geometry::Vector2D getVelocity() const;
+        Geometry::Vector2D getAcceleration() const;
+        Geometry::Angle getOrientation() const;
+        float getAngularSpeed() const;
 
         /*!
          * \brief Override for the = operator.
          */
-        Object &operator=(Object another);
+        Object &operator=(const Object& another);
 
     protected:
         /*!
@@ -67,7 +67,7 @@ namespace Types {
         float _angularSpeed;
 
         // Mutex for data management
-        QReadWriteLock _mutex;
+        mutable QReadWriteLock _mutex;
     };
 }
 }
