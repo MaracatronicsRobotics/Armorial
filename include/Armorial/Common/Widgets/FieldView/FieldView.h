@@ -27,6 +27,7 @@ namespace Widgets {
         Q_OBJECT
     public:
         FieldView(const Common::Types::Field& field, const QString& centralLogoPath = "", QWidget *parent = nullptr);
+        float getLineThickness();
 
     protected:
         /*!
@@ -355,11 +356,12 @@ namespace Widgets {
         int _idSize;
 
         // Field z value references
-        static constexpr float _fieldZ = 1.0;
-        static constexpr float _robotZ = 2.0;
-        static constexpr float _ballZ = 3.0;
-        static constexpr float _minZValue = -10.0;
-        static constexpr float _maxZValue = 10.0;
+        static constexpr float _fieldZ = 1.0f;
+        static constexpr float _robotZ = 2.0f;
+        static constexpr float _ballZ = 3.0f;
+        static constexpr float _minZValue = -10.0f;
+        static constexpr float _maxZValue = 10.0f;
+        static constexpr float _lineThickness = 20.0f;
 
     private:
         // Field view

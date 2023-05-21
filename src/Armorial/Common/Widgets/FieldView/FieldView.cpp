@@ -9,10 +9,12 @@
 using namespace Common::Widgets;
 
 FieldView::FieldView(const Common::Types::Field &field, const QString &centralLogoPath, QWidget *parent) : QOpenGLWidget(parent), _field(field) {
-    // 4x MSAA for antialiasing
-    QSurfaceFormat fmt;
-    fmt.setSamples(4);
-    this->setFormat(fmt);
+    // Set format
+    QSurfaceFormat format;
+    format.setDepthBufferSize(32);
+    format.setSamples(16);
+    format.setSwapBehavior(QSurfaceFormat::SwapBehavior::DoubleBuffer);
+    this->setFormat(format);
 
     // Setup central logo path
     _centralLogoPath = centralLogoPath;
@@ -190,6 +192,10 @@ void FieldView::setupBallDisplayList() {
     glEndList();
 }
 
+float FieldView::getLineThickness() {
+    return _lineThickness;
+}
+
 void FieldView::initializeGL() {
     // Setup display lists
     setupRobotDisplayList();
@@ -216,11 +222,10 @@ void FieldView::paintGL() {
     glDisable(GL_CULL_FACE);
     glEnable(GL_DEPTH_TEST);
     glEnable(GL_MULTISAMPLE);
-    glEnable(GL_BLEND);
-    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
+    glClear (GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     glMatrixMode(GL_MODELVIEW);
+
     glLoadIdentity();
     glPushMatrix();
 
@@ -237,30 +242,27 @@ void FieldView::draw() {
 }
 
 void FieldView::drawFieldLines() {
-    const float lineThickness = 20.0;
-
     glColor4f(FIELD_LINES_COLOR);
 
     for (auto &l : _fieldLineSegments) {
-        const float half_thickness = 0.5 * lineThickness;
+        const float half_thickness = 0.5f * getLineThickness();
         Geometry::Vector2D perp = (l.end() - l.start()).normalize();
         perp = {-perp.y(), perp.x()};
 
-        const Geometry::Vector2D v1 = l.start() - perp.scale(half_thickness);
-        const Geometry::Vector2D v2 = l.start() + perp.scale(half_thickness);
-        const Geometry::Vector2D v3 = l.end() - perp.scale(half_thickness);
-        const Geometry::Vector2D v4 = l.end() + perp.scale(half_thickness);
+        const Geometry::Vector2D v1 = l.start() - (perp * half_thickness);
+        const Geometry::Vector2D v2 = l.end() + (perp * half_thickness);
 
-        drawRect(v1, v2, v3, v4, _fieldZ);
+        drawRect(v1, v2, _fieldZ);
     }
 
+
     for (auto &c : _fieldCircles) {
-        const float half_thickness = 0.5 * lineThickness;
+        const float half_thickness = 0.5 * getLineThickness();
         drawArc(c.center(), c.radius() - half_thickness, c.radius() + half_thickness, 0.0, 2.0 * M_PI, _fieldZ);
     }
 
     for (auto &a : _fieldArcs) {
-        drawArc(a.center(), a.radius() - lineThickness, a.radius() + lineThickness, a.startAngle().value(), a.endAngle().value(), _fieldZ);
+        drawArc(a.center(), a.radius() - getLineThickness(), a.radius() + getLineThickness(), a.startAngle().value(), a.endAngle().value(), _fieldZ);
     }
 }
 
