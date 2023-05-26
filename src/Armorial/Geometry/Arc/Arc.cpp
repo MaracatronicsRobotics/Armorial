@@ -63,7 +63,7 @@ bool Arc::isCircle() const {
 
 bool Arc::angleWithinArc(const Geometry::Angle &angle) const {
     if (_reversed) {
-        return !(angle.value() > _startAngle.value() && angle.value() <= _endAngle.value());
+        return !(angle.value() >= _startAngle.value() && angle.value() <= _endAngle.value());
     } else {
         return (angle.value() >= _startAngle.value() && angle.value() <= _endAngle.value());
     }
