@@ -207,7 +207,7 @@ void FieldView::initializeGL() {
     }
 
     // Setup font
-    QFont textFont = this->font();
+    QFont textFont = QFont("Ubuntu Mono");
     textFont.setWeight(QFont::Bold);
     textFont.setPointSize(80);
     _glText = GLText(textFont);
