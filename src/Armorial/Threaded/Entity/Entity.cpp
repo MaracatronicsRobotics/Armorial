@@ -97,7 +97,9 @@ void Entity::run() {
         // Else, if the rest is negative, it means that the loop call has achieved a duration
         // that is higher than the expected by the desired frequency, so alert the user.
         else {
-            spdlog::warn("[{}] Entity timer overextended for {} milliseconds.", entityName().toStdString(), -rest);
+            if(rest >= 1E6) {
+                spdlog::warn("[{0}] Entity timer overextended for {1:.3f} milliseconds.", entityName().toStdString(), -rest/1E9);
+            }
         }
 
         // Set the current FPS for this Entity instance
