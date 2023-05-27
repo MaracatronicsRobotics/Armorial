@@ -1,5 +1,6 @@
 #include <Armorial/Threaded/Entity/Entity.h>
 
+#include <chrono>
 #include <spdlog/spdlog.h>
 
 using namespace Threaded;
@@ -8,6 +9,7 @@ Entity::Entity() {
     setLoopFrequency(60);
     _isEnabled = true;
     _isStopped = false;
+    _currentFPS = 0.0f;
 }
 
 void Entity::setLoopFrequency(const quint16 hz) {
@@ -90,13 +92,16 @@ void Entity::run() {
         // If rest is positive, it is, the loop has succesfully run in the desired time
         // put the Entity to sleep for the remaining time.
         if(rest >= 0) {
-            msleep(rest);
+            std::this_thread::sleep_for(std::chrono::nanoseconds(rest));
         }
         // Else, if the rest is negative, it means that the loop call has achieved a duration
         // that is higher than the expected by the desired frequency, so alert the user.
         else {
             spdlog::warn("[{}] Entity timer overextended for {} milliseconds.", entityName().toStdString(), -rest);
         }
+
+        // Set the current FPS for this Entity instance
+        setFPS(1000.0f / getDeltaTime());
     }
 
     // When the Entity is disabled, it leaves the while, so cast the finalization() implementation
@@ -110,7 +115,25 @@ void Entity::startTimer() {
 
 long Entity::getRemainingTime() {
     // Get the remaining time (in milliseconds) based on the desired frequency
-    long remainingTime = (1000 / _loopFrequency) - _entityTimer.getMilliseconds();
+    long remainingTime = ((1000.0f / loopFrequency()) - _entityTimer.getMilliseconds())*1E6;
 
     return remainingTime;
+}
+
+float Entity::getDeltaTime() {
+    return _entityTimer.getMilliseconds();
+}
+
+float Entity::getFPS() {
+    _entityMutex.lock();
+    float currentFPS = _currentFPS;
+    _entityMutex.unlock();
+
+    return currentFPS;
+}
+
+void Entity::setFPS(const float &fps) {
+    _entityMutex.lock();
+    _currentFPS = fps;
+    _entityMutex.unlock();
 }

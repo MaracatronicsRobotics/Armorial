@@ -77,6 +77,11 @@ namespace Threaded {
          */
         [[nodiscard]] bool isStopped();
 
+        /*!
+         * \return The current processing FPS of this Entity instance.
+         */
+        [[nodiscard]] float getFPS();
+
     private:
         /*!
          * \brief Reimplementation of QThread::run() which contains the structure to call the virtual methods.
@@ -127,6 +132,7 @@ namespace Threaded {
          * \brief Timer which will be used to execute the loop() method in the desired frequency.
          */
         Utils::Timer _entityTimer;
+        float _currentFPS;
 
         /*!
          * \brief Auxiliary method to start the timer.
@@ -141,6 +147,16 @@ namespace Threaded {
          * the Entity::run() call.
          */
         long getRemainingTime();
+
+        /*!
+         * \return Get the delta time from the execution.
+         */
+        float getDeltaTime();
+
+        /*!
+         * \brief Set the current fps for this Entity instance.
+         */
+        void setFPS(const float& fps);
 
         /*!
          * \brief Mutex to be used in the calls that changes entity members.
