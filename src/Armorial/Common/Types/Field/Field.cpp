@@ -188,3 +188,9 @@ Geometry::Rectangle Field::bottomLeftQuadrant() const {
 Geometry::Rectangle Field::bottomRightQuadrant() const {
     return Geometry::Rectangle({0.0, 0.0}, {length() / 2.0f, -(width() / 2.0f)});
 }
+
+Field Field::operator*(const float &scalar) {
+    return Field(_playSide, _centerRadius * scalar, _fieldLength * scalar, _fieldWidth * scalar,
+                 _goalDepth * scalar, _goalWidth * scalar, _penaltyDepth * scalar,
+                 _penaltyWidth * scalar, _penaltyMarkDistanceFromGoal * scalar);
+}

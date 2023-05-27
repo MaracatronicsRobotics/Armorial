@@ -217,6 +217,12 @@ namespace Types {
          */
         Geometry::Rectangle bottomRightQuadrant() const;
 
+        /*!
+         * \brief Multiply a scalar to Field components.
+         * \param other A float scalar value.
+         * \return A Field instance which components has the multiplication result.
+         */
+        Field operator*(const float &scalar);
 
     private:
         Enums::Side _playSide;
