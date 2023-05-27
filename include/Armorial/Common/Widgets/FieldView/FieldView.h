@@ -174,10 +174,10 @@ namespace Widgets {
 
             // Draw rect
             glBegin(GL_QUADS);
-            glVertex3d(topLeft.x(), topLeft.y(), z);
-            glVertex3d(bottomRight.x(), topLeft.y(), z);
-            glVertex3d(bottomRight.x(), bottomRight.y(), z);
             glVertex3d(topLeft.x(), bottomRight.y(), z);
+            glVertex3d(bottomRight.x(), bottomRight.y(), z);
+            glVertex3d(bottomRight.x(), topLeft.y(), z);
+            glVertex3d(topLeft.x(), topLeft.y(), z);
             glEnd();
         }
 
@@ -187,6 +187,7 @@ namespace Widgets {
          * \param z The z value where the rectangle will be drawed at.
          * \param color The color of the rectangle (use 0-255 values for rgba).
          * \note You need to call this method in the scope of the paintGL() or draw() methods.
+         * \note v1, v2, v3, v4 needs to be in the order bottom-left, bottom-right, top-right, top-left.
          */
         template <typename T>
         std::enable_if_t<Common::Types::has_coordinates_v<T>, void> drawRect(const T &v1, const T &v2, const T &v3, const T &v4, const float &z, const std::optional<QColor>& color = std::nullopt) {
