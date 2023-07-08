@@ -17,6 +17,8 @@ RobotFrame::RobotFrame(const QString& basePath, QWidget *parent) : QFrame(parent
 
     _basePath = basePath;
 
+    this->setFrameStyle(QFrame::StyledPanel | QFrame::Plain);
+
     reset();
 }
 
