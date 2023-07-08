@@ -43,6 +43,11 @@ namespace Threaded {
          */
         void disableEntities();
 
+        /*!
+         * \return Return a list containing all registered entities.
+         */
+        QList<Entity*> getEntities();
+
     private:
         /*!
          * \brief The map that will store the entities by given priority.

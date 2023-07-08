@@ -7,6 +7,7 @@ using namespace Threaded;
 
 Entity::Entity() {
     setLoopFrequency(60);
+    setEntityPostfix("");
     _isEnabled = true;
     _isStopped = false;
     _currentFPS = 0.0f;
@@ -132,6 +133,20 @@ float Entity::getFPS() {
     _entityMutex.unlock();
 
     return currentFPS;
+}
+
+void Entity::setEntityPostfix(const QString& name) {
+    _entityMutex.lock();
+    _entityPostfixName = name;
+    _entityMutex.unlock();
+}
+
+QString Entity::getEntityPostfix() {
+    _entityMutex.lock();
+    QString postfix = _entityPostfixName;
+    _entityMutex.unlock();
+
+    return postfix;
 }
 
 void Entity::setFPS(const float &fps) {

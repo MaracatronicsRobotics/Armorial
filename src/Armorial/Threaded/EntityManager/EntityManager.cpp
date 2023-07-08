@@ -55,3 +55,7 @@ void EntityManager::disableEntities() {
         }
     }
 }
+
+QList<Entity*> EntityManager::getEntities() {
+    return _priorityMap.values();
+}

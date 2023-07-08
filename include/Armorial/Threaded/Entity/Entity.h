@@ -26,7 +26,7 @@ namespace Threaded {
          * \return A QString object containing the name of the implemented Entity.
          */
         virtual inline QString entityName() {
-            return NAMEOF_TYPE_RTTI(*this).data();
+            return QString(NAMEOF_TYPE_RTTI(*this).data()) + getEntityPostfix();
         }
 
         /*!
@@ -81,6 +81,18 @@ namespace Threaded {
          * \return The current processing FPS of this Entity instance.
          */
         [[nodiscard]] float getFPS();
+
+    protected:
+        /*!
+         * \brief Set a postfix name for this Entity instance.
+         * \param name The given postfix name.
+         */
+        void setEntityPostfix(const QString& name);
+
+        /*!
+         * \return Returns the entity postfix name.
+         */
+        QString getEntityPostfix();
 
     private:
         /*!
@@ -162,6 +174,11 @@ namespace Threaded {
          * \brief Mutex to be used in the calls that changes entity members.
          */
         QMutex _entityMutex;
+
+        /*!
+         * \brief This entity postfix name.
+         */
+        QString _entityPostfixName;
     };
 }
 
