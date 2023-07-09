@@ -91,10 +91,10 @@ namespace Widgets {
             const Geometry::Vector2D perp = Geometry::Vector2D(-norm.y(), norm.x());
 
             // Generate vectors to simulate thickness
-            const Geometry::Vector2D qv1 = (v1Transformed - (thickness / 2.0f)) * perp;
-            const Geometry::Vector2D qv2 = (v1Transformed + (thickness / 2.0f)) * perp;
-            const Geometry::Vector2D qv3 = (v2Transformed + (thickness / 2.0f)) * perp;
-            const Geometry::Vector2D qv4 = (v2Transformed - (thickness / 2.0f)) * perp;
+            const Geometry::Vector2D qv1 = v1Transformed - perp * (thickness / 2.0f);
+            const Geometry::Vector2D qv2 = v1Transformed + perp * (thickness / 2.0f);
+            const Geometry::Vector2D qv3 = v2Transformed + perp * (thickness / 2.0f);
+            const Geometry::Vector2D qv4 = v2Transformed - perp * (thickness / 2.0f);
 
             // Set color
             if(color.has_value()) {
