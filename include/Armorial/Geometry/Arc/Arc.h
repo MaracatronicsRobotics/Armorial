@@ -88,6 +88,18 @@ namespace Geometry {
          */
         std::vector<Vector2D> intersectionWithLine(const LineSegment &lineSegment) const;
 
+        /*!
+         * \brief toString method that returns a QString object.
+         * \return The Arc's general info.
+         */
+        QString toQString();
+
+        /*!
+         * \brief toString method that returns a std string object.
+         * \return The Arc's general info.
+         */
+        std::string toStdString();
+
     private:
         Vector2D _center;         // Defines the center of the Arc
         float _radius;            // Defines the radius of the Arc

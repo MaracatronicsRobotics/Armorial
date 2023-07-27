@@ -5,6 +5,8 @@
 
 #include <optional>
 
+#include <QString>
+
 namespace Geometry {
     class LineSegment;
     /*!
@@ -63,6 +65,18 @@ namespace Geometry {
          * \return True if the Line instances represent the same line and False otherwise.
          */
         bool operator==(const Line &other) const;
+
+        /*!
+         * \brief toString method that returns a QString object.
+         * \return The two Points of reference of Line.
+         */
+        QString toQString();
+
+        /*!
+         * \brief toString method that returns a std string object.
+         * \return The two Points of reference of Line.
+         */
+        std::string toStdString();
 
     private:
         Vector2D _p1; // One of the points located on the Line

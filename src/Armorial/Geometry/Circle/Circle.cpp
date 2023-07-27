@@ -98,3 +98,11 @@ Circle Circle::operator*=(const float &scale) {
 Circle Circle::operator/=(const float &scale) {
     return Circle(center(), _radius /= fabs(scale));
 }
+
+QString Circle::toQString() {
+    return QString("Center: (%1, %2)\nRadius: %3").arg(_center.x()).arg(_center.y()).arg(_radius);
+}
+
+std::string Circle::toStdString() {
+    return toQString().toStdString();
+}

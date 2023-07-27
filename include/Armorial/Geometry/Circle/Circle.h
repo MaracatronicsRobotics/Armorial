@@ -5,6 +5,7 @@
 #include <Armorial/Geometry/LineSegment/LineSegment.h>
 
 #include <vector>
+#include <QString>
 
 namespace Geometry {
     class Circle
@@ -107,6 +108,18 @@ namespace Geometry {
         Circle operator/(const float &scale) const;
         Circle operator*=(const float &scale);
         Circle operator/=(const float &scale);
+
+        /*!
+         * \brief toString method that returns a QString object.
+         * \return The Center Point of Circle, and its radius info.
+         */
+        QString toQString();
+
+        /*!
+         * \brief toString method that returns a std string object.
+         * \return The Center Point of Circle, and its radius info.
+         */
+        std::string toStdString();
 
     private:
         Vector2D _center;

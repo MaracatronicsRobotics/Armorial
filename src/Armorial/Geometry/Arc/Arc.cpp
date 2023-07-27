@@ -91,3 +91,15 @@ std::vector<Vector2D> Arc::intersectionWithLine(const LineSegment &lineSegment) 
 
     return intersections;
 }
+
+QString Arc::toQString() {
+    QString arcStr = "";
+    arcStr.append("Center: (%1, %2)\nRadius: %3\n").arg(_center.x()).arg(_center.y()).arg(_radius);
+    arcStr.append("Start: %1; End: %2\n").arg(_startAngle.value()).arg(_endAngle.value());
+    arcStr.append(_reversed ? "Reversed" : "Not Reversed");
+    return arcStr;
+}
+
+std::string Arc::toStdString() {
+    return toQString().toStdString();
+}

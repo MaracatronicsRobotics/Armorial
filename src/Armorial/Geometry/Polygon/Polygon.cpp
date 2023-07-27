@@ -179,3 +179,19 @@ bool Polygon::isSimple() const {
     // If the polygon is not simple, it will intersect more than in the corners.
     return intersections.size() == amountOfVertices();
 }
+
+QString Polygon::toQString() {
+    QString polygonStr = "";
+    for (int i = 0; i < _vertices.size(); i++) {
+        if ((i + 1) == _vertices.size()) {
+            polygonStr.append(QString("Vertice %1: (%2, %3)").arg(i).arg(_vertices.at(i).x()).arg(_vertices.at(i).y()));
+        } else {
+            polygonStr.append(QString("Vertice %1: (%2, %3)\n").arg(i).arg(_vertices.at(i).x()).arg(_vertices.at(i).y()));
+        }
+    }
+    return polygonStr;
+}
+
+std::string Polygon::toStdString() {
+    return toQString().toStdString();
+}

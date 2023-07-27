@@ -126,6 +126,18 @@ namespace Geometry {
          */
         bool operator==(const Rectangle &other) const;
 
+        /*!
+         * \brief toString method that returns a QString object.
+         * \return The Vertices Points.
+         */
+        QString toQString();
+
+        /*!
+         * \brief toString method that returns a std string object.
+         * \return The Vertices Points.
+         */
+        std::string toStdString();
+
     private:
         Vector2D _topLeft;
         Vector2D _topRight;

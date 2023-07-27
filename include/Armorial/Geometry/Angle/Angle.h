@@ -102,7 +102,6 @@ namespace Geometry {
          * \return A float containing the value of the angle.
          */
         float value() const;
-
     private:
         // Angle value
         float _angle;

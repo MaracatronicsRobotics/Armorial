@@ -57,6 +57,18 @@ namespace Geometry {
          */
         [[nodiscard]] std::vector<Vector2D> intersect(const LineSegment& lineSegment) const;
 
+        /*!
+         * \brief toString method that returns a QString object.
+         * \return The Vertices Points.
+         */
+        QString toQString();
+
+        /*!
+         * \brief toString method that returns a std string object.
+         * \return The Vertices Points.
+         */
+        std::string toStdString();
+
     private:
         Vector2D _p1;
         Vector2D _p2;

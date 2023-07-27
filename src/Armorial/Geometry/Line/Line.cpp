@@ -62,3 +62,11 @@ bool Line::isOnLine(const Vector2D &point) const {
 bool Line::operator==(const Line &other) const {
     return ((project(other._p1) == other._p1) && (project(other._p2) == other._p2));
 }
+
+QString Line::toQString() {
+    return QString("P1: (%1, %2)\nP2: (%3, %4)").arg(_p1.x()).arg(_p1.y()).arg(_p2.x()).arg(_p2.y());
+}
+
+std::string Line::toStdString() {
+    return toQString().toStdString();
+}

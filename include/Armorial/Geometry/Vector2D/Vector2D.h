@@ -3,6 +3,8 @@
 
 #include <Armorial/Geometry/Angle/Angle.h>
 
+#include <QString>
+
 namespace Geometry {
     /*!
      * \brief The Geometry::Vector2D class stores a vector of two floats that starts from (0, 0) to (_x, _y).
@@ -300,6 +302,18 @@ namespace Geometry {
          * \return A Vector2D instance which contains the result of the division.
          */
         Vector2D operator/(const float &scalar) const;
+
+        /*!
+         * \brief toString method that returns a QString object.
+         * \return The Vector2D x and y values.
+         */
+        QString toQString();
+
+        /*!
+         * \brief toString method that returns a std string object.
+         * \return The Vector2D x and y values.
+         */
+        std::string toStdString();
 
     private:
         float _x;

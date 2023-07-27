@@ -152,3 +152,11 @@ std::optional<float> LineSegment::relativePosition(const Vector2D &pointOnLine) 
 bool LineSegment::operator==(const LineSegment &other) const {
     return (this->start() == other.start()) && (this->end() == other.end());
 }
+
+QString LineSegment::toQString() {
+    return QString("Start: (%1, %2)\nEnd: (%3, %4)").arg(_start.x()).arg(_start.y()).arg(_end.x()).arg(_end.y());
+}
+
+std::string LineSegment::toStdString() {
+    return toQString().toStdString();
+}

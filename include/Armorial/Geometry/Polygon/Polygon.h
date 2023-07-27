@@ -121,6 +121,18 @@ namespace Geometry {
          */
         bool isSimple() const;
 
+        /*!
+         * \brief toString method that returns a QString object.
+         * \return The Vertices Points.
+         */
+        QString toQString();
+
+        /*!
+         * \brief toString method that returns a std string object.
+         * \return The Vertices Points.
+         */
+        std::string toStdString();
+
     private:
         std::vector<Vector2D> _vertices;
     };

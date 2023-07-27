@@ -68,3 +68,15 @@ std::vector<Vector2D> Triangle::intersect(const LineSegment &lineSegment) const 
 
     return intersections;
 }
+
+QString Triangle::toQString() {
+    QString triangleStr = "";
+    triangleStr.append(QString("P 1: (%1, %2)\n").arg(_p1.x()).arg(_p1.y()));
+    triangleStr.append(QString("P 2: (%1, %2)\n").arg(_p2.x()).arg(_p2.y()));
+    triangleStr.append(QString("P 3: (%1, %2)\n").arg(_p3.x()).arg(_p3.y()));
+    return triangleStr;
+}
+
+std::string Triangle::toStdString() {
+    return toQString().toStdString();
+}

@@ -191,3 +191,11 @@ Vector2D Vector2D::operator/(const Vector2D &other) const {
 Vector2D Vector2D::operator/(const float &scalar) const {
     return Vector2D(_x / scalar, _y / scalar);
 }
+
+QString Vector2D::toQString() {
+    return QString("(%1, %2)").arg(_x).arg(_y);
+}
+
+std::string Vector2D::toStdString() {
+    return toQString().toStdString();
+}

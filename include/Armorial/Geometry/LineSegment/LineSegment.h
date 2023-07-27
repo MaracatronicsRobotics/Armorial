@@ -6,6 +6,8 @@
 #include <optional>
 #include <vector>
 
+#include <QString>
+
 namespace Geometry {
     /*!
      * \brief The Geometry::LineSegment class provides a interface for a line segment object that starts at a given point and ends at a given point.
@@ -123,6 +125,18 @@ namespace Geometry {
          * \return True if the LineSegment instances have the same start/end points and False otherwise.
          */
         bool operator==(const LineSegment &other) const;
+
+        /*!
+         * \brief toString method that returns a QString object.
+         * \return The two Points of reference of LineSegment.
+         */
+        QString toQString();
+
+        /*!
+         * \brief toString method that returns a std string object.
+         * \return The two Points of reference of LineSegment.
+         */
+        std::string toStdString();
 
     private:
         Vector2D _start;
