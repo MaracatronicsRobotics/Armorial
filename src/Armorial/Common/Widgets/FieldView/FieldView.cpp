@@ -9,13 +9,6 @@
 using namespace Common::Widgets;
 
 FieldView::FieldView(const Common::Types::Field &field, const QString &centralLogoPath, QWidget *parent) : QOpenGLWidget(parent), _field(field) {
-    // Set format
-    QSurfaceFormat format;
-    format.setDepthBufferSize(32);
-    format.setSamples(16);
-    format.setSwapBehavior(QSurfaceFormat::SwapBehavior::DoubleBuffer);
-    this->setFormat(format);
-
     // Setup central logo path
     _centralLogoPath = centralLogoPath;
 
@@ -218,10 +211,13 @@ void FieldView::paintGL() {
 
     glClearColor(FIELD_COLOR);
     glShadeModel(GL_SMOOTH);
+    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+
     glDisable(GL_LIGHTING);
     glDisable(GL_CULL_FACE);
     glEnable(GL_DEPTH_TEST);
     glEnable(GL_MULTISAMPLE);
+    glEnable( GL_BLEND );
 
     glClear (GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     glMatrixMode(GL_MODELVIEW);

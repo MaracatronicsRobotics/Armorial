@@ -282,7 +282,10 @@ namespace Widgets {
             glPopMatrix();
 
             // Draw text
-            drawText(position, 0.0f, QString("%1").arg(robotId), _idSize, GLText::CenterAligned, GLText::MiddleAligned, QColor(0, 0, 0));
+            QColor textColor = QColor(0, 0, 0);
+            if(teamColor == Common::Enums::Color::BLUE)
+                textColor = QColor(255, 255, 255);
+            drawText(position, 0.0f, QString("%1").arg(robotId), _idSize, GLText::CenterAligned, GLText::MiddleAligned, textColor);
         }
 
         /*!
