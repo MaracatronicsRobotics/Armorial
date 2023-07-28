@@ -26,6 +26,8 @@ count(arch, 1) {
 INCLUDEPATH *= include
 
 HEADERS     += \
+    include/Armorial/Algorithms/Hungarian/Hungarian.h \
+    include/Armorial/Algorithms/Hungarian/impl/hungarian_impl.h \
     include/Armorial/Base/Base.h \
     include/Armorial/Base/Client/Client.h \
     include/Armorial/Base/Service/Service.h \
