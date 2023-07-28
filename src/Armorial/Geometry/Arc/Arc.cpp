@@ -6,16 +6,16 @@ using namespace Geometry;
 Arc::Arc() {
     _center = Vector2D();
     _radius = 1.0;
-    _startAngle = 0.0;
-    _endAngle = ARC_MAX;
+    _startAngle = Geometry::Angle(-M_PI);
+    _endAngle = Geometry::Angle(M_PI);
     _reversed = false;
 }
 
 Arc::Arc(const Vector2D &center, const float &radius) {
     _center = center;
     _radius = radius;
-    _startAngle = 0.0;
-    _endAngle = ARC_MAX;
+    _startAngle = Geometry::Angle(-M_PI);
+    _endAngle = Geometry::Angle(M_PI);
     _reversed = false;
 }
 
@@ -58,7 +58,7 @@ Geometry::Angle Arc::endAngle() const {
 }
 
 bool Arc::isCircle() const {
-    return (startAngle() == 0.0f && endAngle() == ARC_MAX);
+    return (startAngle() == -M_PI && endAngle() == M_PI);
 }
 
 bool Arc::angleWithinArc(const Geometry::Angle &angle) const {

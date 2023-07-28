@@ -10,11 +10,6 @@
 
 namespace Geometry {
     /*!
-     * \brief Defines the maximum angle value which a Arc should contain.
-     */
-    constexpr float ARC_MAX = 2.0 * M_PI - std::numeric_limits<float>::epsilon();
-
-    /*!
      * \brief The Geometry::Arc class provides a interface which defines a arc which may be a circle / ellipse.
      */
     class Arc
