@@ -71,7 +71,7 @@ bool Arc::angleWithinArc(const Geometry::Angle &angle) const {
 
 bool Arc::pointInArc(const Vector2D &point) const {
     Vector2D normPoint = point - center();
-    return (angleWithinArc(normPoint.angle()) && std::fabs(normPoint.length() - radius()) < 1e-3);
+    return (angleWithinArc(normPoint.angle()) && (normPoint.length() <= radius()));
 }
 
 std::vector<Vector2D> Arc::intersectionWithLine(const LineSegment &lineSegment) const {

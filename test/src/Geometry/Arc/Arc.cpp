@@ -22,12 +22,12 @@ TEST(Geometry_Arc_Tests, GivenAnArc_AngleGetters_ShouldWork) {
 
     {
         SCOPED_TRACE("Start angles");
-        EXPECT_EQ(arcBase1.startAngle(), Geometry::Angle(0.0f)) << "Start angle does not match";
+        EXPECT_EQ(arcBase1.startAngle(), Geometry::Angle(-M_PI)) << "Start angle does not match";
         EXPECT_EQ(arcBase2.startAngle(), Geometry::Angle(M_PI_4)) << "Start angle does not match";
     }
     {
         SCOPED_TRACE("End angles");
-        EXPECT_EQ(arcBase1.endAngle(), Geometry::Angle(Geometry::ARC_MAX)) << "End angle does not match";
+        EXPECT_EQ(arcBase1.endAngle(), Geometry::Angle(M_PI)) << "End angle does not match";
         EXPECT_EQ(arcBase2.endAngle(), Geometry::Angle(-M_PI_4)) << "End angle does not match";
     }
 }
