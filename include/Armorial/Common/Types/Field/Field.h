@@ -203,9 +203,19 @@ namespace Types {
         Geometry::Rectangle topRightQuadrant() const;
 
         /*!
+         * \return A Geometry::Vector2D object that describes the top right corner.
+         */
+        Geometry::Vector2D topRightCorner() const;
+
+        /*!
          * \return A Geometry::Rectangle object that describes the top left quadrant area.
          */
         Geometry::Rectangle topLeftQuadrant() const;
+
+        /*!
+         * \return A Geometry::Vector2D object that describes the top left corner.
+         */
+        Geometry::Vector2D topLeftCorner() const;
 
         /*!
          * \return A Geometry::Rectangle object that describes the bottom left quadrant area.
@@ -213,9 +223,26 @@ namespace Types {
         Geometry::Rectangle bottomLeftQuadrant() const;
 
         /*!
+         * \return A Geometry::Vector2D object that describes the bottom left corner.
+         */
+        Geometry::Vector2D bottomLeftCorner() const;
+
+        /*!
          * \return A Geometry::Rectangle object that describes the bottom right quadrant area.
          */
         Geometry::Rectangle bottomRightQuadrant() const;
+
+        /*!
+         * \return A Geometry::Vector2D object that describes the bottom right corner.
+         */
+        Geometry::Vector2D bottomRightCorner() const;
+
+        /*!
+         * \brief Verify if position is inside field.
+         * \param A Geometry::Vector2D that represents the position.
+         * \return True if the point is inside field.
+         */
+        bool isInsideField(Geometry::Vector2D position);
 
         /*!
          * \brief Multiply a scalar to Field components.

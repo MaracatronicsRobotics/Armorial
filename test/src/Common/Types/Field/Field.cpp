@@ -327,10 +327,10 @@ TEST(Common_Field_Test, OurAndTheir_PenaltyMark_Should_Work){
 }
 
 TEST(Common_Field_Test, Quadrants_Should_Work){
-    Field Teste_Field = Field(Common::Enums::SIDE_LEFT, 50.0f, 1000.0f, 500.0f,
+    Field Teste_Field = Field(Common::Enums::SIDE_LEFT, 50.0f, 900.0f, 600.0f,
                                   10.0f,30.0f, 100.0f,50.0f,75.0f);
-    float width = 500.0f;
-    float length = 1000.0f;
+    float width = 600.0f;
+    float length = 900.0f;
 
     Geometry::Rectangle FirstQ({0.0, width / 2.0f}, {length / 2.0f, 0.0});
     Geometry::Rectangle SecondQ({-(length / 2.0f), width / 2.0f}, {0.0, 0.0});
@@ -343,3 +343,46 @@ TEST(Common_Field_Test, Quadrants_Should_Work){
     EXPECT_EQ(FourthQ, Teste_Field.bottomRightQuadrant());
 }
 
+TEST(Common_Field_Test, Corners_Should_Work) {
+    Field Teste_Field = Field(Common::Enums::SIDE_LEFT, 50.0f, 900.0f, 600.0f,
+                              10.0f,30.0f, 100.0f,50.0f,75.0f);
+    float width = 600.0f;
+    float length = 900.0f;
+
+    Geometry::Vector2D TopLeftC(-length / 2.0f, width / 2.0f);
+    Geometry::Vector2D TopRightC(length / 2.0f, width / 2.0f);
+    Geometry::Vector2D BottomLeftC(-length / 2.0f, -width / 2.0f);
+    Geometry::Vector2D BottomRightC(length / 2.0f, -width / 2.0f);
+
+    EXPECT_EQ(TopLeftC, Teste_Field.topLeftCorner());
+    EXPECT_EQ(TopRightC, Teste_Field.topRightCorner());
+    EXPECT_EQ(BottomLeftC, Teste_Field.bottomLeftCorner());
+    EXPECT_EQ(BottomRightC, Teste_Field.bottomRightCorner());
+}
+
+TEST(Common_Field_Test, isInsideField_Should_Work) {
+    Field Teste_Field = Field(Common::Enums::SIDE_LEFT, 50.0f, 900.0f, 600.0f,
+                              10.0f,30.0f, 100.0f,50.0f,75.0f);
+    float width = 600.0f;
+    float length = 900.0f;
+
+    Geometry::Vector2D insidePointQ1(-length / 4.0f, width / 4.0f);
+    Geometry::Vector2D insidePointQ2(length / 4.0f, width / 4.0f);
+    Geometry::Vector2D insidePointQ3(-length / 4.0f, -width / 4.0f);
+    Geometry::Vector2D insidePointQ4(length / 4.0f, -width / 4.0f);
+
+    Geometry::Vector2D outsidePointQ1(-length, width);
+    Geometry::Vector2D outsidePointQ2(length, width);
+    Geometry::Vector2D outsidePointQ3(-length, -width);
+    Geometry::Vector2D outsidePointQ4(length, -width);
+
+    EXPECT_TRUE(Teste_Field.isInsideField(insidePointQ1));
+    EXPECT_TRUE(Teste_Field.isInsideField(insidePointQ2));
+    EXPECT_TRUE(Teste_Field.isInsideField(insidePointQ3));
+    EXPECT_TRUE(Teste_Field.isInsideField(insidePointQ4));
+
+    EXPECT_FALSE(Teste_Field.isInsideField(outsidePointQ1));
+    EXPECT_FALSE(Teste_Field.isInsideField(outsidePointQ2));
+    EXPECT_FALSE(Teste_Field.isInsideField(outsidePointQ3));
+    EXPECT_FALSE(Teste_Field.isInsideField(outsidePointQ4));
+}

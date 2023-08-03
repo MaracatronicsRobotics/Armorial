@@ -177,16 +177,39 @@ Geometry::Rectangle Field::topRightQuadrant() const {
     return Geometry::Rectangle({0.0, width() / 2.0f}, {length() / 2.0f, 0.0});
 }
 
+Geometry::Vector2D Field::topRightCorner() const {
+    return Geometry::Vector2D(maxX(), maxY());
+}
+
 Geometry::Rectangle Field::topLeftQuadrant() const {
     return Geometry::Rectangle({-(length() / 2.0f), width() / 2.0f}, {0.0, 0.0});
+}
+
+Geometry::Vector2D Field::topLeftCorner() const {
+    return Geometry::Vector2D(minX(), maxY());
 }
 
 Geometry::Rectangle Field::bottomLeftQuadrant() const {
     return Geometry::Rectangle({-(length() / 2.0f), 0.0}, {0.0, -(width() / 2.0f)});
 }
 
+Geometry::Vector2D Field::bottomLeftCorner() const {
+    return Geometry::Vector2D(minX(), minY());
+}
+
 Geometry::Rectangle Field::bottomRightQuadrant() const {
     return Geometry::Rectangle({0.0, 0.0}, {length() / 2.0f, -(width() / 2.0f)});
+}
+
+Geometry::Vector2D Field::bottomRightCorner() const {
+    return Geometry::Vector2D(maxX(), minY());
+}
+
+bool Field::isInsideField(Geometry::Vector2D position) {
+    return ((position.x() < maxX()) &&
+            (position.y() < maxY()) &&
+            (position.x() > minX()) &&
+            (position.y() > minY()));
 }
 
 Field Field::operator*(const float &scalar) {
