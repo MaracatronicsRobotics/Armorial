@@ -245,6 +245,34 @@ namespace Types {
         bool isInsideField(Geometry::Vector2D position);
 
         /*!
+         * \brief Verify if position is inside our penalty area.
+         * \param A Geometry::Vector2D that represents the position.
+         * \return True if the point is inside our penalty area.
+         */
+        bool isInsideOurPenaltyArea(Geometry::Vector2D position);
+
+        /*!
+         * \brief Verify if position is inside their penalty area.
+         * \param A Geometry::Vector2D that represents the position.
+         * \return True if the point is inside their penalty area.
+         */
+        bool isInsideTheirPenaltyArea(Geometry::Vector2D position);
+
+        /*!
+         * \brief Verify if position is inside our field side.
+         * \param A Geometry::Vector2D that represents the position.
+         * \return True if the point is inside our field side.
+         */
+        bool isInsideOurField(Geometry::Vector2D position);
+
+        /*!
+         * \brief Verify if position is inside their field side.
+         * \param A Geometry::Vector2D that represents the position.
+         * \return True if the point is inside their field side.
+         */
+        bool isInsideTheirField(Geometry::Vector2D position);
+
+        /*!
          * \brief Multiply a scalar to Field components.
          * \param other A float scalar value.
          * \return A Field instance which components has the multiplication result.

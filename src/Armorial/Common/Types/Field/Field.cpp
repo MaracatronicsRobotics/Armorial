@@ -206,10 +206,23 @@ Geometry::Vector2D Field::bottomRightCorner() const {
 }
 
 bool Field::isInsideField(Geometry::Vector2D position) {
-    return ((position.x() < maxX()) &&
-            (position.y() < maxY()) &&
-            (position.x() > minX()) &&
-            (position.y() > minY()));
+    return field().contains(position);
+}
+
+bool Field::isInsideOurPenaltyArea(Geometry::Vector2D position) {
+    return ourPenaltyArea().contains(position);
+}
+
+bool Field::isInsideTheirPenaltyArea(Geometry::Vector2D position) {
+    return theirPenaltyArea().contains(position);
+}
+
+bool Field::isInsideOurField(Geometry::Vector2D position) {
+    return ourField().contains(position);
+}
+
+bool Field::isInsideTheirField(Geometry::Vector2D position) {
+    return theirField().contains(position);
 }
 
 Field Field::operator*(const float &scalar) {

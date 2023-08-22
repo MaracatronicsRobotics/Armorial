@@ -386,3 +386,93 @@ TEST(Common_Field_Test, isInsideField_Should_Work) {
     EXPECT_FALSE(Teste_Field.isInsideField(outsidePointQ3));
     EXPECT_FALSE(Teste_Field.isInsideField(outsidePointQ4));
 }
+
+TEST(Common_Field_Test, isInsideOurPenaltyArea_Should_Work) {
+    Field Teste_Field = Field(Common::Enums::SIDE_LEFT, 50.0f, 900.0f, 600.0f,
+                              10.0f,30.0f, 100.0f,50.0f,75.0f);
+    float length = 900.0f;
+    float penaltyDistanceFromGoal = 75.0f;
+    float penaltyWidth = 50.0f;
+    float ourSide = Teste_Field.playingLeftSide() ? -1.0f : 1.0f;
+
+    Geometry::Vector2D insidePoint(ourSide*((length / 2.0f) - penaltyDistanceFromGoal), penaltyWidth / 4.0f);
+
+    Geometry::Vector2D outsidePoint1((-ourSide)*((length / 2.0f) - penaltyDistanceFromGoal), penaltyWidth / 4.0f);
+    Geometry::Vector2D outsidePoint2(ourSide*((length / 2.0f) - penaltyDistanceFromGoal), penaltyWidth * 2.0f);
+    Geometry::Vector2D outsidePoint3((-ourSide)*((length / 2.0f) - penaltyDistanceFromGoal), penaltyWidth * 2.0f);
+
+    EXPECT_TRUE(Teste_Field.isInsideOurPenaltyArea(insidePoint));
+
+    EXPECT_FALSE(Teste_Field.isInsideOurPenaltyArea(outsidePoint1));
+    EXPECT_FALSE(Teste_Field.isInsideOurPenaltyArea(outsidePoint2));
+    EXPECT_FALSE(Teste_Field.isInsideOurPenaltyArea(outsidePoint3));
+}
+
+TEST(Common_Field_Test, isInsideTheirPenaltyArea_Should_Work) {
+    Field Teste_Field = Field(Common::Enums::SIDE_LEFT, 50.0f, 900.0f, 600.0f,
+                              10.0f,30.0f, 100.0f,50.0f,75.0f);
+    float length = 900.0f;
+    float penaltyDistanceFromGoal = 75.0f;
+    float penaltyWidth = 50.0f;
+    float ourSide = Teste_Field.playingLeftSide() ? 1.0f : -1.0f;
+
+    Geometry::Vector2D insidePoint(ourSide*((length / 2.0f) - penaltyDistanceFromGoal), penaltyWidth / 4.0f);
+
+    Geometry::Vector2D outsidePoint1((-ourSide)*((length / 2.0f) - penaltyDistanceFromGoal), penaltyWidth / 4.0f);
+    Geometry::Vector2D outsidePoint2(ourSide*((length / 2.0f) - penaltyDistanceFromGoal), penaltyWidth * 2.0f);
+    Geometry::Vector2D outsidePoint3((-ourSide)*((length / 2.0f) - penaltyDistanceFromGoal), penaltyWidth * 2.0f);
+
+    EXPECT_TRUE(Teste_Field.isInsideTheirPenaltyArea(insidePoint));
+
+    EXPECT_FALSE(Teste_Field.isInsideTheirPenaltyArea(outsidePoint1));
+    EXPECT_FALSE(Teste_Field.isInsideTheirPenaltyArea(outsidePoint2));
+    EXPECT_FALSE(Teste_Field.isInsideTheirPenaltyArea(outsidePoint3));
+}
+
+TEST(Common_Field_Test, isInsideOurField_Should_Work) {
+    Field Teste_Field = Field(Common::Enums::SIDE_LEFT, 50.0f, 900.0f, 600.0f,
+                              10.0f,30.0f, 100.0f,50.0f,75.0f);
+    float width = 600.0f;
+    float length = 900.0f;
+    float ourSide = Teste_Field.playingLeftSide() ? -1.0f : 1.0f;
+
+    Geometry::Vector2D insidePoint1((length / 4.0f)*ourSide, width / 4.0f);
+    Geometry::Vector2D insidePoint2((length / 4.0f)*ourSide, -width / 4.0f);
+
+    Geometry::Vector2D outsidePoint1((length / 4.0f)*(-ourSide), width / 4.0f);
+    Geometry::Vector2D outsidePoint2((length / 4.0f)*(-ourSide), -width / 4.0f);
+    Geometry::Vector2D outsidePoint3((length / 4.0f)*ourSide, width * 2.0f);
+    Geometry::Vector2D outsidePoint4((length / 4.0f)*ourSide, -width * 2.0f);
+
+    EXPECT_TRUE(Teste_Field.isInsideOurField(insidePoint1));
+    EXPECT_TRUE(Teste_Field.isInsideOurField(insidePoint2));
+
+    EXPECT_FALSE(Teste_Field.isInsideOurField(outsidePoint1));
+    EXPECT_FALSE(Teste_Field.isInsideOurField(outsidePoint2));
+    EXPECT_FALSE(Teste_Field.isInsideOurField(outsidePoint3));
+    EXPECT_FALSE(Teste_Field.isInsideOurField(outsidePoint4));
+}
+
+TEST(Common_Field_Test, isInsideTheirField_Should_Work) {
+    Field Teste_Field = Field(Common::Enums::SIDE_LEFT, 50.0f, 900.0f, 600.0f,
+                              10.0f,30.0f, 100.0f,50.0f,75.0f);
+    float width = 600.0f;
+    float length = 900.0f;
+    float ourSide = Teste_Field.playingLeftSide() ? 1.0f : -1.0f;
+
+    Geometry::Vector2D insidePoint1((length / 4.0f)*ourSide, width / 4.0f);
+    Geometry::Vector2D insidePoint2((length / 4.0f)*ourSide, -width / 4.0f);
+
+    Geometry::Vector2D outsidePoint1((length / 4.0f)*(ourSide*-1.0f), width / 4.0f);
+    Geometry::Vector2D outsidePoint2((length / 4.0f)*(ourSide*-1.0f), -width / 4.0f);
+    Geometry::Vector2D outsidePoint3((length / 4.0f)*ourSide, width * 2.0f);
+    Geometry::Vector2D outsidePoint4((length / 4.0f)*ourSide, -width * 2.0f);
+
+    EXPECT_TRUE(Teste_Field.isInsideTheirField(insidePoint1));
+    EXPECT_TRUE(Teste_Field.isInsideTheirField(insidePoint2));
+
+    EXPECT_FALSE(Teste_Field.isInsideTheirField(outsidePoint1));
+    EXPECT_FALSE(Teste_Field.isInsideTheirField(outsidePoint2));
+    EXPECT_FALSE(Teste_Field.isInsideTheirField(outsidePoint3));
+    EXPECT_FALSE(Teste_Field.isInsideTheirField(outsidePoint4));
+}
