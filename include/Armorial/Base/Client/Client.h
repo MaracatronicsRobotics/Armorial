@@ -28,6 +28,7 @@ namespace Base {
         * \tparam T The type of the service obtained through the protobuf headers.
         * \brief The GRPC::Client class is the responsible to make the connections with the gRPC.
         * services created by the Service class.
+        * @deprecated Unnused due to it's natural tendency of causing delay on modules connection.
         */
         template <typename T>
         class Client
