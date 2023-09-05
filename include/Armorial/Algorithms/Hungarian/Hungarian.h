@@ -15,11 +15,12 @@ public:
     const int n = static_cast<int>(robots.size());
     const int m = static_cast<int>(positions.size());
 
-    tourist::hungarian<PT> hungarian(n, m);
+    tourist::hungarian<float> hungarian(n, m);
 
     for (int i = 0; i < n; ++i) {
       for (int j = 0; j < m; ++j) {
-        hungarian.a[i][j] = robots[i].distTo(positions[j]);
+        R robot = robots[i];
+        hungarian.a[i][j] = robot.distTo(positions[j]);
       }
     }
 
@@ -27,7 +28,8 @@ public:
 
     for (int i = 0; i < n; ++i) {
       const auto &position = positions[hungarian.pa[i]];
-      result.emplace_back(std::move(robots[i]), position);
+      result.push_back(QPair<R, PT>(std::move(robots[i]), position));
+      // result.emplace_back(QPair<R, PT>(std::move(robots[i]), position));
     }
 
     return result;
