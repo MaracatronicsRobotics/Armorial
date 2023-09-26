@@ -46,14 +46,49 @@ namespace Widgets {
         void mousePressEvent(QMouseEvent* event);
 
         /*!
+         * \brief Virtual method that allows an implementation to handle mouse press events.
+         */
+        virtual void handleMousePressEvent(QMouseEvent* event);
+
+        /*!
          * \brief Override of QOpenGLWidget::mouseReleaseEvent method to handle field view changes.
          */
         void mouseReleaseEvent(QMouseEvent* event);
 
         /*!
+         * \brief Virtual method that allows an implementation to handle mouse release events.
+         */
+        virtual void handleMouseReleaseEvent(QMouseEvent* event);
+
+        /*!
          * \brief Override of QOpenGLWidget::mouseMoveEvent method to handle field view changes.
          */
         void mouseMoveEvent(QMouseEvent* event);
+
+        /*!
+         * \brief Virtual method that allows an implementation to handle mouse move events.
+         */
+        virtual void handleMouseMoveEvent(QMouseEvent* event);
+
+        /*!
+         * \brief Override of QOpenGLWidget::keyPressEvent method to handle key press events.
+         */
+        void keyPressEvent(QKeyEvent* event);
+
+        /*!
+         * \brief Virtual method that allows an implementation to handle key press events.
+         */
+        virtual void handleKeyPressEvent(QKeyEvent* event);
+
+        /*!
+         * \brief Override of QOpenGLWidget::keyPressEvent method to handle key release events.
+         */
+        void keyReleaseEvent(QKeyEvent* event);
+
+        /*!
+         * \brief Virtual method that allows an implementation to handle key release events.
+         */
+        virtual void handleKeyReleaseEvent(QKeyEvent* event);
 
         /*!
          * \brief Override of QOpenGLWidget::wheelEvent method to handle field zoom changes.
@@ -353,6 +388,10 @@ namespace Widgets {
         void setupIdSize(const float& idSize) {
             _idSize = idSize;
         }
+
+        float getViewScale() { return _viewScale; }
+        float getViewXOffset() { return _viewXOffset; }
+        float getViewYOffset() { return _viewYOffset; }
 
         // Display lists
         QMap<Common::Enums::Color, GLuint> _robotShape;

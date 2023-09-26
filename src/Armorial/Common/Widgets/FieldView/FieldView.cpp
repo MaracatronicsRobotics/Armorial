@@ -301,10 +301,21 @@ void FieldView::mousePressEvent(QMouseEvent* event) {
         _mouseStartX = event->x();
         _mouseStartY = event->y();
     }
+
+    handleMousePressEvent(event);
+}
+
+void FieldView::handleMousePressEvent(QMouseEvent* event) {
+    //
 }
 
 void FieldView::mouseReleaseEvent(QMouseEvent* event) {
     setCursor(Qt::ArrowCursor);
+    handleMouseReleaseEvent(event);
+}
+
+void FieldView::handleMouseReleaseEvent(QMouseEvent* evet) {
+    //
 }
 
 void FieldView::mouseMoveEvent(QMouseEvent* event) {
@@ -325,6 +336,29 @@ void FieldView::mouseMoveEvent(QMouseEvent* event) {
         _mouseStartX = event->x();
         _mouseStartY = event->y();
     }
+    handleMouseMoveEvent(event);
+}
+
+void FieldView::handleMouseMoveEvent(QMouseEvent* event) {
+    //
+}
+
+void FieldView::keyPressEvent(QKeyEvent* event) {
+    QOpenGLWidget::keyPressEvent(event);
+    handleKeyPressEvent(event);
+}
+
+void FieldView::handleKeyPressEvent(QKeyEvent* event) {
+    //
+}
+
+void FieldView::keyReleaseEvent(QKeyEvent* event) {
+    QOpenGLWidget::keyReleaseEvent(event);
+    handleKeyReleaseEvent(event);
+}
+
+void FieldView::handleKeyReleaseEvent(QKeyEvent* event) {
+    //
 }
 
 void FieldView::wheelEvent(QWheelEvent* event) {
