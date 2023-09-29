@@ -14,8 +14,12 @@ float Angle::value() const {
 }
 
 Angle Angle::normalize() {
-    _angle = fmod(value() + M_PI, 2.0 * M_PI);
-    _angle = (value() <= 0.0) ? value() + M_PI : value() - M_PI;
+    while (_angle > Geometry::Angle::PI) {
+        _angle -= 2*Geometry::Angle::PI;
+    }
+    while (_angle < -Geometry::Angle::PI) {
+        _angle += 2*Geometry::Angle::PI;
+    }
 
     return *this;
 }
@@ -23,7 +27,7 @@ Angle Angle::normalize() {
 Angle::Direction Angle::rotateDirection(const Angle &target) const {
     float angleDiff = target.value() - this->value();
     bool positive = (angleDiff >= 0.0);
-    bool large = fabs(angleDiff) >= M_PI;
+    bool large = fabs(angleDiff) >= Geometry::Angle::PI;
 
     return Angle::Direction(positive ^ large);
 }

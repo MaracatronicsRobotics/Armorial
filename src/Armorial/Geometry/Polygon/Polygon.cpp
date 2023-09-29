@@ -182,7 +182,7 @@ bool Polygon::isSimple() const {
 
 QString Polygon::toQString() {
     QString polygonStr = "";
-    for (int i = 0; i < _vertices.size(); i++) {
+    for (size_t i = 0; i < _vertices.size(); i++) {
         if ((i + 1) == _vertices.size()) {
             polygonStr.append(QString("Vertice %1: (%2, %3)").arg(i).arg(_vertices.at(i).x()).arg(_vertices.at(i).y()));
         } else {

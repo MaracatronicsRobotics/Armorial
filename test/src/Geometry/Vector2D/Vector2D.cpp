@@ -73,27 +73,27 @@ TEST(Geometry_Vector2D_Tests, GivenANullVector_StretchToLength_ShouldFail) {
 
 TEST(Geometry_Vector2D_Tests, GivenAVector_GetAngle_ShouldWork) {
     Geometry::Vector2D vectorBase(1.0f, 1.0f);
-    EXPECT_FLOAT_EQ(vectorBase.angle(), M_PI_4) << "Vector angle value do not match";
+    EXPECT_FLOAT_EQ(vectorBase.angle(), Geometry::Angle::PI/4.0f) << "Vector angle value do not match";
 }
 
 TEST(Geometry_Vector2D_Tests, GivenAVector_Angulization_ShouldWork) {
     Geometry::Vector2D vectorBase(1.0f, 1.0f);
-    EXPECT_EQ(vectorBase.toAngle(), Geometry::Angle(M_PI_4)) << "Vector angle do not match";
+    EXPECT_EQ(vectorBase.toAngle(), Geometry::Angle(Geometry::Angle::PI/4.0f)) << "Vector angle do not match";
 }
 
 TEST(Geometry_Vector2D_Tests, GivenAVector_RotationFromOrigin_ShouldWork) {
     Geometry::Vector2D vectorBase1(sqrtf(2), 0.0f);
     Geometry::Vector2D vectorBase2(1.0f, 1.0f);
-    EXPECT_EQ(vectorBase1.rotate(M_PI_4), Geometry::Vector2D(1.0f, 1.0f)) << "Vector rotation do not match";
-    EXPECT_EQ(vectorBase2.rotate(-M_PI_2), Geometry::Vector2D(1.0f, -1.0f)) << "Vector rotation do not match";
+    EXPECT_EQ(vectorBase1.rotate(Geometry::Angle::PI/4.0f), Geometry::Vector2D(1.0f, 1.0f)) << "Vector rotation do not match";
+    EXPECT_EQ(vectorBase2.rotate(-Geometry::Angle::PI/2.0f), Geometry::Vector2D(1.0f, -1.0f)) << "Vector rotation do not match";
 }
 
 TEST(Geometry_Vector2D_Tests, GivenAVector_RotationFromPoint_ShouldWork) {
     Geometry::Vector2D vectorBase1(0.0f, 0.0f);
     Geometry::Vector2D vectorBase2(1.0f, 1.0f);
     Geometry::Vector2D referencePoint(2.0f, 2.0f);
-    EXPECT_EQ(vectorBase1.rotateAroundPoint(-M_PI_2, referencePoint), Geometry::Vector2D(0.0f, 4.0f)) << "Vector rotation from point do not match";
-    EXPECT_EQ(vectorBase2.rotateAroundPoint(M_PI, referencePoint), Geometry::Vector2D(3.0f, 3.0f)) << "Vector rotation from point do not match";
+    EXPECT_EQ(vectorBase1.rotateAroundPoint(-Geometry::Angle::PI/2.0f, referencePoint), Geometry::Vector2D(0.0f, 4.0f)) << "Vector rotation from point do not match";
+    EXPECT_EQ(vectorBase2.rotateAroundPoint(Geometry::Angle::PI, referencePoint), Geometry::Vector2D(3.0f, 3.0f)) << "Vector rotation from point do not match";
 }
 
 TEST(Geometry_Vector2D_Tests, GivenAVector_ProjectionWithLine_ShouldWork) {
@@ -110,26 +110,26 @@ TEST(Geometry_Vector2D_Tests, GivenAVector_OperatorsWithVectors_ShouldWork) {
     {
         SCOPED_TRACE("Vectors sum");
 
-        Geometry::Vector2D vectorSum(sqrtf(3) + 1.0f, 1.0f + M_PI);
-        EXPECT_EQ(vectorBase + Geometry::Vector2D(sqrtf(3), M_PI), vectorSum);
+        Geometry::Vector2D vectorSum(sqrtf(3) + 1.0f, 1.0f + Geometry::Angle::PI);
+        EXPECT_EQ(vectorBase + Geometry::Vector2D(sqrtf(3), Geometry::Angle::PI), vectorSum);
     }
     {
         SCOPED_TRACE("Vectors subtraction");
 
-        Geometry::Vector2D vectorSubtraction(1.0f - sqrtf(3), 1.0f - M_PI);
-        EXPECT_EQ(vectorBase - Geometry::Vector2D(sqrtf(3), M_PI), vectorSubtraction);
+        Geometry::Vector2D vectorSubtraction(1.0f - sqrtf(3), 1.0f - Geometry::Angle::PI);
+        EXPECT_EQ(vectorBase - Geometry::Vector2D(sqrtf(3), Geometry::Angle::PI), vectorSubtraction);
     }
     {
         SCOPED_TRACE("Vectors multiplication");
 
-        Geometry::Vector2D vectorMultiplication(sqrtf(3), M_PI);
-        EXPECT_EQ(vectorBase * Geometry::Vector2D(sqrtf(3), M_PI), vectorMultiplication);
+        Geometry::Vector2D vectorMultiplication(sqrtf(3), Geometry::Angle::PI);
+        EXPECT_EQ(vectorBase * Geometry::Vector2D(sqrtf(3), Geometry::Angle::PI), vectorMultiplication);
     }
     {
         SCOPED_TRACE("Vectors division");
 
-        Geometry::Vector2D vectorDivision(1.0f/sqrtf(3), 1.0f/M_PI);
-        EXPECT_EQ(vectorBase / Geometry::Vector2D(sqrtf(3), M_PI), vectorDivision);
+        Geometry::Vector2D vectorDivision(1.0f/sqrtf(3), 1.0f/Geometry::Angle::PI);
+        EXPECT_EQ(vectorBase / Geometry::Vector2D(sqrtf(3), Geometry::Angle::PI), vectorDivision);
     }
 }
 
@@ -150,8 +150,8 @@ TEST(Geometry_Vector2D_Tests, GivenAVector_OperatorsWithScalars_ShouldWork) {
     {
         SCOPED_TRACE("Vector multiplication");
 
-        Geometry::Vector2D vectorMultiplication(M_PI, M_PI);
-        EXPECT_EQ(vectorBase * M_PI, vectorMultiplication);
+        Geometry::Vector2D vectorMultiplication(Geometry::Angle::PI, Geometry::Angle::PI);
+        EXPECT_EQ(vectorBase * Geometry::Angle::PI, vectorMultiplication);
     }
     {
         SCOPED_TRACE("Vector division");

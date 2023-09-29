@@ -43,7 +43,7 @@ namespace Utils {
          */
         template<typename T>
         inline static constexpr std::enable_if_t<std::is_floating_point_v<T>, T> radToDeg(const T& radians) {
-            return (radians * (180.0 / M_PI));
+            return (radians * (180.0f / Geometry::Angle::PI));
         }
 
         /*!
@@ -52,7 +52,7 @@ namespace Utils {
          */
         template<typename T>
         inline static constexpr std::enable_if_t<std::is_floating_point_v<T>, T> degToRad(const T& degrees) {
-            return (degrees * (M_PI / 180.0));
+            return (degrees * (Geometry::Angle::PI / 180.0f));
         }
 
     }

@@ -1,6 +1,8 @@
 #ifndef ARMORIAL_GEOMETRY_ANGLE_H
 #define ARMORIAL_GEOMETRY_ANGLE_H
 
+#include <math.h>
+
 namespace Geometry {
     /*!
      * \brief The Geometry::Angle class is a class that stores angles on the interval [-π, π) and allows
@@ -9,6 +11,7 @@ namespace Geometry {
     class Angle
     {
     public:
+        static constexpr float PI = M_PI;
         /*!
          * \brief The Direction enum contains the possible directions which we can use
          * to rotate our angle to achieve some target angle value.
@@ -22,7 +25,7 @@ namespace Geometry {
          * \brief Constructor of the Angle class, receiving a float value that represents the angle
          * value in radians and normalize it.
          * \param angle The given float value of the angle. As it is normalized after you can give it
-         * outside the range [-π, π).
+         * outside the range [-π, π].
          */
         Angle(const float &angle = 0.0);
 

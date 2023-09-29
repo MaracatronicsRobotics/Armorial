@@ -13,15 +13,15 @@ TEST(Geometry_Angle_Tests, GivenAnAngle_AngleLimitsChecker_ShouldWork) {
 
     spdlog::info("{}", angleBase.value());
 
-    ASSERT_GE(angleBase.value(), -M_PI) << "Angle under minimum angle limit";
-    ASSERT_LE(angleBase.value(), M_PI) << "Angle over maximum angle limit";
+    ASSERT_GE(angleBase.value(), -Geometry::Angle::PI) << "Angle under minimum angle limit";
+    ASSERT_LE(angleBase.value(), Geometry::Angle::PI) << "Angle over maximum angle limit";
     ASSERT_LE(angleBase.value(), std::numeric_limits<float>::epsilon()) << "Angle value does not match";
 }
 
 TEST(Geometry_Angle_Tests, GivenAnAngle_Normalization_ShouldWork) {
-    Geometry::Angle angleBase(M_PI_4);
-    Geometry::Angle referenceAngle1(17 * M_PI_4);
-    Geometry::Angle referenceAngle2(-7 * M_PI_4);
+    Geometry::Angle angleBase(Geometry::Angle::PI / 4.0f);
+    Geometry::Angle referenceAngle1(17 * Geometry::Angle::PI / 4.0f);
+    Geometry::Angle referenceAngle2(-7 * Geometry::Angle::PI / 4.0f);
 
     EXPECT_EQ(angleBase, referenceAngle1) << "Normalization does not work";
     EXPECT_EQ(angleBase, referenceAngle2) << "Normalization does not work";
@@ -30,14 +30,14 @@ TEST(Geometry_Angle_Tests, GivenAnAngle_Normalization_ShouldWork) {
 TEST(Geometry_Angle_Tests, GivenAnAngle_RotationDirectionGetter_ShouldWork) {
     Geometry::Angle angleBase(0.0f);
 
-    EXPECT_EQ(angleBase.rotateDirection(M_PI - 0.1f), Geometry::Angle::COUNTER_CLOCKWISE) << "Rot. direction does not match";
+    EXPECT_EQ(angleBase.rotateDirection(Geometry::Angle::PI - 0.1f), Geometry::Angle::COUNTER_CLOCKWISE) << "Rot. direction does not match";
     EXPECT_EQ(angleBase.rotateDirection(-sqrtf(3)), Geometry::Angle::CLOCKWISE) << "Rot. direction does not match";
 }
 
 TEST(Geometry_Angle_Tests, GivenAnAngle_ShotestAngleGetter_ShouldWork) {
-    Geometry::Angle angleBase(M_PI);
-    EXPECT_FLOAT_EQ(angleBase.shortestAngleDiff(sqrtf(3)), M_PI - sqrtf(3)) << "Angle difference does not match";
-    EXPECT_FLOAT_EQ(angleBase.shortestAngleDiff(3*M_PI_2), M_PI_2) << "Angle difference does not match";
+    Geometry::Angle angleBase(Geometry::Angle::PI);
+    EXPECT_FLOAT_EQ(angleBase.shortestAngleDiff(sqrtf(3)), Geometry::Angle::PI - sqrtf(3)) << "Angle difference does not match";
+    EXPECT_FLOAT_EQ(angleBase.shortestAngleDiff(3*Geometry::Angle::PI/2.0f), Geometry::Angle::PI/2.0f) << "Angle difference does not match";
 }
 
 TEST(Geometry_Angle_Tests, GivenAnAngle_Operators_ShouldWork) {

@@ -114,8 +114,8 @@ void FieldView::setupRobotDisplayList() {
         else                                           glColor3d(0.5882,0.5882,0.5882);
 
         // Drawing triangle (robot front)
-        float theta1 = 40.0*(M_PI/180.0);
-        float theta2 = 2.0*M_PI - theta1;
+        float theta1 = 40.0*(Geometry::Angle::PI/180.0);
+        float theta2 = 2.0*Geometry::Angle::PI - theta1;
         drawTriangle(QVector2D(0, 0), QVector2D(90.0*cos(theta1), 90.0*sin(theta1)),
                      QVector2D(90.0*cos(theta2), 90.0*sin(theta2)), _robotZ);
         drawArc(QVector2D(0, 0), 0, 90, theta1, theta2, _robotZ);
@@ -136,26 +136,26 @@ void FieldView::setupRobotDisplayList() {
         // Draw robot wheels
         drawRect(QVector2D(90.0*cos(theta1), 90.0*sin(theta1)),
                  QVector2D(90.0*cos(theta1) + 3.5, 90.0*sin(theta1) + 3.5),
-                 QVector2D(90.0*cos(theta1 + (M_PI/6)) + 3.5, 90.0*sin(theta1 + (M_PI/6)) + 3.5),
-                 QVector2D(90.0*cos(theta1 + (M_PI/6)), 90.0*sin(theta1 + (M_PI/6))),
+                 QVector2D(90.0*cos(theta1 + (Geometry::Angle::PI/6)) + 3.5, 90.0*sin(theta1 + (Geometry::Angle::PI/6)) + 3.5),
+                 QVector2D(90.0*cos(theta1 + (Geometry::Angle::PI/6)), 90.0*sin(theta1 + (Geometry::Angle::PI/6))),
                  _robotZ + 0.02);
 
         drawRect(QVector2D(-90.0*cos(theta1), 90.0*sin(theta1)),
                  QVector2D(-90.0*cos(theta1) - 3.5, 90.0*sin(theta1) + 3.5),
-                 QVector2D(-90.0*cos(theta1 + (M_PI/6)) - 3.5, 90.0*sin(theta1 + (M_PI/6)) + 3.5),
-                 QVector2D(-90.0*cos(theta1 + (M_PI/6)), 90.0*sin(theta1 + (M_PI/6))),
+                 QVector2D(-90.0*cos(theta1 + (Geometry::Angle::PI/6)) - 3.5, 90.0*sin(theta1 + (Geometry::Angle::PI/6)) + 3.5),
+                 QVector2D(-90.0*cos(theta1 + (Geometry::Angle::PI/6)), 90.0*sin(theta1 + (Geometry::Angle::PI/6))),
                  _robotZ + 0.02);
 
         drawRect(QVector2D(90.0*cos(theta2), 90.0*sin(theta2)),
                  QVector2D(90.0*cos(theta2) + 3.5, 90.0*sin(theta2) - 3.5),
-                 QVector2D(90.0*cos(theta2 - (M_PI/6)) + 3.5, 90.0*sin(theta2 - (M_PI/6)) - 3.5),
-                 QVector2D(90.0*cos(theta2 - (M_PI/6)), 90.0*sin(theta2 - (M_PI/6))),
+                 QVector2D(90.0*cos(theta2 - (Geometry::Angle::PI/6)) + 3.5, 90.0*sin(theta2 - (Geometry::Angle::PI/6)) - 3.5),
+                 QVector2D(90.0*cos(theta2 - (Geometry::Angle::PI/6)), 90.0*sin(theta2 - (Geometry::Angle::PI/6))),
                  _robotZ + 0.02);
 
         drawRect(QVector2D(-90.0*cos(theta2), 90.0*sin(theta2)),
                  QVector2D(-90.0*cos(theta2) - 3.5, 90.0*sin(theta2) - 3.5),
-                 QVector2D(-90.0*cos(theta2 - (M_PI/6)) - 3.5, 90.0*sin(theta2 - (M_PI/6)) - 3.5),
-                 QVector2D(-90.0*cos(theta2 - (M_PI/6)), 90.0*sin(theta2 - (M_PI/6))),
+                 QVector2D(-90.0*cos(theta2 - (Geometry::Angle::PI/6)) - 3.5, 90.0*sin(theta2 - (Geometry::Angle::PI/6)) - 3.5),
+                 QVector2D(-90.0*cos(theta2 - (Geometry::Angle::PI/6)), 90.0*sin(theta2 - (Geometry::Angle::PI/6))),
                  _robotZ + 0.02);
 
         glEndList();
@@ -178,9 +178,9 @@ void FieldView::setupBallDisplayList() {
     glNewList(_ballShape, GL_COMPILE);
 
     glColor3d(1.0, 0.5059, 0.0);
-    drawArc(QVector2D(0, 0), 0, 16, -M_PI, M_PI, _ballZ);
+    drawArc(QVector2D(0, 0), 0, 16, -Geometry::Angle::PI, Geometry::Angle::PI, _ballZ);
     glColor3d(0.8706, 0.3490, 0.0);
-    drawArc(QVector2D(0, 0), 15, 21, -M_PI, M_PI, _ballZ);
+    drawArc(QVector2D(0, 0), 15, 21, -Geometry::Angle::PI, Geometry::Angle::PI, _ballZ);
 
     glEndList();
 }
@@ -254,7 +254,7 @@ void FieldView::drawFieldLines() {
 
     for (auto &c : _fieldCircles) {
         const float half_thickness = 0.5 * getLineThickness();
-        drawArc(c.center(), c.radius() - half_thickness, c.radius() + half_thickness, 0.0, 2.0 * M_PI, _fieldZ);
+        drawArc(c.center(), c.radius() - half_thickness, c.radius() + half_thickness, 0.0, 2.0 * Geometry::Angle::PI, _fieldZ);
     }
 
     for (auto &a : _fieldArcs) {

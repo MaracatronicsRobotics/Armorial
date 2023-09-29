@@ -6,16 +6,16 @@ using namespace Geometry;
 Arc::Arc() {
     _center = Vector2D();
     _radius = 1.0;
-    _startAngle = Geometry::Angle(-M_PI);
-    _endAngle = Geometry::Angle(M_PI);
+    _startAngle = Geometry::Angle(-Geometry::Angle::PI);
+    _endAngle = Geometry::Angle(Geometry::Angle::PI);
     _reversed = false;
 }
 
 Arc::Arc(const Vector2D &center, const float &radius) {
     _center = center;
     _radius = radius;
-    _startAngle = Geometry::Angle(-M_PI);
-    _endAngle = Geometry::Angle(M_PI);
+    _startAngle = Geometry::Angle(-Geometry::Angle::PI);
+    _endAngle = Geometry::Angle(Geometry::Angle::PI);
     _reversed = false;
 }
 
@@ -58,12 +58,13 @@ Geometry::Angle Arc::endAngle() const {
 }
 
 bool Arc::isCircle() const {
-    return (startAngle() == -M_PI && endAngle() == M_PI);
+    return (startAngle() == -Geometry::Angle::PI && endAngle() == Geometry::Angle::PI);
 }
 
 bool Arc::angleWithinArc(const Geometry::Angle &angle) const {
     if (_reversed) {
-        return !(angle.value() >= _startAngle.value() && angle.value() <= _endAngle.value());
+        // include start and final angle in calculations
+        return !(angle.value() > _startAngle.value() && angle.value() < _endAngle.value());
     } else {
         return (angle.value() >= _startAngle.value() && angle.value() <= _endAngle.value());
     }
@@ -93,10 +94,13 @@ std::vector<Vector2D> Arc::intersectionWithLine(const LineSegment &lineSegment) 
 }
 
 QString Arc::toQString() {
-    QString arcStr = "";
-    arcStr.append("Center: (%1, %2)\nRadius: %3\n").arg(_center.x()).arg(_center.y()).arg(_radius);
-    arcStr.append("Start: %1; End: %2\n").arg(_startAngle.value()).arg(_endAngle.value());
-    arcStr.append(_reversed ? "Reversed" : "Not Reversed");
+    QString arcStr = QString("Center: (%1, %2)\nRadius: %3\nStart: %4; End: %5\n%6")
+                         .arg(_center.x())
+                         .arg(_center.y())
+                         .arg(_radius)
+                         .arg(_startAngle.value())
+                         .arg(_endAngle.value())
+                         .arg(_reversed ? "Reversed" : "Not Reversed");
     return arcStr;
 }
 
