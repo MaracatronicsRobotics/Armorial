@@ -31,8 +31,8 @@ namespace Utils {
          * \param type The reference for the object of type T
          */
         template <typename T>
-        [[nodiscard]] inline static constexpr bool convertDatagramToType(QNetworkDatagram &datagram, T& type) noexcept {
-            return (type.ParseFromArray(datagram.data().data(), datagram.data().size()));
+        [[nodiscard]] inline static constexpr bool convertDatagramToType(const QNetworkDatagram &datagram, T& type) noexcept {
+            return (type.ParseFromArray(datagram.data().constData(), datagram.data().size()));
         }
     }
 
