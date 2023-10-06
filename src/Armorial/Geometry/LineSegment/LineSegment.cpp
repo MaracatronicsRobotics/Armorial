@@ -26,8 +26,16 @@ float LineSegment::length() const {
     return (end() - start()).length();
 }
 
+float LineSegment::length2() const {
+    return (end() - start()).length2();
+}
+
 bool LineSegment::isPoint() const {
     return (start() == end());
+}
+
+float LineSegment::distanceToLine(const Vector2D& point) const {
+    return (project(point) - point).length();
 }
 
 float LineSegment::distanceToPoint(const Vector2D &point) const {

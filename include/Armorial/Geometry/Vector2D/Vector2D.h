@@ -90,6 +90,12 @@ namespace Geometry {
         float length() const;
 
         /*!
+         * \brief Computes the length2 of this Vector2D instance.
+         * \return The length2 of this Vector2D instance.
+         */
+        float length2() const;
+
+        /*!
          * \brief Computes the angle of this Vector2D instance viewed from the center of the field (0.0, 0.0). <br>
          * As this uses the atan2 function, the following behavior is expected: <br>
          *      - The positive x-axis has angle value 0; <br>

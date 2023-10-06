@@ -49,10 +49,22 @@ namespace Geometry {
         [[nodiscard]] float length() const;
 
         /*!
+         * \brief Computes the length2 of this LineSegment instance.
+         * \return A float value containing the length2 of this LineSegment instance.
+         */
+        [[nodiscard]] float length2() const;
+
+        /*!
          * \brief Check if this LineSegment instance is a point, i.e. it start and end points are the same.
          * \return True if this LineSegment is a point or False otherwise.
          */
         [[nodiscard]] bool isPoint() const;
+
+        /*!
+         * \param point The given point.
+         * \return Returns the distance of the point to this LineSegment instance.
+         */
+        [[nodiscard]] float distanceToLine(const Vector2D& point) const;
 
         /*!
          * \brief Computes the distance from this LineSegment instance to a given point.

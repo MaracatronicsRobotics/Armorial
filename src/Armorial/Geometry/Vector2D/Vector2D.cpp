@@ -1,4 +1,4 @@
-#include <Armorial/Geometry/Vector2D/Vector2D.h>
+﻿#include <Armorial/Geometry/Vector2D/Vector2D.h>
 
 #include <Armorial/Utils/Utils.h>
 
@@ -45,7 +45,11 @@ Vector2D Vector2D::normalize() const {
 }
 
 float Vector2D::length() const {
-    return sqrt(_x * _x + _y * _y);
+    return sqrt(length2());
+}
+
+float Vector2D::length2() const {
+    return (_x * _x + _y * _y);
 }
 
 float Vector2D::angle() const {
