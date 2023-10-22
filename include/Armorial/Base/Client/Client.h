@@ -22,6 +22,8 @@
 
 #include <Armorial/Libs/nameof/include/nameof.hpp>
 
+#include <spdlog/spdlog.h>
+
 namespace Base {
     namespace GRPC {
        /*!
@@ -153,11 +155,34 @@ namespace Base {
              * \param serverNetworkInterface The network interface which the UDP::Client will listen to.
              * \note By default the network interface will be set as 'lo'.
              */
-            Client(QString serverAddress, quint16 serverPort, QString serverNetworkInterface = "lo") {
+            Client(QString serverAddress, quint16 serverPort, QString serverNetworkInterface = "lo")
+            {
                 _serverAddress = serverAddress;
                 _serverPort = serverPort;
+                _serverControlPort = 9999;
                 _serverNetworkInterface = serverNetworkInterface;
                 _socket = nullptr;
+                _controlSocket = nullptr;
+            }
+
+            /*!
+             * \brief UDP::Client constructor that initialize the network variables.
+             * \param serverAddress The server address which the UDP::Client will listen to.
+             * \param serverPort The port which the UDP::Client will listen to.
+             * \param serverNetworkInterface The network interface which the UDP::Client will listen to.
+             * \note By default the network interface will be set as 'lo'.
+             */
+            Client(QString serverAddress,
+                   quint16 serverPort,
+                   quint16 serverControlPort,
+                   QString serverNetworkInterface = "lo")
+            {
+                _serverAddress = serverAddress;
+                _serverPort = serverPort;
+                _serverControlPort = serverControlPort;
+                _serverNetworkInterface = serverNetworkInterface;
+                _socket = nullptr;
+                _controlSocket = nullptr;
             }
 
             /*!
@@ -175,12 +200,53 @@ namespace Base {
              * \param isMulticast If it is a multicast connection.
              * \return
              */
-            [[nodiscard]] bool updateNetworkAddress(QString serverAddress, quint16 serverPort, QString serverNetworkInterface, bool isMulticast) {
+            [[nodiscard]] bool updateNetworkAddress(QString serverAddress,
+                                                    quint16 serverPort,
+                                                    QString serverNetworkInterface,
+                                                    bool isMulticast)
+            {
                 _mutex.lock();
 
                 // Setup network addresses
                 _serverAddress = serverAddress;
                 _serverPort = serverPort;
+                _serverControlPort = 9999;
+                _serverNetworkInterface = serverNetworkInterface;
+
+                // Perform connection
+                // If is a multicast, bind and connect to multicast address
+                // If it is not multicast, just connecto to required host
+                bool connected = false;
+                if (isMulticast) {
+                    connected = bindAndConnectToMulticastNetwork();
+                } else {
+                    connected = connectToNetwork();
+                }
+
+                _mutex.unlock();
+
+                return connected;
+            }
+
+            /*!
+             * \brief Update the network address that was previously defined in the constructor.
+             * \param serverAddress The address which the UDP::Client socket will listen to.
+             * \param serverPort The port which the UDP::Client socket will listen to.
+             * \param isMulticast If it is a multicast connection.
+             * \return
+             */
+            [[nodiscard]] bool updateNetworkControlAddress(QString serverAddress,
+                                                           quint16 serverPort,
+                                                           quint16 serverControlPort,
+                                                           QString serverNetworkInterface,
+                                                           bool isMulticast)
+            {
+                _mutex.lock();
+
+                // Setup network addresses
+                _serverAddress = serverAddress;
+                _serverPort = serverPort;
+                _serverControlPort = serverControlPort;
                 _serverNetworkInterface = serverNetworkInterface;
 
                 // Perform connection
@@ -219,6 +285,26 @@ namespace Base {
                     return false;
                 }
 
+                if (_serverControlPort != 9999) {
+                    if (_controlSocket == nullptr) {
+                        _controlSocket = std::make_shared<QUdpSocket>(new QUdpSocket());
+                    }
+
+                    if (_controlSocket->bind(QHostAddress(_serverAddress),
+                                             _serverControlPort,
+                                             QUdpSocket::ShareAddress)
+                        == false) {
+                        return false;
+                    }
+
+                    if (_controlSocket->joinMulticastGroup(QHostAddress(_serverAddress),
+                                                           QNetworkInterface::interfaceFromName(
+                                                               _serverNetworkInterface))
+                        == false) {
+                        return false;
+                    }
+                }
+
                 return true;
             }
 
@@ -234,14 +320,29 @@ namespace Base {
                     _socket = std::make_shared<QUdpSocket>(new QUdpSocket());
                 }
 
+                if (_serverControlPort != 9999) {
+                    if (_controlSocket == nullptr) {
+                        _controlSocket = std::make_shared<QUdpSocket>(new QUdpSocket());
+                    }
+                }
+
                 // Disconnect from network
                 disconnectFromNetwork();
 
                 // Connect to required host
                 _socket->connectToHost(_serverAddress, _serverPort, openMode, networkProtocol);
-
                 // Connect to specific network interface
-                _socket->setMulticastInterface(QNetworkInterface::interfaceFromName(_serverNetworkInterface));
+                _socket->setMulticastInterface(
+                    QNetworkInterface::interfaceFromName(_serverNetworkInterface));
+
+                if (_serverControlPort != 9999) {
+                    _controlSocket->connectToHost(_serverAddress,
+                                                  _serverControlPort,
+                                                  openMode,
+                                                  networkProtocol);
+                    _controlSocket->setMulticastInterface(
+                        QNetworkInterface::interfaceFromName(_serverNetworkInterface));
+                }
 
                 return true;
             }
@@ -252,12 +353,21 @@ namespace Base {
              */
             void disconnectFromNetwork() {
                 // If socket is nullptr, can not disconnect, so skip function
-                if(_socket == nullptr) {
-                    return ;
-                }
+                if (_socket == nullptr) {
+                    if (_controlSocket != nullptr) {
+                        if (_controlSocket->isOpen()) {
+                            _controlSocket->close();
+                        }
 
+                        _controlSocket->disconnectFromHost();
+
+                        while (_controlSocket->state() != QUdpSocket::UnconnectedState) {
+                        }
+                    }
+                    return;
+                }
                 // Close if socket is already open
-                if(_socket->isOpen()) {
+                if (_socket->isOpen()) {
                     _socket->close();
                 }
 
@@ -265,7 +375,8 @@ namespace Base {
                 _socket->disconnectFromHost();
 
                 // Block until reach unconnected state
-                while(_socket->state() != QUdpSocket::UnconnectedState) { }
+                while (_socket->state() != QUdpSocket::UnconnectedState) {
+                }
             }
 
             /*!
@@ -283,6 +394,28 @@ namespace Base {
 
                 // Check pending datagrams
                 bool pendingDatagrams = _socket->hasPendingDatagrams();
+
+                _mutex.unlock();
+
+                return pendingDatagrams;
+            }
+
+            /*!
+             * \brief Check if has pending datagrams in the control socket.
+             * \return A boolean that informs if the control socket has pending datagrams to be read.
+             */
+            [[nodiscard]] bool hasPendingControlDatagrams()
+            {
+                _mutex.lock();
+
+                // If socket is nullptr it has no pending datagrams, so return false
+                if (_controlSocket == nullptr) {
+                    _mutex.unlock();
+                    return false;
+                }
+
+                // Check pending datagrams
+                bool pendingDatagrams = _controlSocket->hasPendingDatagrams();
 
                 _mutex.unlock();
 
@@ -314,14 +447,15 @@ namespace Base {
                 _mutex.unlock();
 
                 return datagram;
-             }
+            }
 
             /*!
-             * \brief Send a given datagram to the socket.
+             * \brief Send a given datagram to_serverControlPort the socket.
              * \param The given datagram.
              * \return True if the given datagram could be sent through the socket and False otherwise.
              */
-            [[nodiscard]] bool sendDatagram(const QNetworkDatagram &datagram) {
+            [[nodiscard]] bool sendDatagram(const QNetworkDatagram &datagram)
+            {
                 _mutex.lock();
 
                 // If socket is nullptr can not send any datagram, so return false
@@ -329,6 +463,29 @@ namespace Base {
                 if(_socket != nullptr) {
                     // Try to send datagram
                     if(_socket->writeDatagram(datagram) != -1) {
+                        sentDatagram = true;
+                    }
+                }
+
+                _mutex.unlock();
+
+                return sentDatagram;
+            }
+
+            /*!
+             * \brief Send a given datagram to the control socket.
+             * \param The given datagram.
+             * \return True if the given datagram could be sent through the cnotrol socket and False otherwise.
+             */
+            [[nodiscard]] bool sendControlDatagram(const QNetworkDatagram &datagram)
+            {
+                _mutex.lock();
+
+                // If socket is nullptr can not send any datagram, so return false
+                bool sentDatagram = false;
+                if (_controlSocket != nullptr) {
+                    // Try to send datagram
+                    if (_controlSocket->writeDatagram(datagram) != -1) {
                         sentDatagram = true;
                     }
                 }
@@ -372,15 +529,33 @@ namespace Base {
             }
 
             /*!
+             * \return The server control port.
+             */
+            [[nodiscard]] quint16 getServerControlPort()
+            {
+                _mutex.lock();
+                quint16 serverControlPort = _serverControlPort;
+                _mutex.unlock();
+
+                return serverControlPort;
+            }
+
+            /*!
              * \return The socket shared pointer.
              */
-            std::shared_ptr<QUdpSocket> getSocket() {
-                return _socket;
-            }
+            std::shared_ptr<QUdpSocket> getSocket() { return _socket; }
+
+            /*!
+            * \return The control socket shared pointer
+            */
+            std::shared_ptr<QUdpSocket> getControlSocket() { return _controlSocket; }
 
         private:
             // Pointer to socket
             std::shared_ptr<QUdpSocket> _socket;
+
+            // Pointer to control socket
+            std::shared_ptr<QUdpSocket> _controlSocket;
 
             // Mutex for socket management
             QMutex _mutex;
@@ -389,6 +564,7 @@ namespace Base {
             QString _serverAddress;
             QString _serverNetworkInterface;
             quint16 _serverPort;
+            quint16 _serverControlPort;
         };
     }
 }
