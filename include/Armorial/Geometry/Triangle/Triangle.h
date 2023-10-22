@@ -11,6 +11,8 @@ namespace Geometry {
     class Triangle
     {
     public:
+        Triangle() = default;
+
         /*!
          * \brief Constructs a Triangle instance with the provided corner points.
          * \param p1 The first given corner point.
