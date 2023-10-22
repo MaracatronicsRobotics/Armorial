@@ -29,6 +29,14 @@ namespace Widgets {
         FieldView(const Common::Types::Field& field, const QString& centralLogoPath = "", QWidget *parent = nullptr);
         float getLineThickness();
 
+        // Field z value references
+        static constexpr float _fieldZ = 1.0f;
+        static constexpr float _robotZ = 2.0f;
+        static constexpr float _ballZ = 3.0f;
+        static constexpr float _minZValue = -10.0f;
+        static constexpr float _maxZValue = 10.0f;
+        static constexpr float _lineThickness = 20.0f;
+
     protected:
         /*!
          * \brief Override of QOpenGLWidget::initializeGL method that initialize the display lists of robots and ball.
@@ -397,14 +405,6 @@ namespace Widgets {
         QMap<Common::Enums::Color, GLuint> _robotShape;
         GLuint _ballShape;
         int _idSize;
-
-        // Field z value references
-        static constexpr float _fieldZ = 1.0f;
-        static constexpr float _robotZ = 2.0f;
-        static constexpr float _ballZ = 3.0f;
-        static constexpr float _minZValue = -10.0f;
-        static constexpr float _maxZValue = 10.0f;
-        static constexpr float _lineThickness = 20.0f;
 
     private:
         // Field view
