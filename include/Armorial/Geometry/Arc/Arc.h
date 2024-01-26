@@ -77,6 +77,11 @@ namespace Geometry {
         [[nodiscard]] bool pointInArc(const Vector2D &point) const;
 
         /*!
+         * \return The absolute angle of an arc.
+         */
+        [[nodiscard]] float arcAngle() const;
+
+        /*!
          * \brief Compute the points at which a given LineSegment intersects this Arc instance, if these points exists.
          * \param lineSegment The given LineSegment instance.
          * \return A std::vector object containing the Vector2D points which defines the intersection points.
