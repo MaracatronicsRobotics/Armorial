@@ -76,9 +76,11 @@ bool Arc::pointInArc(const Vector2D &point) const {
 }
 
 float Arc::arcAngle() const{
-    float startAngle = (_startAngle.value() < 0) ? _startAngle.value() + M_PI*2 : _startAngle.value();
-    float endAngle = (_endAngle.value() < 0) ? _endAngle.value() + M_PI*2 : _endAngle.value();
-    return std::abs(startAngle - endAngle);
+    float temp = _endAngle.value() - _startAngle.value();
+    if(temp < 0){
+        temp+=M_PI*2;
+    }
+    return temp;
 }
 std::vector<Vector2D> Arc::intersectionWithLine(const LineSegment &lineSegment) const {
     std::vector<Vector2D> intersections;
