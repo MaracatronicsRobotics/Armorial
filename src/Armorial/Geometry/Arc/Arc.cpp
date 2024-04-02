@@ -76,7 +76,7 @@ bool Arc::pointInArc(const Vector2D &point) const {
 }
 
 float Arc::arcAngle() const{
-    float temp = _endAngle.value() - _startAngle.value();
+    float temp = endAngle().value() - startAngle().value();
     if(temp < 0){
         temp+=M_PI*2;
     }
