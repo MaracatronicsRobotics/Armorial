@@ -92,7 +92,8 @@ std::vector<Vector2D> Arc::intersectionWithLine(const LineSegment &lineSegment) 
     // For each point in the intersection result, check if it is contained in the arc
     // and put it into the vector if True
     for(auto p : intersectionsWithCircle) {
-        if(pointInArc(p)) {
+        Vector2D newP = (p - _center) * 0.9 + _center; // decreasing p radius in order to fit properly in pointInArc() function
+        if(pointInArc(newP)) {
             intersections.push_back(p);
         }
     }
