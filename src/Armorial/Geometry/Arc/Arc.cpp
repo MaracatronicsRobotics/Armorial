@@ -70,9 +70,9 @@ bool Arc::angleWithinArc(const Geometry::Angle &angle) const {
     }
 }
 
-bool Arc::pointInArc(const Vector2D &point) const {
+bool Arc::pointInArc(const Vector2D &point, float error) const {
     Vector2D normPoint = point - center();
-    return (angleWithinArc(normPoint.angle()) && (normPoint.length() <= radius()));
+    return (angleWithinArc(normPoint.angle()) && (normPoint.length() <= (radius() + error)));
 }
 
 float Arc::arcAngle() const{
@@ -92,8 +92,8 @@ std::vector<Vector2D> Arc::intersectionWithLine(const LineSegment &lineSegment) 
     // For each point in the intersection result, check if it is contained in the arc
     // and put it into the vector if True
     for(auto p : intersectionsWithCircle) {
-        Vector2D newP = (p - _center) * 0.9 + _center; // decreasing p radius in order to fit properly in pointInArc() function
-        if(pointInArc(newP)) {
+        // Vector2D newP = (p - _center) * 0.9 + _center; // decreasing p radius in order to fit properly in pointInArc() function
+        if(pointInArc(p, 0.01f)) {
             intersections.push_back(p);
         }
     }
