@@ -72,9 +72,10 @@ namespace Geometry {
         /*!
          * \brief Checks if a given point is contained in this Arc.
          * \param point The given point.
+         * \param error The error used to consider points in outskirts of the arc
          * \return True if the point is contained in this Arc and False otherwise.
          */
-        [[nodiscard]] bool pointInArc(const Vector2D &point) const;
+        [[nodiscard]] bool pointInArc(const Vector2D &point, float error = 0.0f) const;
 
         /*!
          * \return The absolute angle of an arc.
